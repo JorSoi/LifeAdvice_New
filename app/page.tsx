@@ -1,11 +1,14 @@
-import NavBar from '@/components/NavBar'
-import styles from './page.module.css'
-import supabaseServerClient from '@/lib/supabaseServerClient'
+import styles from './Home.module.scss'
+import LessonContainer from '@/components/Home/LessonContainer/LessonContainer';
+ 
 
-export default async function Home() {
-
-
- return (
-  <main className={styles.main}>hello world</main>
- )
+function home() {
+    
+    return (
+        <main className={styles.home}>
+            <LessonContainer />
+        </main>
+    );
 }
+
+export default home;

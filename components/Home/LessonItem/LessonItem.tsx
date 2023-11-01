@@ -1,9 +1,10 @@
 'use client'
 
 import { useState, useRef, TouchEventHandler, MouseEventHandler } from 'react';
-import styles from './CardItem.module.scss'; 
+import styles from './LessonItem.module.scss'; 
+import { Lesson } from '@/types/home.types';
 
-function CardItem({value, zLayer, index, bgColor} : {value:number, zLayer : number, index: number, bgColor: string}) {
+function LessonItem ({data, zLayer, index, bgColor, removeLessonFromList} : {data:Lesson, zLayer : number, index: number, bgColor: string, removeLessonFromList: (idToRemove : number) => void }) {
 
     const [isDragging, setIsDragging] = useState<boolean>(false);
     const cardRef = useRef<HTMLDivElement | null>(null);
@@ -34,6 +35,7 @@ function CardItem({value, zLayer, index, bgColor} : {value:number, zLayer : numb
       if(cardRef.current) {
         cardRef.current.style.transition = 'transform 1s ease';
         setX(() => direction == 'right' ? windowCenter*4 : windowCenter*-4)
+        // removeLessonFromList(data.id)
       }
     } 
  
@@ -78,10 +80,12 @@ function CardItem({value, zLayer, index, bgColor} : {value:number, zLayer : numb
       }
     };
 
+    
+
   return (
     <div 
       ref={cardRef} 
-      className={styles.cardItem} 
+      className={styles.lessonItem} 
       style={{
         zIndex: zLayer,
         background: bgColor, 
@@ -95,10 +99,11 @@ function CardItem({value, zLayer, index, bgColor} : {value:number, zLayer : numb
       onTouchEnd={handlePointerUp}
       onTouchCancel={handlePointerUp}
     > 
-    <p>Lorem ipsum dolor sit amet. This is a very special lesson and advice which I would like to share with you. </p>
+    <p>Learned by {data.author} </p>
+    <h1>{data.lesson}</h1>
 </div>
   );
 };
 
 
-export default CardItem;
+export default LessonItem;
