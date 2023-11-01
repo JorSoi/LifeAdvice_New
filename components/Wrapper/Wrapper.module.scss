@@ -1,0 +1,8 @@
+@import '@/scss/flexbox';
+
+.wrapper {
+    width: 600px;
+    height: 600px;
+    background-color: gainsboro;
+    @include flex-c-c;
+}

@@ -1,0 +1,17 @@
+.drag {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.cardContainer {
+    position: relative;
+    max-width: 900px;
+    width: 100%;
+    height: 600px;
+    margin: 0 3%;
+
+}
