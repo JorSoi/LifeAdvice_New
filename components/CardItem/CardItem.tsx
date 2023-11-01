@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useRef } from 'react';
+import { useState, useRef, TouchEventHandler, MouseEventHandler } from 'react';
 import styles from './CardItem.module.scss'; 
 
 function CardItem({value, zLayer, index, bgColor} : {value:number, zLayer : number, index: number, bgColor: string}) {
@@ -10,10 +10,10 @@ function CardItem({value, zLayer, index, bgColor} : {value:number, zLayer : numb
     const [x, setX] = useState<number>(0)
     const [y, setY] = useState<number>(0)
     const [rotation, setRotation] = useState<number>(0)
-    const [initialMousePosition, setInitialMousePosition] = useState<{x: number, y: number}>()
-    const windowCenter : number = window.innerWidth / 2;
-    const distanceFromCenter : number= x / windowCenter //Represents the percentage to which a card has been moved away from its original position relative to the window center. This value can be used as a swipe-threshold to trigger events.
-    const swipeThreshold : number = 0.3 //The minimum % of distance from the center to be interpreted as a swipe. 
+    const [initialPointerPosition, setinitialPointerPosition] = useState<{x: number, y: number}>()
+    const windowCenter : number = window ? window.innerWidth / 2 : 0; //Conditional ensures no issues during serverside rendering as window is usually only accessible client-side.
+    const distanceFromCenter : number = x / windowCenter //Represents the percentage to which a card has been moved away from its original position relative to the window center. This value can be used as a swipe-threshold to trigger events.
+    const swipeThreshold : number = 0.4 //The minimum % of distance from the center to be interpreted as a swipe. 
 
     const resetPosition = () : void => {
       if(cardRef.current) {
@@ -29,15 +29,6 @@ function CardItem({value, zLayer, index, bgColor} : {value:number, zLayer : numb
       const maxRotation : number = 20;
       setRotation(() => x/windowCenter * maxRotation)
     };
- 
-    const handleMouseDown = (e: React.MouseEvent) : void => {
-      setIsDragging(true);
-
-      if (cardRef.current) {
-        cardRef.current.style.transition = 'none'; //resets prior transition settings to enable smooth drag functionality.
-        setInitialMousePosition({x: e.clientX, y: e.clientY})
-      }
-    };
 
     const executeSwipe = (direction : 'left' | 'right') : void => {
       if(cardRef.current) {
@@ -45,28 +36,37 @@ function CardItem({value, zLayer, index, bgColor} : {value:number, zLayer : numb
         setX(() => direction == 'right' ? windowCenter*4 : windowCenter*-4)
       }
     } 
+ 
+    const handlePointerDown = (e: React.MouseEvent | React.TouchEvent) : void => {
+      setIsDragging(true);
 
-    const handleMouseLeave = (e : React.MouseEvent) : void => {
-      setIsDragging(false)
-      if(distanceFromCenter > swipeThreshold) {
-        executeSwipe('right');
-      } else if (distanceFromCenter < -swipeThreshold) {
-        executeSwipe('left')
-      } else {
-        resetPosition();
+
+      if (cardRef.current) {
+        cardRef.current.style.transition = 'none'; //resets prior transition settings to enable smooth drag functionality.
+        if(e.type == 'touchstart') {
+          setinitialPointerPosition({x: (e as React.TouchEvent).touches[0].clientX, y: (e as React.TouchEvent).touches[0].clientY})
+        } else {
+          setinitialPointerPosition({x: (e as React.MouseEvent).clientX, y: (e as React.MouseEvent).clientY})
+        }
       }
     };
   
-    const handleMouseMove = (e: React.MouseEvent) : void=> {
+    const handlePointerMove = (e: React.MouseEvent | React.TouchEvent) : void=> {
 
-      if (isDragging && cardRef.current && initialMousePosition) {
-        setX(() => e.clientX - initialMousePosition.x );
-        setY(() => e.clientY - initialMousePosition.y );
-        rotateCard();
+      if (isDragging && cardRef.current && initialPointerPosition) {
+
+        if(e.type == 'touchmove') {
+          setX(() => (e as React.TouchEvent).touches[0].clientX - initialPointerPosition.x );
+          setY(() => (e as React.TouchEvent).touches[0].clientY - initialPointerPosition.y );
+        } else {
+          setX(() => (e as React.MouseEvent).clientX - initialPointerPosition.x );
+          setY(() => (e as React.MouseEvent).clientY - initialPointerPosition.y );
+        }
+        rotateCard(); 
       }  
     };
   
-    const handleMouseUp = () => {
+    const handlePointerUp = () => {
       setIsDragging(false);
 
       if(distanceFromCenter > swipeThreshold) {
@@ -79,7 +79,22 @@ function CardItem({value, zLayer, index, bgColor} : {value:number, zLayer : numb
     };
 
   return (
-    <div ref={cardRef} className={styles.cardItem} style={{zIndex: zLayer, background: bgColor, transform: `translateX(${x}px) translateY(${y}px) rotate(${rotation}deg)`}} onMouseDown={handleMouseDown} onMouseMove={handleMouseMove} onMouseUp={handleMouseUp} onMouseLeave={handleMouseLeave}> 
+    <div 
+      ref={cardRef} 
+      className={styles.cardItem} 
+      style={{
+        zIndex: zLayer,
+        background: bgColor, 
+        transform: `translateX(${x}px) translateY(${y}px) rotate(${rotation}deg)`}} 
+      onMouseDown={handlePointerDown} 
+      onMouseMove={handlePointerMove} 
+      onMouseUp={handlePointerUp} 
+      onMouseLeave={handlePointerUp}
+      onTouchStart={handlePointerDown}
+      onTouchMove={handlePointerMove}
+      onTouchEnd={handlePointerUp}
+      onTouchCancel={handlePointerUp}
+    > 
     <p>Lorem ipsum dolor sit amet. This is a very special lesson and advice which I would like to share with you. </p>
 </div>
   );

@@ -1,6 +1,6 @@
 .drag {
     width: 100%;
-    height: 100vh;
+    height: 100svh;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -9,9 +9,8 @@
 
 .cardContainer {
     position: relative;
-    max-width: 900px;
+    max-width: 980px;
     width: 100%;
-    height: 600px;
-    margin: 0 3%;
-
+    height: 300px;
+    margin: 0px 3%;
 }
