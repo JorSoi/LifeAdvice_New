@@ -1,0 +1,16 @@
+@import '@/scss/variables';
+@import '@/scss/mixins';
+
+.categoryDropdown {
+    padding: 15px 20px;
+    background-color: $primary-font;
+    color: white;
+    font-size: 16px;
+    border-radius: 100px;
+    // @include flex-c-c;
+
+    p {
+        margin-right: 10px;
+    }
+}
+

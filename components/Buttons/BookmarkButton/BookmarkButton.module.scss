@@ -1,0 +1,21 @@
+@import '@/scss/variables';
+@import '@/scss/mixins';
+
+.bookmarkButton {
+    @include flex-c-c;
+    width: 55px;
+    height: 55px;
+    border-radius: 100px;
+    border: 2.2px solid #DBDBDE;
+    cursor: pointer;
+
+    img {
+        user-select: none;
+        pointer-events: none;
+    }
+}
+
+.active {
+    border: 2.2px solid #F4801C;
+    background-color: #F4801C2B;
+}

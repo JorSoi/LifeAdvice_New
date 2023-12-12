@@ -1,10 +1,15 @@
 'use client'
 
-import { useState, useRef, TouchEventHandler, MouseEventHandler } from 'react';
+import { useState, useRef, TouchEventHandler, MouseEventHandler, useEffect } from 'react';
 import styles from './LessonItem.module.scss'; 
 import { Lesson } from '@/types/home.types';
+import BookmarkButton from '@/components/Buttons/BookmarkButton/BookmarkButton';
+import CommentButton from '@/components/Buttons/CommentButton/CommentButton';
+import LikeButton from '@/components/Buttons/LikeButton/LikeButton';
+import ShareButton from '@/components/Buttons/ShareButton/ShareButton';
+import CategoryItem from '@/components/CategoryIcon/CategoryItem';
 
-function LessonItem ({data, zLayer, index, bgColor, removeLessonFromList} : {data:Lesson, zLayer : number, index: number, bgColor: string, removeLessonFromList: (idToRemove : number) => void }) {
+function LessonItem ({data, zLayer, index, removeLessonFromList} : {data:Lesson, zLayer : number, index: number, removeLessonFromList: (idToRemove : number) => void }) {
 
     const [isDragging, setIsDragging] = useState<boolean>(false);
     const cardRef = useRef<HTMLDivElement | null>(null);
@@ -67,7 +72,7 @@ function LessonItem ({data, zLayer, index, bgColor, removeLessonFromList} : {dat
         rotateCard(); 
       }  
     };
-  
+   
     const handlePointerUp = () => {
       setIsDragging(false);
 
@@ -80,6 +85,12 @@ function LessonItem ({data, zLayer, index, bgColor, removeLessonFromList} : {dat
       }
     };
 
+    useEffect(() => {
+      if(index == 0 && cardRef.current) {
+        cardRef.current.style.boxShadow = '0px 4px 15px 6px rgba(129, 102, 61, 0.03)'
+      }
+    }, [index])
+
     
 
   return (
@@ -88,7 +99,6 @@ function LessonItem ({data, zLayer, index, bgColor, removeLessonFromList} : {dat
       className={styles.lessonItem} 
       style={{
         zIndex: zLayer,
-        background: bgColor, 
         transform: `translateX(${x}px) translateY(${y}px) rotate(${rotation}deg)`}} 
       onMouseDown={handlePointerDown} 
       onMouseMove={handlePointerMove} 
@@ -99,9 +109,19 @@ function LessonItem ({data, zLayer, index, bgColor, removeLessonFromList} : {dat
       onTouchEnd={handlePointerUp}
       onTouchCancel={handlePointerUp}
     > 
-    <p>Learned by {data.author} </p>
-    <h1>{data.lesson}</h1>
-</div>
+    <div className={styles.headerWrapper}>
+      <ShareButton />
+      <p className={styles.lessonCredentials}>Learned by <span>{data.author}</span></p>
+      <CategoryItem category={'mental-health'} />
+    </div>
+      
+      <p className={styles.lessonContent}>"{data.lesson}"</p>
+      <div className={styles.buttonWrapper}>
+        <BookmarkButton />
+        <CommentButton commentCount={1}/>
+        <LikeButton />
+      </div>
+    </div>
   );
 };
 

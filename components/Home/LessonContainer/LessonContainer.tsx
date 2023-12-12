@@ -9,10 +9,11 @@ import LessonItem from "../LessonItem/LessonItem";
 
 
 
-const bgColor : string[] = ["violet", "sand", "green", "purple", "yellow", "sand", "orange", "brown", "grey", "pink"]
+
 
 function LessonContainer() {
     const [lessonList, setLessonList] = useState<Lesson[]>([])
+    console.log(lessonList)
 
     const supabase = supabaseBrowserClient();
 
@@ -25,10 +26,13 @@ function LessonContainer() {
         }
     }
 
-    const appendLessons = async () => {
+    const loadMoreLessons = async () => {
         const {data, error} = await supabase.from('lessons').select('*').limit(10)
         if(!error) {
-            setLessonList((prev) => [...prev, ...data]);
+            setLessonList((prev) => {
+                console.log(prev)
+                return [...prev, ...data]
+            });
         } else {
             console.log(error)
         }
@@ -44,17 +48,20 @@ function LessonContainer() {
 
 
     useEffect(() => {
-        console.log(lessonList)
-        if(lessonList.length <= 3)
-        appendLessons();
-    }, [])
+        if(lessonList.length == 0) {
+            getLessons();
+        } else if(lessonList.length <= 3 && lessonList.length != 0) {
+            loadMoreLessons();
+        }
+        
+    }, [lessonList])
 
     return (
         <div className={styles.lessonContainer}>
             {
-                    lessonList.map((lesson, i : number) => {
+                    lessonList.map((lesson, i) => {
                         
-                        return <LessonItem key={lesson.id} data={lesson} zLayer={(lessonList.length-i)} index={i} bgColor={bgColor[i]} removeLessonFromList={removeLessonFromList}/>
+                        return <LessonItem key={Math.floor(Math.random()*1000000)} data={lesson} zLayer={(lessonList.length-i)} index={i} removeLessonFromList={removeLessonFromList}/>
                     })
                 }
         </div>

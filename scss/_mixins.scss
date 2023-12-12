@@ -1,0 +1,16 @@
+@mixin flex-c-c () {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@mixin flex-sb-c () {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+@mixin Garamond-Secondary () {
+    font-size: 18px;
+    font-weight: 600;
+}

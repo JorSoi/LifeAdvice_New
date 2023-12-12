@@ -1,0 +1,44 @@
+@import '@/scss/variables';
+@import '@/scss/mixins';
+
+.categoryItem {
+    width: 35px;
+    height: 35px;
+    border-radius: 5px;
+    @include flex-c-c;
+    font-size: 20px;
+    user-select: none;
+    pointer-events: none;
+}
+
+.love {
+    background-color: #F87584;
+}
+
+.mental-health {
+    background-color: #E2A2D4;
+}
+
+.friendship {
+    background-color: #A2CCF2;
+}
+
+.travel {
+    background-color: #73C0E6;
+}
+
+.education {
+    background-color: #8EC15D;
+}
+
+.business {
+    background-color: #E3B287;
+}
+
+.fitness {
+    background-color: #BD9E9E;
+}
+
+.other {
+    background-color: #DBDBDE;
+}

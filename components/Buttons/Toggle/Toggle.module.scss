@@ -1,0 +1,26 @@
+@import '@/scss/variables';
+@import '@/scss/mixins';
+
+.toggle {
+    display: flex;
+    justify-content: left;
+    width: 45px;
+    height: 28px;
+    padding: 3px;
+    background-color: #B6B9BE;
+    border-radius: 100px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.slider {
+    width: 22px;
+    height: 22px;
+    border-radius: 100px;
+    background-color: white;
+}
+
+.active {
+    background-color: $primary-orange;
+    justify-content: right;
+}

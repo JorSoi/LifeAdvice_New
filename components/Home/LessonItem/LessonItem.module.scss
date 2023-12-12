@@ -1,19 +1,49 @@
+@import '@/scss/variables';
+@import '@/scss/mixins';
+
 .lessonItem {
     width: 100%;
     height: 100%;
-    background-color: rgb(193, 193, 193);
-    border-radius: 5px;
+    border-radius: 12px;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    padding: 15px;
+    padding: 35px;
     position: absolute;
     text-align: center;
     user-select: none;
+    background-color: $snow-white;
+    font-family: $EB_Garamond;
+}
 
-    h1 {
-        font-size: 1.3rem;
-        margin-top: 10px;
+.headerWrapper {
+    width: 100%;
+    @include flex-sb-c;
+}
+
+.lessonCredentials {
+    color: #2D355B99;
+    font-size: 1rem;
+    font-weight: 500;
+    span {
+        color: $primary-orange;
     }
+}
+
+.lessonContent {
+    font-size: 1.4rem;
+    margin-top: 23px;
+    max-width: 800px;
+    text-align: justify;
+    font-family: $EB_Garamond; 
+    color: $primary-font;
+    font-size: 25px;
+    font-weight: 700;
+}
+
+.buttonWrapper {
+    margin-top: 30px;
+    @include flex-sb-c;
+    gap: 16px;
 }

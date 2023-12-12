@@ -1,0 +1,26 @@
+@import '@/scss/variables';
+@import '@/scss/mixins';
+
+.commentButton {
+    @include flex-c-c;
+    width: 55px;
+    height: 55px;
+    border-radius: 100px;
+    border: 2.2px solid #DBDBDE;
+    cursor: pointer;
+    position: relative;
+}
+
+.commentCount {
+    position: absolute;
+    @include flex-c-c;
+    width: 25px;
+    height: 25px;
+    background-color: $snow-white;
+    border-radius: 100px;
+    border: 2.2px solid #DBDBDE;
+    top: -5px;
+    right: -5px;
+    font-weight: 500;
+    font-size: 14px;
+}
