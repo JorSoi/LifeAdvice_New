@@ -1,0 +1,26 @@
+@import '@/scss/variables';
+@import '@/scss/mixins';
+
+.profile {
+    @include flex-c-c;
+    flex-direction: column;
+    gap: 2px;
+    height: 100%;
+    width: 70px;
+    border-radius: 5px;
+    padding: 0px 10px;
+    cursor: pointer;
+    color: #BEC0CC;
+
+    p {
+        font-size: 0.8rem;
+        font-family: $Inter;
+        font-weight: 550;
+
+    }
+}
+
+.active {
+    color: $primary-orange;
+    background-color: rgba(244, 128, 28, 0.13);
+}

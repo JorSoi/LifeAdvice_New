@@ -13,12 +13,11 @@ import LessonItem from "../LessonItem/LessonItem";
 
 function LessonContainer() {
     const [lessonList, setLessonList] = useState<Lesson[]>([])
-    console.log(lessonList)
 
     const supabase = supabaseBrowserClient();
 
     const getLessons = async () => {
-        const {data, error} = await supabase.from('lessons').select('*').limit(10)
+        const {data, error} = await supabase.from('lessons').select(`*, categories(*)`).limit(10)
         if(!error) {
             setLessonList(data);
         } else {
@@ -26,7 +25,7 @@ function LessonContainer() {
         }
     }
 
-    const loadMoreLessons = async () => {
+    const loadMoreLessons = async () => { 
         const {data, error} = await supabase.from('lessons').select('*').limit(10)
         if(!error) {
             setLessonList((prev) => {
@@ -62,8 +61,10 @@ function LessonContainer() {
                     lessonList.map((lesson, i) => {
                         
                         return <LessonItem key={Math.floor(Math.random()*1000000)} data={lesson} zLayer={(lessonList.length-i)} index={i} removeLessonFromList={removeLessonFromList}/>
-                    })
+                    }) 
                 }
+            
+            {lessonList.length > 0 && <div className={styles.bgCard}></div>} 
         </div>
     );
 }

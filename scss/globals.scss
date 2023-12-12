@@ -1,8 +1,14 @@
 @import '@/scss/variables';
 @import '@/scss/mixins';
 
+html {
+  overflow: hidden;
+}
+
 body {
-  display: flex;
+  @include flex-c-c;
+  width: 100%;
+  height: 100svh;
   overflow: hidden;
   background-color: $background-orange;
 }

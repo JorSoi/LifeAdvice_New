@@ -1,0 +1,16 @@
+@import '@/scss/variables';
+@import '@/scss/mixins';
+
+.menuBar {
+    position: fixed;
+    z-index: 9999;
+    bottom: 12px;
+    @include flex-sb-c;
+    width: 96%;
+    height: 66px;
+    padding: 6px;
+    background-color: $snow-white;
+    border-radius: 12px;
+    box-shadow: 0px 0px 15px 6px rgba(129, 102, 61, 0.06);
+}
+

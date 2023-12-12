@@ -91,7 +91,7 @@ function LessonItem ({data, zLayer, index, removeLessonFromList} : {data:Lesson,
       }
     }, [index])
 
-    
+
 
   return (
     <div 
@@ -112,7 +112,7 @@ function LessonItem ({data, zLayer, index, removeLessonFromList} : {data:Lesson,
     <div className={styles.headerWrapper}>
       <ShareButton />
       <p className={styles.lessonCredentials}>Learned by <span>{data.author}</span></p>
-      <CategoryItem category={'mental-health'} />
+      <CategoryItem category={data.categories} />
     </div>
       
       <p className={styles.lessonContent}>"{data.lesson}"</p>

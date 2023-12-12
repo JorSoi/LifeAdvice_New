@@ -6,7 +6,7 @@
     height: 100%;
     border-radius: 12px;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     flex-direction: column;
     padding: 35px;
@@ -14,7 +14,7 @@
     text-align: center;
     user-select: none;
     background-color: $snow-white;
-    font-family: $EB_Garamond;
+    overflow: hidden;
 }
 
 .headerWrapper {
@@ -24,9 +24,11 @@
 
 .lessonCredentials {
     color: #2D355B99;
+    font-family: $Inter;
     font-size: 1rem;
     font-weight: 500;
     span {
+        font-family: $Inter;
         color: $primary-orange;
     }
 }
@@ -46,4 +48,24 @@
     margin-top: 30px;
     @include flex-sb-c;
     gap: 16px;
+}
+
+@media (max-width: 480px) {
+    .lessonItem {
+        padding: 15px;
+        padding-bottom: 25px;
+    }
+
+    .lessonCredentials {
+        font-size: 0.95rem;
+        font-weight: 450;
+    }
+
+    .lessonContent {
+        font-size: 1.39rem;
+    }
+
+    .lessonContent {
+        line-height: 1.7rem;
+    }
 }
