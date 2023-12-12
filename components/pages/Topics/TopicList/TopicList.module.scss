@@ -1,0 +1,84 @@
+@import '@/scss/variables';
+@import '@/scss/mixins';
+
+.topicList {
+    margin: 0px 3%;
+    padding-top: 85px;
+    padding-bottom: 120px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+
+    a {
+        text-decoration: none;
+        color: $primary-font;
+    }
+
+}
+
+.card {
+    height: 180px;
+    width: auto;
+    padding: 14px;
+    border-radius: 12px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow: hidden;
+
+    h2 {
+        font-size: 1.22rem;
+        font-weight: 700;
+        position: relative;
+        z-index: 1;
+    }
+
+    img {
+        position: absolute;
+        z-index: 0;
+        right: 14px;
+        bottom: 14px;
+        height: auto;
+    }
+}
+
+.love {
+    background-color: #FF5354;
+    img {
+        bottom: 0px;
+    }
+}
+
+.friendship {
+    background-color: #B7DDFF;
+    img {
+        bottom: 0px;
+    }
+}
+
+.mental {
+    background-color: #FFB8EF;
+}
+
+.business {
+    background-color: #FFBB82;
+}
+
+.education {
+    background-color: #B0E57C;
+}
+
+.travel {
+    background-color: #AEDFF7;
+}
+
+.fitness {
+    background-color: #DFC8C8;
+}
+
+.other {
+    background-color: $snow-white;
+}
+
+

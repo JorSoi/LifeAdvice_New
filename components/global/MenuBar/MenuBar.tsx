@@ -8,13 +8,16 @@ import LessonButton from './LessonButton/LessonButton';
 
 function MenuBar({page} : {page : PageOptions}) {
     return (
-        <div className={styles.menuBar}>
-            <ExploreButton isActive={page == 'explore'} />
-            <TopicButton isActive={page == 'topics'} />
-            <LessonButton />
-            <StoryButton isActive={page == 'stories'} />
-            <ProfileButton isActive={page == 'profile'} />
+        <div className={styles.menuWrapper}>
+            <div className={styles.menuBar}>
+                <ExploreButton isActive={page == 'explore'} />
+                <TopicButton isActive={page == 'topics'} />
+                <LessonButton />
+                <StoryButton isActive={page == 'stories'} />
+                <ProfileButton isActive={page == 'profile'} />
+            </div>
         </div>
+
     );
 }
 

@@ -1,0 +1,10 @@
+@import '@/scss/variables';
+@import '@/scss/mixins';
+
+.logo {
+    position: fixed;
+    z-index: 10;
+    top: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+}

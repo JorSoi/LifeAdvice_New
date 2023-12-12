@@ -1,12 +1,20 @@
 @import '@/scss/variables';
 @import '@/scss/mixins';
 
-.menuBar {
+.menuWrapper {
     position: fixed;
-    z-index: 10;
-    bottom: 12px;
-    left: 50%;
-    transform: translateX(-50%);
+    z-index: 11;
+    bottom: 0px;
+    width: 100%;
+    height: fit-content;
+    background-color: $background-orange;
+    display: flex;
+    justify-content: center;
+}
+
+.menuBar {
+    margin-bottom: 8px;
+    transform: translateY(-4px);
     @include flex-sb-c;
     width: 96%;
     height: 66px;
@@ -15,4 +23,6 @@
     border-radius: 12px;
     box-shadow: 0px 0px 15px 6px rgba(129, 102, 61, 0.06);
 }
+
+
 

@@ -3,11 +3,11 @@
 import { useState, useRef, TouchEventHandler, MouseEventHandler, useEffect } from 'react';
 import styles from './LessonItem.module.scss'; 
 import { Lesson } from '@/types/home.types';
-import BookmarkButton from '@/components/Buttons/BookmarkButton/BookmarkButton';
-import CommentButton from '@/components/Buttons/CommentButton/CommentButton';
-import LikeButton from '@/components/Buttons/LikeButton/LikeButton';
-import ShareButton from '@/components/Buttons/ShareButton/ShareButton';
-import CategoryItem from '@/components/CategoryIcon/CategoryItem';
+import BookmarkButton from '@/components/global/Buttons/BookmarkButton/BookmarkButton';
+import CommentButton from '@/components/global/Buttons/CommentButton/CommentButton';
+import LikeButton from '@/components/global/Buttons/LikeButton/LikeButton';
+import ShareButton from '@/components/global/Buttons/ShareButton/ShareButton';
+import CategoryItem from '@/components/global/CategoryIcon/CategoryIcon';
 
 function LessonItem ({data, zLayer, index, removeLessonFromList} : {data:Lesson, zLayer : number, index: number, removeLessonFromList: (idToRemove : number) => void }) {
 
@@ -112,7 +112,7 @@ function LessonItem ({data, zLayer, index, removeLessonFromList} : {data:Lesson,
     <div className={styles.headerWrapper}>
       <ShareButton />
       <p className={styles.lessonCredentials}>Learned by <span>{data.author}</span></p>
-      <CategoryItem category={data.categories} />
+      <CategoryItem category={data.categories.category_name} />
     </div>
       
       <p className={styles.lessonContent}>"{data.lesson}"</p>
