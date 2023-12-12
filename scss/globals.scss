@@ -11,11 +11,11 @@ body {
   height: 100svh;
   overflow: hidden;
   background-color: $background-orange;
+  font-family: $Inter;
 }
 
 * {
   box-sizing: border-box;
   padding: unset;
   margin: unset;
-  font-family: 'Inter';
 }
