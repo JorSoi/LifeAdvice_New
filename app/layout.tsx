@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import { EB_Garamond, Inter } from 'next/font/google'
 import '@/scss/globals.scss'
-import SideBar from '@/components/Home/Sidebar/Sidebar'
+import MenuBar from '@/components/MenuBar/MenuBar'
 
 //Using next font optimization to locally host fonts for performance optimization.
 const garamond = EB_Garamond({
@@ -29,7 +29,6 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${garamond.variable} ${inter.variable}`}>
       <body>
-        {/* <SideBar /> */}
         {children}
       </body>
     </html>

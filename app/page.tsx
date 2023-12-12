@@ -1,28 +1,18 @@
-import CategoryItem from '@/components/CategoryIcon/CategoryItem';
-import styles from './Home.module.scss'
-import LessonContainer from '@/components/Home/LessonContainer/LessonContainer';
-import Toggle from '@/components/Buttons/Toggle/Toggle';
-import ShareButton from '@/components/Buttons/ShareButton/ShareButton';
- 
+import LessonContainer from "@/components/Home/LessonContainer/LessonContainer";
+import MenuBar from "@/components/MenuBar/MenuBar";
+import Image from "next/image";
+import styles from './Explore.module.scss'
 
-function home() {
-    
+
+
+function Explore() {
     return (
-        <main className={styles.home}>
-            {/* <LessonContainer /> */}
-            <CategoryItem category={'mental-health'} />
-            <CategoryItem category={'business'} />
-            <CategoryItem category={'love'} />
-            <CategoryItem category={'education'} />
-            <CategoryItem category={'fitness'} />
-            <CategoryItem category={'other'} />
-            <CategoryItem category={'travel'} />
-            <br></br>
-            <Toggle />
-            <br></br>
-            <ShareButton />
-        </main>
+        <div className={styles.explore}>
+            <Image className={styles.logo} src={'./logo-light.svg'} width={140} height={40} alt="LifeAdvice" />
+            <LessonContainer />
+            <MenuBar page={'explore'}/>
+        </div>
     );
 }
 
-export default home;
+export default Explore;

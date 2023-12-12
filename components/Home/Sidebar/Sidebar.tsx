@@ -1,7 +1,6 @@
 import styles from './Sidebar.module.scss'
 import supabaseServerClient from '@/lib/supabaseServerClient';
 import Link from 'next/link';
-import CategoryItem from '../CategoryItem/CategoryItem';
 
 export const revalidate = 60*60*24 //Daily
 
@@ -20,11 +19,11 @@ async function SideBar() {
                 
             <div style={{ width: '100%'}}>
                 <Link href={'/'} className={styles.category}><span>🎲</span> Random Advices</Link>
-                {data?.map((category) => {
+                {/* {data?.map((category) => {
                     return( 
                         <CategoryItem key={category.id} {...category} />
                     ) 
-                })}
+                })} */}
             </div>
 
             <p className={styles.footer}>Lifelessons ©{currentYear}</p>

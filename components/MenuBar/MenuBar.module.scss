@@ -3,8 +3,10 @@
 
 .menuBar {
     position: fixed;
-    z-index: 9999;
+    z-index: 10;
     bottom: 12px;
+    left: 50%;
+    transform: translateX(-50%);
     @include flex-sb-c;
     width: 96%;
     height: 66px;

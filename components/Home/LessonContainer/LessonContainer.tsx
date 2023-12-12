@@ -17,7 +17,7 @@ function LessonContainer() {
     const supabase = supabaseBrowserClient();
 
     const getLessons = async () => {
-        const {data, error} = await supabase.from('lessons').select(`*, categories(*)`).limit(10)
+        const {data, error} = await supabase.from('lessons').select(`*, categories(*)`).limit(5).order('id', { ascending: true })
         if(!error) {
             setLessonList(data);
         } else {
