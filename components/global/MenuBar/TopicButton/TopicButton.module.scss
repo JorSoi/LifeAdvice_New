@@ -16,11 +16,50 @@
         font-size: 0.8rem;
         font-family: $Inter;
         font-weight: 550;
-
     }
 }
 
 .active {
     color: $primary-orange;
-    background-color: rgba(244, 128, 28, 0.13);
+    background-color: $menu-item-bg;
+}
+
+.love {
+    color: #f35050;
+    background-color: #f8758454
+}
+
+.friendship {
+    color: #5fa0d9;
+    background-color: #b7ddff96;
+}
+
+.mental-health {
+    color: #e065c6;
+    background-color: #ffb8ee84;
+}
+
+.business {
+    color: #b87132;
+    background-color: #da975c63;
+}
+
+.education {
+    color: #63b314;
+    background-color: #a2e3628a;
+}
+
+.travel {
+    color: #2babeb;
+    background-color: #aedff79c;
+}
+
+.fitness {
+    color: #928080;
+    background-color: #dfc8c8b2;
+}
+
+.other {
+    color: #2D355B;
+    background-color: rgba(0, 0, 0, 0.079);
 }
