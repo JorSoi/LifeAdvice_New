@@ -1,0 +1,53 @@
+@import '@/scss/variables';
+@import '@/scss/mixins';
+
+.commentItem {
+    width: 100%;
+    display: flex;
+    gap: 7px;
+    padding-right: 4%;
+    position: relative;
+    overflow: hidden;
+}
+
+.userName {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: $primary-font;
+}
+
+.comment {
+    color: rgba(45, 53, 91, 0.829);
+    font-size: 0.9rem;
+    font-weight: 457;
+    margin-top: 4px;
+}
+
+.metadataWrapper {
+    display: flex;
+    gap: 25px;
+    margin-top: 10px;
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+
+.creationDate {
+    color: rgba(45, 53, 91, 0.46);
+}
+
+.interactionContainer {
+    display: flex;
+    gap: 15px;
+    color: rgba(45, 53, 91, 0.57);
+}
+
+.optionButton {
+    @include flex-c-c;
+    padding: 10px 10px;
+    padding-bottom: 15px;
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    cursor: pointer;
+    opacity: 50%;
+}

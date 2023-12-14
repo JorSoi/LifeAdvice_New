@@ -1,0 +1,13 @@
+@import '@/scss/variables';
+@import '@/scss/mixins';
+
+.overlay {
+    background-color: #161c3677;
+    position: fixed;
+    z-index: 9999;
+    top: 0px;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+
+}
