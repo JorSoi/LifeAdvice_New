@@ -1,0 +1,56 @@
+@import '@/scss/variables';
+@import '@/scss/mixins';
+
+.itemWrapper {
+    @include flex-c-c;
+    flex-direction: column;
+    text-decoration: none;
+    color: rgba(45, 53, 91, 0.60);
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+
+.socialItem {
+    width: 70px;
+    height: 70px;
+    @include flex-c-c;
+    border-radius: 100%;
+    cursor: pointer;
+    margin-bottom: 5px;
+}
+
+.whatsapp {
+    background-color: #29D16826;
+}
+
+.facebook {
+    background-color: #1877F126;
+}
+
+.reddit {
+    background-color: #FE450026;
+}
+
+.twitter {
+    background-color: #161c360e;
+
+    img {
+        transform: scale(0.75);
+    }
+}
+
+.discord {
+    background-color: #DEE1FF;
+}
+
+.messenger {
+    background-color: #E4E0FF;
+}
+
+.telegram {
+    background-color: #D7F3FF;
+
+    img {
+        transform: scale(0.95) translateX(-10%);
+    }
+}

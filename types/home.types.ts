@@ -28,3 +28,5 @@ export interface CommentData extends CommentProps {
 }
 
 export type InitiateReplyFunction = ((creator_id : number, comment_id : number, user_name : string) => void)
+
+export type SocialType = 'whatsapp' | 'facebook' | 'reddit' | 'x' | 'discord' | 'messenger' | 'telegram';

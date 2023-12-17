@@ -13,6 +13,7 @@ import BottomSheet from '@/components/global/BottomSheet/BottomSheet';
 import CommentList from '@/components/global/Comments/CommentList/CommentList';
 import TextField from '@/components/global/TextArea/TextArea';
 import CommentLogicWrapper from '@/components/global/Comments/CommentLogicWrapper/CommentLogicWrapper';
+import SocialShareList from '../SocialShareList/SocialShareList';
 
 function LessonItem ({data, zLayer, index, removeLessonFromList} : {data:Lesson, zLayer : number, index: number, removeLessonFromList: (idToRemove : number) => void }) {
 
@@ -27,6 +28,7 @@ function LessonItem ({data, zLayer, index, removeLessonFromList} : {data:Lesson,
     const swipeThreshold : number = 0.4 //The minimum % of distance from the center to be interpreted as a swipe.
     
     const [areCommentsOpen, setAreCommentsOpen] = useState<boolean>(false)
+    const [areSocialsOpen, setAreSocialsOpen] = useState<boolean>(false)
 
     const resetPosition = () : void => {
       if(cardRef.current) {
@@ -107,6 +109,14 @@ function LessonItem ({data, zLayer, index, removeLessonFromList} : {data:Lesson,
       setAreCommentsOpen(false)
     }
 
+    const openSocials = () => {
+      setAreSocialsOpen(true)
+    }
+
+    const closeSocials = () => {
+      setAreSocialsOpen(false)
+    }
+
     useEffect(() => {
       console.log(areCommentsOpen)
     }, [areCommentsOpen])
@@ -130,7 +140,7 @@ function LessonItem ({data, zLayer, index, removeLessonFromList} : {data:Lesson,
         onTouchCancel={handlePointerUp}
       > 
       <div className={styles.headerWrapper}>
-        <ShareButton />
+        <ShareButton openSocials={openSocials} />
         <p className={styles.lessonCredentials}>Learned by <span>{data.author}</span></p>
         <CategoryItem category={data.categories.category_name} />
       </div>
@@ -144,12 +154,17 @@ function LessonItem ({data, zLayer, index, removeLessonFromList} : {data:Lesson,
       </div>
 
       
-        <Overlay closeOverlayFunction={closeComments} isOpen={areCommentsOpen}>
-          <BottomSheet title='Comments'>
-            <CommentLogicWrapper lessonId={data.id}/>
-          </BottomSheet>
-        </Overlay>
-      
+      <Overlay closeOverlayFunction={closeComments} isOpen={areCommentsOpen}>
+        <BottomSheet title='Comments'>
+          <CommentLogicWrapper lessonId={data.id}/>
+        </BottomSheet>
+      </Overlay>
+    
+      <Overlay isOpen={areSocialsOpen} closeOverlayFunction={closeSocials}>
+        <BottomSheet title="Share this lesson">
+            <SocialShareList />
+        </BottomSheet>
+      </Overlay>
     </>
   );
 };

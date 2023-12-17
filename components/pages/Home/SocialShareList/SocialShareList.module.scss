@@ -1,0 +1,36 @@
+@import '@/scss/variables';
+@import '@/scss/mixins';
+
+.socialShareList {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(18%, 1fr));
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.clipBarWrapper {
+    position: relative;
+
+    img {
+        position: absolute;
+        right: 20px;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+}
+
+.clipBar {
+    background-color: $input-bg;
+    border: none;
+    outline: none;
+    padding: 20px;
+    padding-right: 50px;
+    width: 100%;
+    font-size: 0.9rem;
+    color: #2D355B99;
+    font-weight: 500;
+    white-space: nowrap;
+    overflow: hidden; 
+    text-overflow: ellipsis; 
+    border-radius: 8px;
+}
