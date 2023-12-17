@@ -11,7 +11,8 @@ function Overlay({children, isOpen, closeOverlayFunction} : {children : React.Re
     }
 
     return (
-        <div className={`${styles.overlay} ${isOpen ? styles.opened : styles.closed}`} onClick={handleClick}>
+        <div className={`${styles.overlay} ${isOpen ? styles.opened : styles.closed}`}>
+            <div className={styles.clickableSpace} onClick={handleClick}></div>
             {children}
         </div>
     );

@@ -11,6 +11,11 @@
     right: 0px;
 }
 
+.clickableSpace {
+  height: 100%;
+  width: 100%;
+}
+
 .opened {
     display: block;
     animation: fadeIn 0.5s ease-in-out;

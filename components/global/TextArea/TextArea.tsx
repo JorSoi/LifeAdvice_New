@@ -21,7 +21,7 @@ function TextArea({minLength, maxLength, lessonId, recipient} : {minLength : num
         setIsLoading(true);
         const { data, error } = await supabase.from('comments').insert([{ 
             lesson_id: lessonId, 
-            profile_id: 6, //must be dynamic
+            profile_id: 1, //must be dynamic
             comment: text,
         },]).select()
         if(!error) {
@@ -73,7 +73,14 @@ function TextArea({minLength, maxLength, lessonId, recipient} : {minLength : num
                 value={text} 
                 onChange={({target}) => setText(target.value)} 
                 maxLength={maxLength} 
-                onFocus={() => setIsFocused(true)}
+                onFocus={
+                    () => {
+                        setIsFocused(true)
+                        if (formRef.current) {
+                            formRef.current.scrollIntoView(false) 
+                        }
+                    }
+                }
                 onBlur={() => setIsFocused(false)}
             />
 
