@@ -1,7 +1,6 @@
 // SCSS Colors
 $primary-orange: #F4801C;
 $background-orange: #FFE7C5;
-$fade-orange: linear-gradient(273deg, #F79516 0.67%, #EF6023 194.75%);
 $snow-white: #F8F9FA;
 $menu-item-bg: #F4811C31;
 
@@ -15,6 +14,10 @@ $EB_Garamond: var(--font-eb-garamond);
 $Inter: var(--font-inter);
 
 // SCSS Font Sizes
-
 $Garamond_Primary: 23px;
-$Garamond_Secondary: 19px
+$Garamond_Secondary: 19px;
+
+
+//Button Colors
+$fade-orange: linear-gradient(273deg, #F79516 0.67%, #EF6023 194.75%);
+$pitch-dark: #161C36;

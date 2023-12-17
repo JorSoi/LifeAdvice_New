@@ -9,8 +9,22 @@ export type Category = 'love' | 'friendship' | 'business' | 'mental-health' | 'e
 export type PageOptions = 'explore' | 'topics' | 'stories' | 'profile' | 'default'
 
 export type CommentProps = {
+    comment_id: number,
     avatar_url: string, 
-    username: string,
+    user_name: string,
     comment: string, 
-    creation_date: string
+    created_at: string
 }
+
+export interface CommentData extends CommentProps {
+    id: number,
+    profiles: {
+        id: number;
+        user_name: string
+        avatars: {
+            avatar_url: string
+        }  
+    }
+}
+
+export type InitiateReplyFunction = ((creator_id : number, comment_id : number, user_name : string) => void)

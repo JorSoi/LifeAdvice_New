@@ -1,0 +1,15 @@
+.commentList {
+    display: flex;
+    width: 100%;
+    height: auto;
+    flex-direction: column;
+    gap: 20px;
+    margin-top: 15px;
+}
+
+.placeholderImg {
+    max-width: 480px;
+    width: 100%;
+    height: auto;
+    margin: 0 auto;
+}

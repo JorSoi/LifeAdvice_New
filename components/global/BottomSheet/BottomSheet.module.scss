@@ -14,12 +14,23 @@
     padding-bottom: 35px;
     background-color: white;
     border-radius: 20px 20px 0px 0px;
+    animation: slideInFromBottom 0.5s ease-out;
 }
+
+@keyframes slideInFromBottom {
+    from {
+      transform: translateY(100%);
+    }
+    to {
+      transform: translateY(0);
+    }
+  }
 
 .headingContainer {
     position: sticky;
     padding-top: 5px;
     padding-bottom: 2px;
+    margin-bottom: 5px;
     width: auto;
     background-color: white;
     z-index: 9999;

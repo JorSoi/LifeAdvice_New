@@ -5,7 +5,7 @@
     width: 100%;
     display: flex;
     gap: 7px;
-    padding-right: 4%;
+    padding-right: 6%;
     position: relative;
     overflow: hidden;
 }
@@ -25,8 +25,9 @@
 
 .metadataWrapper {
     display: flex;
+    align-items: center;
     gap: 25px;
-    margin-top: 10px;
+    margin-top: 6px;
     font-size: 0.8rem;
     font-weight: 500;
 }
@@ -37,7 +38,8 @@
 
 .interactionContainer {
     display: flex;
-    gap: 15px;
+    align-items: center;
+    gap: 10px;
     color: rgba(45, 53, 91, 0.57);
 }
 

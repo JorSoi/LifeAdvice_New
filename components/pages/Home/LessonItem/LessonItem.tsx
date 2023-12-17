@@ -3,11 +3,16 @@
 import { useState, useRef, TouchEventHandler, MouseEventHandler, useEffect } from 'react';
 import styles from './LessonItem.module.scss'; 
 import { Lesson } from '@/types/home.types';
-import BookmarkButton from '@/components/global/Buttons/BookmarkButton/BookmarkButton';
-import CommentButton from '@/components/global/Buttons/CommentButton/CommentButton';
-import LikeButton from '@/components/global/Buttons/LikeButton/LikeButton';
-import ShareButton from '@/components/global/Buttons/ShareButton/ShareButton';
+import BookmarkButton from '@/components/global/Buttons/LessonItem/BookmarkButton/BookmarkButton';
+import CommentButton from '@/components/global/Buttons/LessonItem/CommentButton/CommentButton';
+import LikeButton from '@/components/global/Buttons/LessonItem/LikeButton/LikeButton';
+import ShareButton from '@/components/global/Buttons/LessonItem/ShareButton/ShareButton';
 import CategoryItem from '@/components/global/CategoryIcon/CategoryIcon';
+import Overlay from '@/components/global/Overlay/Overlay';
+import BottomSheet from '@/components/global/BottomSheet/BottomSheet';
+import CommentList from '@/components/global/Comments/CommentList/CommentList';
+import TextField from '@/components/global/TextArea/TextArea';
+import CommentLogicWrapper from '@/components/global/Comments/CommentLogicWrapper/CommentLogicWrapper';
 
 function LessonItem ({data, zLayer, index, removeLessonFromList} : {data:Lesson, zLayer : number, index: number, removeLessonFromList: (idToRemove : number) => void }) {
 
@@ -19,7 +24,9 @@ function LessonItem ({data, zLayer, index, removeLessonFromList} : {data:Lesson,
     const [initialPointerPosition, setinitialPointerPosition] = useState<{x: number, y: number}>()
     const windowCenter : number = window ? window.innerWidth / 2 : 0; //Conditional ensures no issues during serverside rendering as window is usually only accessible client-side.
     const distanceFromCenter : number = x / windowCenter //Represents the percentage to which a card has been moved away from its original position relative to the window center. This value can be used as a swipe-threshold to trigger events.
-    const swipeThreshold : number = 0.4 //The minimum % of distance from the center to be interpreted as a swipe. 
+    const swipeThreshold : number = 0.4 //The minimum % of distance from the center to be interpreted as a swipe.
+    
+    const [areCommentsOpen, setAreCommentsOpen] = useState<boolean>(false)
 
     const resetPosition = () : void => {
       if(cardRef.current) {
@@ -92,36 +99,58 @@ function LessonItem ({data, zLayer, index, removeLessonFromList} : {data:Lesson,
     }, [index])
 
 
+    const openComments = () => {
+      setAreCommentsOpen(true)
+    }
+
+    const closeComments = () => {
+      setAreCommentsOpen(false)
+    }
+
+    useEffect(() => {
+      console.log(areCommentsOpen)
+    }, [areCommentsOpen])
+
 
   return (
-    <div 
-      ref={cardRef} 
-      className={styles.lessonItem} 
-      style={{
-        zIndex: zLayer,
-        transform: `translateX(${x}px) translateY(${y}px) rotate(${rotation}deg)`}} 
-      onMouseDown={handlePointerDown} 
-      onMouseMove={handlePointerMove} 
-      onMouseUp={handlePointerUp} 
-      onMouseLeave={handlePointerUp}
-      onTouchStart={handlePointerDown}
-      onTouchMove={handlePointerMove}
-      onTouchEnd={handlePointerUp}
-      onTouchCancel={handlePointerUp}
-    > 
-    <div className={styles.headerWrapper}>
-      <ShareButton />
-      <p className={styles.lessonCredentials}>Learned by <span>{data.author}</span></p>
-      <CategoryItem category={data.categories.category_name} />
-    </div>
-      
-      <p className={styles.lessonContent}>"{data.lesson}"</p>
-      <div className={styles.buttonWrapper}>
-        <BookmarkButton />
-        <CommentButton commentCount={1}/>
-        <LikeButton />
+    <>
+      <div 
+        ref={cardRef} 
+        className={styles.lessonItem} 
+        style={{
+          zIndex: zLayer,
+          transform: `translateX(${x}px) translateY(${y}px) rotate(${rotation}deg)`}} 
+        onMouseDown={handlePointerDown} 
+        onMouseMove={handlePointerMove} 
+        onMouseUp={handlePointerUp} 
+        onMouseLeave={handlePointerUp}
+        onTouchStart={handlePointerDown}
+        onTouchMove={handlePointerMove}
+        onTouchEnd={handlePointerUp}
+        onTouchCancel={handlePointerUp}
+      > 
+      <div className={styles.headerWrapper}>
+        <ShareButton />
+        <p className={styles.lessonCredentials}>Learned by <span>{data.author}</span></p>
+        <CategoryItem category={data.categories.category_name} />
       </div>
-    </div>
+        
+        <p className={styles.lessonContent}>"{data.lesson}"</p>
+        <div className={styles.buttonWrapper}>
+          <BookmarkButton />
+          <CommentButton commentCount={0} openComments={openComments} />
+          <LikeButton />
+        </div>
+      </div>
+
+      
+        <Overlay closeOverlayFunction={closeComments} isOpen={areCommentsOpen}>
+          <BottomSheet title='Comments'>
+            <CommentLogicWrapper lessonId={data.id}/>
+          </BottomSheet>
+        </Overlay>
+      
+    </>
   );
 };
 

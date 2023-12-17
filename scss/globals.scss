@@ -2,6 +2,7 @@
 @import '@/scss/mixins';
 
 html {
+  background-color: $background-orange;
   overflow: hidden;
 }
 
@@ -17,4 +18,10 @@ body {
   box-sizing: border-box;
   padding: unset;
   margin: unset;
+}
+
+button {
+  font-family: $Inter;
+  outline: none;
+  border: none;
 }

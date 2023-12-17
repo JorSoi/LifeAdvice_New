@@ -1,18 +1,17 @@
 'use client'
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import styles from './Overlay.module.scss'
 
-function Overlay({children} : {children : React.ReactNode}) {
-
-    const [isClosed, setIsClosed] = useState<boolean>(false);
-
+function Overlay({children, isOpen, closeOverlayFunction} : {children : React.ReactNode, isOpen : boolean, closeOverlayFunction : () => void }) {
+    
+    //Calls the a function which is inserted by the parent component so that the parent component is in full control of when to open or close an overlay.
     const handleClick = () => {
-        setIsClosed(true)
+        closeOverlayFunction()
     }
 
     return (
-        <div className={styles.overlay} onClick={handleClick}>
+        <div className={`${styles.overlay} ${isOpen ? styles.opened : styles.closed}`} onClick={handleClick}>
             {children}
         </div>
     );

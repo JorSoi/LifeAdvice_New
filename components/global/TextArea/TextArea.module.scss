@@ -1,0 +1,73 @@
+@import '@/scss/variables';
+@import '@/scss/mixins';
+
+.textAreaWrapper {
+    position: relative;
+}
+
+.textArea {
+    width: 100%;
+    height: 68px;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: #F3F3F5;
+    border: 1px solid #e8e8e8;
+    font-family: $Inter;
+    font-size: 1rem;
+    color: $primary-font;
+    line-height: 140%;
+    transition: height 0.3s;
+
+    &::placeholder {
+        color: #2d355ba6;
+        font-size: 0.925rem;
+    }
+}
+
+.expanded {
+    height: 200px;
+    padding-bottom: 70px;
+}
+
+.postButton {
+    position: absolute;
+    left: 20px;
+    bottom: 20px;
+    @include Button-Dark;
+    cursor: pointer;
+    transition: background-color 0.2s, color 0.2s;
+
+    &:disabled {
+        background-color: rgb(215, 215, 215);
+        color: rgb(147, 147, 147);
+        cursor: default;
+        pointer-events: none;
+    }
+
+    &:active {
+        opacity: 70%;
+    }
+}
+
+
+.lengthCounter {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    font-size: 0.85rem;
+    color: orange;
+    transition: opacity 0.3s, color 0.8s;
+}
+
+.hidden {
+    opacity: 0%;
+}
+
+.warn {
+    opacity: 100%;
+}
+
+.stop {
+    color: red;
+    opacity: 100%;
+}

@@ -9,5 +9,34 @@
     bottom: 0px;
     left: 0px;
     right: 0px;
-
 }
+
+.opened {
+    display: block;
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from {
+      background-color: #161c3600;    
+    }
+    to {
+      background-color: #161c3677;    
+    }
+}
+
+.closed {
+    animation: fadeOut 0.5s ease-in-out;
+    display: none;
+}
+
+@keyframes fadeOut {
+    from {
+      background-color: #161c3600;    
+    }
+    to {
+      background-color: #161c3677;
+   
+    }
+  }
+

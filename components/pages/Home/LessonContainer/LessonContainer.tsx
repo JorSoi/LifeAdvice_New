@@ -3,7 +3,6 @@
 import styles from "./LessonContainer.module.scss"
 import supabaseBrowserClient from "@/lib/supabaseBrowserClient";
 import { useEffect, useState } from "react";
-import { Database } from "@/types/database.types";
 import { Lesson } from "@/types/home.types";
 import LessonItem from "../LessonItem/LessonItem";
 
@@ -65,6 +64,7 @@ function LessonContainer() {
                 }
             
             {lessonList.length > 0 && <div className={styles.bgCard}></div>} 
+
         </div>
     );
 }

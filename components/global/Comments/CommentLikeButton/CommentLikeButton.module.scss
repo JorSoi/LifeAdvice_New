@@ -1,0 +1,32 @@
+@import '@/scss/variables';
+@import '@/scss/mixins';
+
+.commentLikeButton {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 4px 8px;
+    border-radius: 100px;
+    cursor: pointer;
+
+    svg {
+        animation: heartBeat 0.4s ease-in;
+    }
+}
+
+.liked {
+    background-color: $menu-item-bg;
+    color: $primary-orange;
+}
+
+@keyframes heartBeat {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.4);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }

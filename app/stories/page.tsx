@@ -1,18 +1,18 @@
 import BottomSheet from "@/components/global/BottomSheet/BottomSheet";
-import CommentItem from "@/components/global/CommentItem/CommentItem";
-import CommentList from "@/components/global/CommentList/CommentList";
+import CommentLogicWrapper from "@/components/global/Comments/CommentLogicWrapper/CommentLogicWrapper";
 import MenuBar from "@/components/global/MenuBar/MenuBar";
 import Overlay from "@/components/global/Overlay/Overlay";
+import TextArea from "@/components/global/TextArea/TextArea";
 
 function Stories() {
     return (
         <div>
             <MenuBar page={'stories'} />
-            <Overlay>
+            {/* <Overlay>
                 <BottomSheet title="Comments">
-                    <CommentList />
+                    <CommentLogicWrapper lessonId={1} />
                 </BottomSheet>
-            </Overlay>
+            </Overlay> */}
         </div>
     );
 }
