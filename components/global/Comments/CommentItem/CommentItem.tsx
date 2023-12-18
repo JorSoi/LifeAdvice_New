@@ -2,7 +2,6 @@
 
 import Image from 'next/image';
 import styles from './CommentItem.module.scss'
-import { CommentProps } from '@/types/home.types';
 import supabaseBrowserClient from '@/lib/supabaseBrowserClient';
 import CommentLikeButton from '../CommentLikeButton/CommentLikeButton';
 import CommentReplyButton from '../CommentReplyButton/CommentReplyButton';

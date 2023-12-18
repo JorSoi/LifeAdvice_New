@@ -15,7 +15,7 @@ function CommentList({commentList, initiateReply} : {commentList : CommentData[]
                 {
                     commentList?.map((comment : CommentData) => {
                         return (
-                            <CommentItem key={comment.id} creator_id={comment.profiles.id}avatar_url={comment.profiles.avatars.avatar_url} user_name={comment.profiles.user_name} comment={comment.comment} created_at={getElapsedTime(comment.created_at)} comment_id={comment.id} initiateReply={initiateReply} />
+                            <CommentItem key={comment.id} creator_id={comment.profiles.id} avatar_url={comment.profiles.avatars.avatar_url} user_name={comment.profiles.user_name} comment={comment.comment} created_at={getElapsedTime(comment.created_at)} comment_id={comment.id} initiateReply={initiateReply} />
                         )
                     })
                 }

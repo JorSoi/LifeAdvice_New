@@ -1,7 +1,7 @@
 'use client'
 
-import { InitiateReplyFunction, Lesson } from "@/types/home.types";
-import TextArea from "../../TextArea/TextArea";
+import { CommentData, InitiateReplyFunction, Lesson } from "@/types/home.types";
+import TextArea from "../TextArea/TextArea";
 import CommentList from "../CommentList/CommentList";
 import supabaseBrowserClient from "@/lib/supabaseBrowserClient";
 import { useState, useEffect, useRef, RefObject, MutableRefObject } from "react";
@@ -19,12 +19,13 @@ function CommentLogicWrapper({lessonId} : {lessonId: number}) {
     //Scrolls to top and populates textarea with the recipients username
     const initiateReply : InitiateReplyFunction = async (creator_id, comment_id, user_name) => {
         setRecipient({name : user_name})
-
-        // const {data, error} = await supabase.from('comments_replies').insert({
-        //     recipient_profile_id : user_name,
-        //     comment_id: comment_id,
-        // })
     }
+
+    const addToCommentList = (newComment : CommentData) => {
+        setCommentList((prev : CommentData[]) => [newComment, ...prev])
+    }
+
+    console.log(commentList)
 
     useEffect(() => {
 
@@ -44,7 +45,7 @@ function CommentLogicWrapper({lessonId} : {lessonId: number}) {
     
     return (
         <>
-            <TextArea minLength={1} maxLength={800} lessonId={lessonId} recipient={recipient.name} />
+            <TextArea minLength={1} maxLength={800} lessonId={lessonId} recipient={recipient.name} addToCommentList={addToCommentList} />
             
             <CommentList commentList={commentList} initiateReply={initiateReply}/>
         </>

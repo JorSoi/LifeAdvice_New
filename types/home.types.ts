@@ -8,21 +8,17 @@ export type Category = 'love' | 'friendship' | 'business' | 'mental-health' | 'e
 
 export type PageOptions = 'explore' | 'topics' | 'stories' | 'profile' | 'default'
 
-export type CommentProps = {
-    comment_id: number,
-    avatar_url: string, 
-    user_name: string,
-    comment: string, 
-    created_at: string
-}
 
-export interface CommentData extends CommentProps {
-    id: number,
+export interface CommentData {
+    id: number;
+    comment: string; 
+    upvotes: number;
+    created_at: string;
     profiles: {
         id: number;
-        user_name: string
+        user_name: string;
         avatars: {
-            avatar_url: string
+            avatar_url: string;
         }  
     }
 }

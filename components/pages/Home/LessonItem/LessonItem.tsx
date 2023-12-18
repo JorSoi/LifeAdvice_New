@@ -11,7 +11,7 @@ import CategoryItem from '@/components/global/CategoryIcon/CategoryIcon';
 import Overlay from '@/components/global/Overlay/Overlay';
 import BottomSheet from '@/components/global/BottomSheet/BottomSheet';
 import CommentList from '@/components/global/Comments/CommentList/CommentList';
-import TextField from '@/components/global/TextArea/TextArea';
+import TextField from '@/components/global/Comments/TextArea/TextArea';
 import CommentLogicWrapper from '@/components/global/Comments/CommentLogicWrapper/CommentLogicWrapper';
 import SocialShareList from '../SocialShareList/SocialShareList';
 
