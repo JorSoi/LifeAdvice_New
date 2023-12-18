@@ -67,7 +67,7 @@ function TextArea({minLength, maxLength, lessonId, recipient, addToCommentList} 
 
 
     return (
-        <form className={styles.textAreaWrapper} onSubmit={handleSubmit} ref={formRef}>
+        <form className={styles.textForm} onSubmit={handleSubmit} ref={formRef}>
             <textarea 
                 className={`${styles.textArea} ${isFocused || isExpanded ? styles.expanded : null}`} 
                 placeholder='Share your thoughts' 
