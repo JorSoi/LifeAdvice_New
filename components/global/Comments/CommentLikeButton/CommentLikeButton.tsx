@@ -26,9 +26,8 @@ function CommentLikeButton({comment_id} : {comment_id : number}) {
                 //return to previous state if upvoting fails
                 setIsLiked(true)
             }
-           
-        }
-        else {
+              
+        } else {
             //add like
             setIsLiked(true)
             const {data, error} = await supabase.from('comment_upvoted_by').insert({
@@ -45,11 +44,6 @@ function CommentLikeButton({comment_id} : {comment_id : number}) {
                 //return to previous state if upvoting fails
                 setIsLiked(true)
             }
-           
-
-
-
-  
         }
     }
 
