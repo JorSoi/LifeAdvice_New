@@ -15,7 +15,8 @@ import TextField from '@/components/global/Comments/TextArea/TextArea';
 import CommentLogicWrapper from '@/components/global/Comments/CommentLogicWrapper/CommentLogicWrapper';
 import SocialShareList from '../SocialShareList/SocialShareList';
 
-function LessonItem ({data, zLayer, index, removeLessonFromList} : {data:Lesson, zLayer : number, index: number, removeLessonFromList: (idToRemove : number) => void }) {
+function LessonItem ({data, zLayer, index, removeLessonFromList} : {data: Lesson, zLayer : number, index: number, removeLessonFromList: (idToRemove : number) => void }) {
+  console.log(data)
 
     const [isDragging, setIsDragging] = useState<boolean>(false);
     const cardRef = useRef<HTMLDivElement | null>(null);
