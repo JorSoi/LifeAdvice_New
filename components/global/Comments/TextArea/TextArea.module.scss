@@ -33,7 +33,7 @@
     position: absolute;
     left: 20px;
     bottom: 20px;
-    @include Button-Dark;
+    @include Comment-Button;
     cursor: pointer;
     transition: background-color 0.2s, color 0.2s;
 

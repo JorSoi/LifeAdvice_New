@@ -203,6 +203,7 @@ export interface Database {
       }
       lessons: {
         Row: {
+          categories: any
           author: string | null
           category_id: number | null
           creation_date: string | null
