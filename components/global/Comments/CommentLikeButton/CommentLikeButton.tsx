@@ -2,13 +2,55 @@
 
 import { useState } from 'react';
 import styles from './CommentLikeButton.module.scss'
+import supabaseBrowserClient from '@/lib/supabaseBrowserClient';
 
-function CommentLikeButton() {
+function CommentLikeButton({comment_id} : {comment_id : number}) {
 
     const [isLiked, setIsLiked] = useState<boolean>(false);
 
-    const handleClick = () => {
-        setIsLiked(!isLiked)
+    const supabase = supabaseBrowserClient();
+
+    const handleClick = async () => {
+
+        if(isLiked) {
+            //remove like
+            setIsLiked(false)
+            const {data, error} = await supabase.from('comment_upvoted_by').delete().eq('profile_id', 2).eq('comment_id', comment_id);
+            if(!error) {
+                //decrease upvotes count on comment
+                await supabase.rpc( 'downvoteComment', {
+                    comment_id
+                  } 
+                )
+            } else {
+                //return to previous state if upvoting fails
+                setIsLiked(true)
+            }
+           
+        }
+        else {
+            //add like
+            setIsLiked(true)
+            const {data, error} = await supabase.from('comment_upvoted_by').insert({
+                comment_id,
+                profile_id: 2 //must be dynamic based on authed user
+            })
+            if(!error) {
+               //increase upvotes count on comment
+               await supabase.rpc( 'upvoteComment', {
+                comment_id
+              } 
+            )
+            } else {
+                //return to previous state if upvoting fails
+                setIsLiked(true)
+            }
+           
+
+
+
+  
+        }
     }
 
     return (

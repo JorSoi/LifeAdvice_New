@@ -31,7 +31,7 @@ const supabase = supabaseBrowserClient();
                 <div className={styles.metadataWrapper}>
                     <p className={styles.creationDate}>{created_at}</p>
                     <div className={styles.interactionContainer}>
-                        <CommentLikeButton />
+                        <CommentLikeButton comment_id={comment_id} />
                         <CommentReplyButton onClick={handleReplyClick} />
                     </div>
                 </div>

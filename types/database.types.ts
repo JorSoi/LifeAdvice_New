@@ -9,6 +9,27 @@ export type Json =
 export interface Database {
   public: {
     Tables: {
+      avatars: {
+        Row: {
+          avatar_name: string | null
+          avatar_url: string | null
+          created_at: string
+          id: number
+        }
+        Insert: {
+          avatar_name?: string | null
+          avatar_url?: string | null
+          created_at?: string
+          id?: number
+        }
+        Update: {
+          avatar_name?: string | null
+          avatar_url?: string | null
+          created_at?: string
+          id?: number
+        }
+        Relationships: []
+      }
       categories: {
         Row: {
           category_emoji: string | null
@@ -27,9 +48,161 @@ export interface Database {
         }
         Relationships: []
       }
+      comment_upvoted_by: {
+        Row: {
+          comment_id: number | null
+          created_at: string
+          id: number
+          profile_id: number
+        }
+        Insert: {
+          comment_id?: number | null
+          created_at?: string
+          id?: number
+          profile_id: number
+        }
+        Update: {
+          comment_id?: number | null
+          created_at?: string
+          id?: number
+          profile_id?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "comment_upvoted_by_comment_id_fkey"
+            columns: ["comment_id"]
+            isOneToOne: false
+            referencedRelation: "comments"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "comment_upvoted_by_profile_id_fkey"
+            columns: ["profile_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          }
+        ]
+      }
+      comments: {
+        Row: {
+          comment: string
+          created_at: string
+          id: number
+          lesson_id: number | null
+          profile_id: number | null
+          reports_count: number
+          upvotes: number | null
+        }
+        Insert: {
+          comment: string
+          created_at?: string
+          id?: number
+          lesson_id?: number | null
+          profile_id?: number | null
+          reports_count?: number
+          upvotes?: number | null
+        }
+        Update: {
+          comment?: string
+          created_at?: string
+          id?: number
+          lesson_id?: number | null
+          profile_id?: number | null
+          reports_count?: number
+          upvotes?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "comments_lesson_id_fkey"
+            columns: ["lesson_id"]
+            isOneToOne: false
+            referencedRelation: "lessons"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "comments_profile_id_fkey"
+            columns: ["profile_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          }
+        ]
+      }
+      comments_replies: {
+        Row: {
+          comment_id: number | null
+          created_at: string
+          id: number
+          recipient_profile_id: number | null
+        }
+        Insert: {
+          comment_id?: number | null
+          created_at?: string
+          id?: number
+          recipient_profile_id?: number | null
+        }
+        Update: {
+          comment_id?: number | null
+          created_at?: string
+          id?: number
+          recipient_profile_id?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "comments_replies_comment_id_fkey"
+            columns: ["comment_id"]
+            isOneToOne: false
+            referencedRelation: "comments"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "comments_replies_recipient_profile_id_fkey"
+            columns: ["recipient_profile_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          }
+        ]
+      }
+      lesson_upvoted_by: {
+        Row: {
+          created_at: string
+          id: number
+          lesson_id: number | null
+          profile_id: number
+        }
+        Insert: {
+          created_at?: string
+          id?: number
+          lesson_id?: number | null
+          profile_id: number
+        }
+        Update: {
+          created_at?: string
+          id?: number
+          lesson_id?: number | null
+          profile_id?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "lesson_upvoted_by_lesson_id_fkey"
+            columns: ["lesson_id"]
+            isOneToOne: false
+            referencedRelation: "lessons"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "lesson_upvoted_by_profile_id_fkey"
+            columns: ["profile_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          }
+        ]
+      }
       lessons: {
         Row: {
-          [x: string]: any
           author: string | null
           category_id: number | null
           creation_date: string | null
@@ -69,12 +242,52 @@ export interface Database {
           }
         ]
       }
+      profiles: {
+        Row: {
+          avatar_id: number | null
+          created_at: string
+          id: number
+          user_name: string | null
+        }
+        Insert: {
+          avatar_id?: number | null
+          created_at?: string
+          id?: number
+          user_name?: string | null
+        }
+        Update: {
+          avatar_id?: number | null
+          created_at?: string
+          id?: number
+          user_name?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "profiles_avatar_id_fkey"
+            columns: ["avatar_id"]
+            isOneToOne: false
+            referencedRelation: "avatars"
+            referencedColumns: ["id"]
+          }
+        ]
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      downvoteComment: {
+        Args: {
+          comment_id: number
+        }
+        Returns: undefined
+      }
+      upvoteComment: {
+        Args: {
+          comment_id: number
+        }
+        Returns: undefined
+      }
     }
     Enums: {
       [_ in never]: never
