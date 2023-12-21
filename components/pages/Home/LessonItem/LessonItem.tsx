@@ -31,6 +31,8 @@ function LessonItem ({data, zLayer, index, removeLessonFromList} : {data: Lesson
     const [areCommentsOpen, setAreCommentsOpen] = useState<boolean>(false)
     const [areSocialsOpen, setAreSocialsOpen] = useState<boolean>(false)
 
+    console.log('Initialize staging')
+
     const resetPosition = () : void => {
       if(cardRef.current) {
         cardRef.current.style.transition = 'transform 0.5s';
