@@ -1,0 +1,17 @@
+@import '@/scss/variables';
+@import '@/scss/mixins';
+
+.backButton {
+    min-width: 55px;
+    min-height: 55px;
+    @include flex-c-c;
+    background-color: #EBEBEF;
+    border-radius: 9px;
+    cursor: pointer;
+    
+
+    img {
+        pointer-events: none;
+        user-select: none;
+    }
+}

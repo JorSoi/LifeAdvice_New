@@ -1,11 +1,15 @@
 // SCSS Colors
-$primary-orange: #F4801C;
-$background-orange: #FFE7C5;
-$snow-white: #F8F9FA;
-$menu-item-bg: #F4811C31;
+$orange-primary: #F4801C;
+$orange-secondary:#F4E3D5;
+$orange-gradient: linear-gradient(273deg, #F79516 0.67%, #EF6023 194.75%);
+$orange-background: #FFE7C5;
 
-$primary-font: #2D355B;
-$secondary-font: #293D5470;
+$snow-white: #F8F9FA;
+
+$navy-primary: #2D355B;
+$secondary-font: #293D5470; //muss ausgetauscht werden wahrscheinlich
+$midnight-primary: #161C36;
+$grey-primary: #9DA0B2; //Used for fonts
 
 $voting-button: #293D541A;
 
@@ -21,5 +25,7 @@ $Garamond_Secondary: 19px;
 
 
 //Button Colors
-$fade-orange: linear-gradient(273deg, #F79516 0.67%, #EF6023 194.75%);
-$pitch-dark: #161C36;
+
+
+
+//MenuBar

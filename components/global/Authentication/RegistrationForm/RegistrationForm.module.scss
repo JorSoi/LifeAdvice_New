@@ -1,0 +1,33 @@
+@import '@/scss/variables';
+@import '@/scss/mixins';
+
+.registrationForm {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.buttonWrapper {
+    width: 100%;
+    display: flex;
+    gap: 10px;
+}
+
+.submit {
+    @include Button('dark');
+    flex-grow: 1;
+}
+
+.register {
+    color: $grey-primary;
+    text-align: center;
+    font-weight: 450;
+    font-size: 0.95rem;
+    cursor: pointer;
+    margin-top: 8px;
+
+    span {
+        color: $orange-primary;
+        font-weight: 600;
+    }
+}
