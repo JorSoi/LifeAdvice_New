@@ -11,20 +11,20 @@ export interface Database {
     Tables: {
       avatars: {
         Row: {
-          avatar_name: string | null
-          avatar_url: string | null
+          avatar_name: string
+          avatar_url: string
           created_at: string
           id: number
         }
         Insert: {
-          avatar_name?: string | null
-          avatar_url?: string | null
+          avatar_name: string
+          avatar_url: string
           created_at?: string
           id?: number
         }
         Update: {
-          avatar_name?: string | null
-          avatar_url?: string | null
+          avatar_name?: string
+          avatar_url?: string
           created_at?: string
           id?: number
         }
@@ -53,19 +53,19 @@ export interface Database {
           comment_id: number | null
           created_at: string
           id: number
-          profile_id: number
+          profile_id: string
         }
         Insert: {
           comment_id?: number | null
           created_at?: string
           id?: number
-          profile_id: number
+          profile_id: string
         }
         Update: {
           comment_id?: number | null
           created_at?: string
           id?: number
-          profile_id?: number
+          profile_id?: string
         }
         Relationships: [
           {
@@ -90,7 +90,7 @@ export interface Database {
           created_at: string
           id: number
           lesson_id: number | null
-          profile_id: number | null
+          profile_id: string | null
           reports_count: number
           upvotes: number | null
         }
@@ -99,7 +99,7 @@ export interface Database {
           created_at?: string
           id?: number
           lesson_id?: number | null
-          profile_id?: number | null
+          profile_id?: string | null
           reports_count?: number
           upvotes?: number | null
         }
@@ -108,7 +108,7 @@ export interface Database {
           created_at?: string
           id?: number
           lesson_id?: number | null
-          profile_id?: number | null
+          profile_id?: string | null
           reports_count?: number
           upvotes?: number | null
         }
@@ -134,19 +134,19 @@ export interface Database {
           comment_id: number | null
           created_at: string
           id: number
-          recipient_profile_id: number | null
+          recipient_profile_id: string
         }
         Insert: {
           comment_id?: number | null
           created_at?: string
           id?: number
-          recipient_profile_id?: number | null
+          recipient_profile_id: string
         }
         Update: {
           comment_id?: number | null
           created_at?: string
           id?: number
-          recipient_profile_id?: number | null
+          recipient_profile_id?: string
         }
         Relationships: [
           {
@@ -191,19 +191,11 @@ export interface Database {
             isOneToOne: false
             referencedRelation: "lessons"
             referencedColumns: ["id"]
-          },
-          {
-            foreignKeyName: "lesson_upvoted_by_profile_id_fkey"
-            columns: ["profile_id"]
-            isOneToOne: false
-            referencedRelation: "profiles"
-            referencedColumns: ["id"]
           }
         ]
       }
       lessons: {
         Row: {
-          categories: any
           author: string | null
           category_id: number | null
           creation_date: string | null
@@ -245,22 +237,22 @@ export interface Database {
       }
       profiles: {
         Row: {
-          avatar_id: number | null
+          avatar_id: number
           created_at: string
-          id: number
-          user_name: string | null
+          id: string
+          user_name: string
         }
         Insert: {
-          avatar_id?: number | null
+          avatar_id: number
           created_at?: string
-          id?: number
-          user_name?: string | null
+          id: string
+          user_name: string
         }
         Update: {
-          avatar_id?: number | null
+          avatar_id?: number
           created_at?: string
-          id?: number
-          user_name?: string | null
+          id?: string
+          user_name?: string
         }
         Relationships: [
           {
@@ -268,6 +260,13 @@ export interface Database {
             columns: ["avatar_id"]
             isOneToOne: false
             referencedRelation: "avatars"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "profiles_id_fkey"
+            columns: ["id"]
+            isOneToOne: true
+            referencedRelation: "users"
             referencedColumns: ["id"]
           }
         ]

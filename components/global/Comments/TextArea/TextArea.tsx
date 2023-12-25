@@ -22,7 +22,7 @@ function TextArea({minLength, maxLength, lessonId, recipient, addToCommentList} 
         setIsLoading(true);
         const { data, error } = await supabase.from('comments').insert([{ 
             lesson_id: lessonId, 
-            profile_id: 5, //must be dynamic
+            profile_id: '782049b9-91f5-410b-ad7c-e327a5ec898f', //must be dynamic
             comment: text,
         },]).select(`id, comment, upvotes, created_at, profiles(id, user_name, avatars(avatar_url))`).single();
         if(!error) {

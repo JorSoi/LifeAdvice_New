@@ -43,3 +43,10 @@ export type AuthNavigation = {
     navigateToSignIn: () => void;
     navigateToPasswordReset: () => void;
 }
+
+export interface Avatar {
+    avatar_name: string;
+    avatar_url: string;
+    created_at: string;
+    id: number;
+}

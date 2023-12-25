@@ -15,7 +15,7 @@ function CommentLikeButton({comment_id} : {comment_id : number}) {
         if(isLiked) {
             //remove like
             setIsLiked(false)
-            const {data, error} = await supabase.from('comment_upvoted_by').delete().eq('profile_id', 2).eq('comment_id', comment_id);
+            const {data, error} = await supabase.from('comment_upvoted_by').delete().eq('profile_id', '782049b9-91f5-410b-ad7c-e327a5ec898f').eq('comment_id', comment_id);
             if(!error) {
                 //decrease upvotes count on comment
                 await supabase.rpc( 'downvoteComment', {
@@ -32,7 +32,7 @@ function CommentLikeButton({comment_id} : {comment_id : number}) {
             setIsLiked(true)
             const {data, error} = await supabase.from('comment_upvoted_by').insert({
                 comment_id,
-                profile_id: 2 //must be dynamic based on authed user
+                profile_id: '782049b9-91f5-410b-ad7c-e327a5ec898f' //must be dynamic based on authed user
             })
             if(!error) {
                //increase upvotes count on comment

@@ -1,0 +1,19 @@
+@import '@/scss/variables';
+@import '@/scss/mixins';
+
+.avatarList {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(18%, 1fr));
+    margin-bottom: 12px;
+    row-gap: 7px;
+}
+
+.saveButton {
+    @include Button('dark');
+}
+
+@media (max-width: 370px) {
+    .avatarList {
+        grid-template-columns: repeat(3, minmax(18%, 1fr));
+    }
+}

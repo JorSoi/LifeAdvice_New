@@ -1,0 +1,26 @@
+@import '@/scss/variables';
+@import '@/scss/mixins';
+
+.avatarIcon {
+    @include flex-sb-c;
+    flex-direction: column;
+    font-size: 0.8rem;
+    font-weight: 550;
+    color: $grey-primary;
+    gap: 5px;
+    cursor: pointer;
+    text-align: center;
+    padding: 10px 0px;
+    border-radius: 5px;
+    
+    img {
+        user-select: none;
+        pointer-events: none;
+    }
+}
+
+.active {
+    background-color: #f4811c2f;
+    color: $orange-primary;
+
+}
