@@ -10,7 +10,7 @@ import supabaseBrowserClient from '@/lib/supabaseBrowserClient';
 import Image from 'next/image';
 
 
-function RegistrationForm() {
+function RegistrationForm({authNavigation} : {authNavigation : any}) {
 
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const supabase = supabaseBrowserClient();
@@ -98,13 +98,13 @@ function RegistrationForm() {
                 error={formik.touched.password && formik.errors.password ? formik.errors.password: null}
             />
             <div className={styles.buttonWrapper}>
-                <BackButton />
+                <BackButton onClick={authNavigation.navigateToIntro}/>
                 <button className={styles.submit} type={'submit'} disabled={isLoading}>
                     {isLoading && <Image src={'/spinner-animation.gif'} width={17} height={17} alt='' /> }
                     {!isLoading ? 'Register' : ''}
                 </button>
             </div>
-            <p className={styles.register}>Have an account? <span>Sign In</span></p>
+            <p className={styles.register} onClick={authNavigation.navigateToSignIn}>Have an account? <span>Sign In</span></p>
         </form>
     );
 }

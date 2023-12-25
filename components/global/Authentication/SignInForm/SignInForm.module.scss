@@ -31,3 +31,17 @@
         font-weight: 600;
     }
 }
+
+.passwordWrapper {
+    position: relative;
+}
+
+.forgotPassword {
+    position: absolute;
+    z-index: 9999;
+    bottom: -5px;
+    right: 0px;
+    font-size: 0.8rem;
+    text-decoration: underline;
+    color: $navy-primary;
+}

@@ -1,0 +1,55 @@
+@import '@/scss/variables';
+@import '@/scss/mixins';
+
+.introductionScreen {
+    @include flex-c-c;
+    flex-direction: column;
+}
+
+.introductionBanner {
+    width: 100%;
+    max-height: fit-content;
+    margin-bottom: 15px;
+    border-radius: 12px;
+    object-fit: cover;
+    object-position: bottom;
+    flex: 1;
+}
+
+.googleButton {
+    @include Button('outline');
+    @include flex-c-c;
+    margin-bottom: 10px;
+    img {
+        width: 23px;
+        margin-right: 0px;
+        height: auto;
+        display: inline;
+    }
+}
+
+.emailButton {
+    @include Button('dark');
+}
+
+.contentWrapper {
+    @include flex-c-c;
+    img {
+        width: 20px;
+        height: auto;
+    }
+}
+
+.register {
+    color: $grey-primary;
+    text-align: center;
+    font-weight: 450;
+    font-size: 0.95rem;
+    cursor: pointer;
+    margin-top: 15px;
+
+    span {
+        color: $orange-primary;
+        font-weight: 600;
+    }
+}

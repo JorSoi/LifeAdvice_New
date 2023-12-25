@@ -8,11 +8,15 @@ import { useFormik } from 'formik'
 import * as Yup from 'yup'
 import supabaseBrowserClient from '@/lib/supabaseBrowserClient';
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
+import Image from 'next/image';
 
 
-function SignInForm() {
+function SignInForm({authNavigation} : {authNavigation : any}) {
 
     const [failedAttempts, setFailedAttempts] = useState<number>(0)
+    const [isLoading, setIsLoading] = useState<boolean>(false);
+    const router = useRouter();
 
     const supabase = supabaseBrowserClient();
 
@@ -22,12 +26,14 @@ function SignInForm() {
             password: '',
         },
         onSubmit: async () => {
+            setIsLoading(true)
             const {data, error} = await supabase.auth.signInWithPassword({
                 email: formik.values.email,
                 password: formik.values.password,
             })
             if(!error) {
-                alert(data.user.email)
+                router.push('/')
+                setIsLoading(false)
             } else {
                 if(error.cause == 'AuthApiError') {
                     console.log('sign in unsuccessfull. Invalid credentials')
@@ -54,20 +60,26 @@ function SignInForm() {
                 placeholder={'Email'}
                 error={formik.touched.email && formik.errors.email ? formik.errors.email: null}
             />
-            <InputField 
-                name={'password'} 
-                type='password' 
-                onChange={formik.handleChange}
-                value={formik.values.password}
-                onBlur={formik.handleBlur}
-                placeholder={'Password'}
-                error={formik.touched.password && formik.errors.password ? formik.errors.password: null}
-            />
-            <div className={styles.buttonWrapper}>
-                <BackButton />
-                <button className={styles.submit} type={'submit'}>Sign In</button>
+            <div className={styles.passwordWrapper}>
+                <InputField 
+                    name={'password'} 
+                    type='password' 
+                    onChange={formik.handleChange}
+                    value={formik.values.password}
+                    onBlur={formik.handleBlur}
+                    placeholder={'Password'}
+                    error={formik.touched.password && formik.errors.password ? formik.errors.password: null}
+                />
+                <p className={styles.forgotPassword} onClick={authNavigation.resetPassword}>Forgot Password?</p>
             </div>
-            <p className={styles.register}>Don't have an account? <span>Register</span></p>
+            <div className={styles.buttonWrapper}>
+                <BackButton onClick={authNavigation.navigateToIntro}/>
+                <button className={styles.submit} type={'submit'} disabled={isLoading}>
+                    {isLoading && <Image src={'/spinner-animation.gif'} width={17} height={17} alt='' /> }
+                    {!isLoading ? 'Log In' : ''}
+                </button>
+            </div>
+            <p className={styles.register} onClick={authNavigation.navigateToRegistration}>Don't have an account? <span>Register</span></p>
         </form>
     );
 }
