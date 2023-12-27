@@ -3,20 +3,35 @@
 import Image from 'next/image';
 import styles from './ProfileButton.module.scss'
 import { useRouter } from 'next/navigation';
+import { useContext } from 'react';
+import { OverlayContext } from '@/lib/contexts';
+import { OverlayContextType } from '@/types/home.types';
 
-function ProfileButton ({isActive} : {isActive : boolean}) {
+function ProfileButton ({isActive, profileData} : {isActive : boolean, profileData : any}) {
 
     const router = useRouter();
 
-    const handleClick = () => {
-        router.push('/profile')
-    }
+    const {openOverlay} = useContext(OverlayContext) as OverlayContextType;
 
+    const handleClick = () => {
+        if(profileData) {
+            router.push('/profile')
+        } else {
+            openOverlay('authentication');
+        }
+    }
+    
     return (
-        <div className={`${styles.profile} ${isActive ? styles.active : null}`} onClick={handleClick}>
-            <Image src={'/space-avatar.svg'} width={25} height={25} alt='User Avatar' priority={true} />
-        <p>Profile</p>
-    </div>
+        <div className={`${styles.profile} ${isActive && profileData ? styles.active : null}`} onClick={handleClick}>
+            {
+                profileData ?
+                <Image src={profileData.avatars.avatar_url} width={25} height={25} alt='User Avatar' priority={true} />
+                :
+                <Image src={'/icons/unknown-user.svg'} width={25} height={25} alt='User Avatar' priority={true} />
+            }
+            
+            <p>Profile</p>
+        </div>
     );
 }
 

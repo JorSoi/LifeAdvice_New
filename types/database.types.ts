@@ -86,7 +86,7 @@ export interface Database {
       }
       comments: {
         Row: {
-          comment: string
+          content: string
           created_at: string
           id: number
           lesson_id: number | null
@@ -95,7 +95,7 @@ export interface Database {
           upvotes: number | null
         }
         Insert: {
-          comment: string
+          content: string
           created_at?: string
           id?: number
           lesson_id?: number | null
@@ -104,7 +104,7 @@ export interface Database {
           upvotes?: number | null
         }
         Update: {
-          comment?: string
+          content?: string
           created_at?: string
           id?: number
           lesson_id?: number | null
@@ -281,6 +281,10 @@ export interface Database {
           comment_id: number
         }
         Returns: undefined
+      }
+      get_random_lessons: {
+        Args: Record<PropertyKey, never>
+        Returns: Record<string, unknown>
       }
       upvoteComment: {
         Args: {

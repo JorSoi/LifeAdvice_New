@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useRef, TouchEventHandler, MouseEventHandler, useEffect } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import styles from './LessonItem.module.scss'; 
 import { Lesson } from '@/types/home.types';
 import BookmarkButton from '@/components/global/Buttons/LessonItem/BookmarkButton/BookmarkButton';
@@ -15,8 +15,7 @@ import TextField from '@/components/global/Comments/TextArea/TextArea';
 import CommentLogicWrapper from '@/components/global/Comments/CommentLogicWrapper/CommentLogicWrapper';
 import SocialShareList from '../SocialShareList/SocialShareList';
 
-function LessonItem ({data, zLayer, index, removeLessonFromList} : {data: Lesson, zLayer : number, index: number, removeLessonFromList: (idToRemove : number) => void }) {
-  console.log(data)
+function LessonItem ({lesson, index, removeLessonFromList} : {lesson: Lesson, index: number, removeLessonFromList: (idToRemove : number) => void }) {
 
     const [isDragging, setIsDragging] = useState<boolean>(false);
     const cardRef = useRef<HTMLDivElement | null>(null);
@@ -31,33 +30,8 @@ function LessonItem ({data, zLayer, index, removeLessonFromList} : {data: Lesson
     const [areCommentsOpen, setAreCommentsOpen] = useState<boolean>(false)
     const [areSocialsOpen, setAreSocialsOpen] = useState<boolean>(false)
 
-
-    const resetPosition = () : void => {
-      if(cardRef.current) {
-        cardRef.current.style.transition = 'transform 0.5s';
-        cardRef.current.style.transform = `translateX(0px) translateY(0px)`;
-        setX(0);
-        setY(0);
-        setRotation(0);
-      }
-    };
-
-    const rotateCard = () : void => {
-      const maxRotation : number = 20;
-      setRotation(() => x/windowCenter * maxRotation)
-    };
-
-    const executeSwipe = (direction : 'left' | 'right') : void => {
-      if(cardRef.current) {
-        cardRef.current.style.transition = 'transform 1s ease';
-        setX(() => direction == 'right' ? windowCenter*4 : windowCenter*-4)
-        // removeLessonFromList(data.id)
-      }
-    } 
- 
     const handlePointerDown = (e: React.MouseEvent | React.TouchEvent) : void => {
       setIsDragging(true);
-
 
       if (cardRef.current) {
         cardRef.current.style.transition = 'none'; //resets prior transition settings to enable smooth drag functionality.
@@ -83,6 +57,11 @@ function LessonItem ({data, zLayer, index, removeLessonFromList} : {data: Lesson
         rotateCard(); 
       }  
     };
+
+    const rotateCard = () : void => {
+      const maxRotation : number = 20;
+      setRotation(() => x/windowCenter * maxRotation)
+    };
    
     const handlePointerUp = () => {
       setIsDragging(false);
@@ -95,6 +74,29 @@ function LessonItem ({data, zLayer, index, removeLessonFromList} : {data: Lesson
         resetPosition();
       }
     };
+
+    const resetPosition = () : void => {
+      if(cardRef.current) {
+        cardRef.current.style.transition = 'transform 0.5s';
+        cardRef.current.style.transform = `translateX(0px) translateY(0px)`;
+        setX(0);
+        setY(0);
+        setRotation(0);
+      }
+    };
+
+
+    const executeSwipe = (direction : 'left' | 'right') : void => {
+      if(cardRef.current) {
+        cardRef.current.style.transition = 'transform 1s ease';
+        setX(() => direction == 'right' ? windowCenter*4 : windowCenter*-4)
+
+        //Wait before removing the lesson from lessonList, to finish animation
+        setTimeout(() => {
+          removeLessonFromList(lesson.id)
+        }, 300)
+      }
+    } 
 
     useEffect(() => {
       if(index == 0 && cardRef.current) {
@@ -119,10 +121,6 @@ function LessonItem ({data, zLayer, index, removeLessonFromList} : {data: Lesson
       setAreSocialsOpen(false)
     }
 
-    useEffect(() => {
-      console.log(areCommentsOpen)
-    }, [areCommentsOpen])
-
 
   return (
     <>
@@ -130,8 +128,7 @@ function LessonItem ({data, zLayer, index, removeLessonFromList} : {data: Lesson
         ref={cardRef} 
         className={styles.lessonItem} 
         style={{
-          zIndex: zLayer,
-          transform: `translateX(${x}px) translateY(${y}px) rotate(${rotation}deg)`}} 
+          transform: `translateX(${x}px) translateY(${0}px) rotate(${rotation}deg)`}} //to enable vertical dragging, set translateY to "y"px.
         onMouseDown={handlePointerDown} 
         onMouseMove={handlePointerMove} 
         onMouseUp={handlePointerUp} 
@@ -143,11 +140,11 @@ function LessonItem ({data, zLayer, index, removeLessonFromList} : {data: Lesson
       > 
       <div className={styles.headerWrapper}>
         <ShareButton openSocials={openSocials} />
-        <p className={styles.lessonCredentials}>Learned by <span>{data.author}</span></p>
-        <CategoryItem category={data.categories.category_name} />
+        <p className={styles.lessonCredentials}>Learned by <span>{lesson.author}</span></p>
+        <CategoryItem category={lesson.categories.category_name} />
       </div>
         
-        <p className={styles.lessonContent}>"{data.lesson}"</p>
+        <p className={styles.lessonContent}>"{lesson.lesson}"</p>
         <div className={styles.buttonWrapper}>
           <BookmarkButton />
           <CommentButton commentCount={0} openComments={openComments} />
@@ -158,7 +155,7 @@ function LessonItem ({data, zLayer, index, removeLessonFromList} : {data: Lesson
       
       <Overlay closeOverlayFunction={closeComments} isOpen={areCommentsOpen}>
         <BottomSheet title='Comments'>
-          <CommentLogicWrapper lessonId={data.id}/>
+          <CommentLogicWrapper lessonId={lesson.id}/>
         </BottomSheet>
       </Overlay>
     

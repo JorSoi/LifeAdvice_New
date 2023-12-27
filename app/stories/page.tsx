@@ -1,16 +1,15 @@
-
-import BottomSheet from "@/components/global/BottomSheet/BottomSheet";
-import AvatarList from "@/components/pages/Profile/AvatarList/AvatarList";
+import MenuBar from "@/components/global/MenuBar/MenuBar";
+import Test from "./test";
 
 async function Stories() {
-    
 
 
 
     return (
-            <BottomSheet title="Sign in with email">
-                <AvatarList />
-            </BottomSheet>
+        <>
+            <Test />
+            <MenuBar page={'stories'}/>
+        </>
    
     );
 }

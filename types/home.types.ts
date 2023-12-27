@@ -9,7 +9,7 @@ export type PageOptions = 'explore' | 'topics' | 'stories' | 'profile' | 'defaul
 
 export interface CommentData {
     id: number;
-    comment: string; 
+    content: string; 
     upvotes: number;
     created_at: string;
     profiles: {
@@ -20,6 +20,8 @@ export interface CommentData {
         }  
     }
 }
+
+export type InitiateReplyFunction = ((user_name : string) => void)
 
 export type Lesson = {
     categories: any
@@ -32,8 +34,6 @@ export type Lesson = {
     reports: string | null
     upvotes: number | null
 }
-
-export type InitiateReplyFunction = ((creator_id : number, comment_id : number, user_name : string) => void)
 
 export type SocialType = 'whatsapp' | 'facebook' | 'reddit' | 'x' | 'discord' | 'messenger' | 'telegram';
 
@@ -49,4 +49,8 @@ export interface Avatar {
     avatar_url: string;
     created_at: string;
     id: number;
+}
+
+export interface OverlayContextType {
+    openOverlay : (name : string) => void
 }

@@ -7,30 +7,15 @@ import { Lesson } from "@/types/home.types";
 import LessonItem from "../LessonItem/LessonItem";
 
 
-
-
-
 function LessonContainer() {
-    const [lessonList, setLessonList] = useState<Lesson[]>([])
 
+    const [lessonList, setLessonList] = useState<Lesson[]>([])
     const supabase = supabaseBrowserClient();
 
     const getLessons = async () => {
-        const {data, error} = await supabase.from('lessons').select(`*, categories(*)`).limit(5).order('id', { ascending: true })
+        const {data, error} = await supabase.from('lessons').select(`*, categories(*)`).limit(10)
         if(!error) {
-            setLessonList(data);
-        } else {
-            console.log(error)
-        }
-    }
-
-    const loadMoreLessons = async () => { 
-        const {data, error} = await supabase.from('lessons').select('*').limit(10)
-        if(!error) {
-            setLessonList((prev) => {
-                console.log(prev)
-                return [...prev, ...data]
-            });
+            setLessonList((prev) => [...data, ...prev]);
         } else {
             console.log(error)
         }
@@ -40,17 +25,18 @@ function LessonContainer() {
 
     //Called after lesson has been swiped
     const removeLessonFromList = (idToRemove : number) : void => {
-        const updatedList = lessonList.filter(lesson => lesson.id !== idToRemove);
+        const updatedList = lessonList.filter((lesson, index, array) : boolean => {
+            return index !== array.findLastIndex(el => el.id == idToRemove)
+        })
         setLessonList(updatedList); // Update the state with the new array
     }
 
-
+    //Always append new lessons to lessonList, if its length is lower than 3
     useEffect(() => {
-        if(lessonList.length == 0) {
+        if(lessonList.length < 3) {
             getLessons();
-        } else if(lessonList.length <= 3 && lessonList.length != 0) {
-            loadMoreLessons();
         }
+        
         
     }, [lessonList])
 
@@ -59,7 +45,7 @@ function LessonContainer() {
             {
                     lessonList.map((lesson, i) => {
                         
-                        return <LessonItem key={Math.floor(Math.random()*1000000)} data={lesson} zLayer={(lessonList.length-i)} index={i} removeLessonFromList={removeLessonFromList}/>
+                        return <LessonItem lesson={lesson} index={i} removeLessonFromList={removeLessonFromList}/>
                     }) 
                 }
             
