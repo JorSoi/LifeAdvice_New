@@ -13,18 +13,21 @@ export interface Database {
         Row: {
           avatar_name: string
           avatar_url: string
+          background_colors: Json
           created_at: string
           id: number
         }
         Insert: {
           avatar_name: string
           avatar_url: string
+          background_colors?: Json
           created_at?: string
           id?: number
         }
         Update: {
           avatar_name?: string
           avatar_url?: string
+          background_colors?: Json
           created_at?: string
           id?: number
         }

@@ -6,8 +6,9 @@ import AvatarIcon from '../AvatarIcon/AvatarIcon';
 import { useEffect, useState } from 'react';
 import { Avatar } from '@/types/home.types';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 
-function AvatarList() {
+function AvatarList({user} : {user: any}) {
 
     //still needs to fetch the user's current avatarId and set it to be hightlighted at the very beginning.
 
@@ -16,6 +17,7 @@ function AvatarList() {
     const [isLoading, setIsLoading] = useState<boolean>(false);
 
     const supabase = supabaseBrowserClient();
+    const router = useRouter();
 
 
     const selectAvatar = (avatarId : number) => {
@@ -24,9 +26,10 @@ function AvatarList() {
 
     const handleClick = async () => {
         setIsLoading(true);
-        const {data, error} = await supabase.from('profiles').update({avatar_id: avatarId}).eq('id', '782049b9-91f5-410b-ad7c-e327a5ec898f') //must be dynamic
+        const {data, error} = await supabase.from('profiles').update({avatar_id: avatarId}).eq('id', user?.id)
         if(!error) {
             setIsLoading(false);
+            router.refresh();
         }
     }
 
@@ -40,17 +43,16 @@ function AvatarList() {
 
     //Gets the user's current avatarId
     const getCurrentAvatar = async () => {
-        const {data, error} = await supabase.from('profiles').select('avatar_id').eq('id', '782049b9-91f5-410b-ad7c-e327a5ec898f').single() //must be dynamic
-        if (!error) {
-            setAvatarId(data.avatar_id)
-        } 
-    }
-    
+            const {data, error} = await supabase.from('profiles').select('avatar_id').eq('id', user?.id).single()
+            if (!error) {
+                setAvatarId(data.avatar_id)
+            } 
+        }  
 
     useEffect(() => {
         getCurrentAvatar();
         getAvatars();
-}, [])
+    }, [user])
 
     return (
         <>

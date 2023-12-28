@@ -7,6 +7,8 @@ export type Category = 'love' | 'friendship' | 'business' | 'mental-health' | 'e
 export type PageOptions = 'explore' | 'topics' | 'stories' | 'profile' | 'default'
 
 
+
+
 export interface CommentData {
     id: number;
     content: string; 

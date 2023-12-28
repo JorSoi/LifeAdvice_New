@@ -1,0 +1,26 @@
+@import '@/scss/variables';
+@import '@/scss/mixins';
+
+.historyButtonWrapper {
+    margin-top: 30px;
+    width: fit-content;
+    @include flex-sb-c;
+    gap: 15px;
+}
+   
+
+.historyButton {
+    @include flex-c-c;
+    gap: 8px;
+    padding: 17px 26px;
+    background: #FBECDF;
+    border-radius: 8px;
+    color: $orange-primary;
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.active {
+    background: $orange-gradient;
+    color: white;
+}

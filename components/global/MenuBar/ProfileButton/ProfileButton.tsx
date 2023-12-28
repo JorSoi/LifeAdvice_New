@@ -27,7 +27,7 @@ function ProfileButton ({isActive, profileData} : {isActive : boolean, profileDa
                 profileData ?
                 <Image src={profileData.avatars.avatar_url} width={25} height={25} alt='User Avatar' priority={true} />
                 :
-                <Image src={'/icons/unknown-user.svg'} width={25} height={25} alt='User Avatar' priority={true} />
+                <Image src={'/icons/user-icon.svg'} width={23} height={23} alt='User Avatar' priority={true} />
             }
             
             <p>Profile</p>
