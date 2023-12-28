@@ -58,7 +58,7 @@ function LessonContainer() {
             {
                     lessonList.map((lesson, i) => {
                         
-                        return <LessonItem lesson={lesson} index={i} removeLessonFromList={removeLessonFromList} user={user}/>
+                        return <LessonItem lesson={lesson} index={i} removeLessonFromList={removeLessonFromList} user={user} draggable={true} />
                     }) 
                 }
             

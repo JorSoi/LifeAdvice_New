@@ -11,7 +11,7 @@ import CategoryItem from '@/components/global/CategoryIcon/CategoryIcon';
 import supabaseBrowserClient from '@/lib/supabaseBrowserClient';
 
 
-function LessonItem ({lesson, index, removeLessonFromList, user} : {lesson: Lesson, index: number, removeLessonFromList: (idToRemove : number) => void, user : {} | null }) {
+function LessonItem ({lesson, index, removeLessonFromList, user, draggable} : {lesson: Lesson, index: number, removeLessonFromList: (idToRemove : number) => void, user : {} | null, draggable : boolean }) {
 
     const [isDragging, setIsDragging] = useState<boolean>(false);
     const cardRef = useRef<HTMLDivElement | null>(null);
@@ -103,8 +103,8 @@ function LessonItem ({lesson, index, removeLessonFromList, user} : {lesson: Less
     <div 
       ref={cardRef} 
       className={styles.lessonItem} 
-      style={{
-        transform: `translateX(${x}px) translateY(${0}px) rotate(${rotation}deg)`}} //to enable vertical dragging, set translateY to "y"px.
+      style={draggable ? {
+        transform: `translateX(${x}px) translateY(${0}px) rotate(${rotation}deg)`} : {}} //to enable vertical dragging, set translateY to "y"px.
       onMouseDown={handlePointerDown} 
       onMouseMove={handlePointerMove} 
       onMouseUp={handlePointerUp} 

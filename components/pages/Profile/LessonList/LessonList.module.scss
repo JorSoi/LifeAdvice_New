@@ -1,0 +1,28 @@
+@import '@/scss/variables';
+@import '@/scss/mixins';
+
+.lessonList {
+    width: 100%;
+}
+
+.listTitle {
+    font-size: 1.2375rem;
+    color: $navy-primary;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.listWrapper {
+    width: 100%;
+    @include flex-c-c;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.lessonContainer {
+    position: relative;
+    max-width: 600px;
+    width: 100%;
+    min-height: 400px;
+}
+
