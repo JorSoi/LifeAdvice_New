@@ -1,7 +1,6 @@
 import type { Metadata } from 'next'
 import { EB_Garamond, Inter } from 'next/font/google'
 import '@/scss/globals.scss'
-import Image from 'next/image'
 import LogoHeading from '@/components/global/LogoHeading/LogoHeading'
 import OverlayProvider from '@/components/global/OverlayContextProvider/OverlayContextProvider'
 

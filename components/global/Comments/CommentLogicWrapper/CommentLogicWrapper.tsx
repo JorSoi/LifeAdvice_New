@@ -8,7 +8,7 @@ import { useState, useEffect } from "react";
 
 
 //This Wrapper-Component is used to prevent comment-logic (for submitted post) within the LessonItem-Component. We also need this wrapper to accomodate for the childrens' high interdependency.
-function CommentLogicWrapper({lessonId} : {lessonId: number}) {
+function CommentLogicWrapper({lessonId} : {lessonId : number}) {
 
     const [commentList, setCommentList] = useState<any>([]);
     const [recipient, setRecipient] = useState<{name : string}>({name: ''});
@@ -32,11 +32,13 @@ function CommentLogicWrapper({lessonId} : {lessonId: number}) {
 
             if(!error) {
                 setCommentList(data)
+            } else {
+                console.log(error)
             }
         }
         getComments();
 
-    }, [])
+    }, [lessonId])
 
     
     return (

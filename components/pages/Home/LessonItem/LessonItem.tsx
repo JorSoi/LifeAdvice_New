@@ -8,14 +8,10 @@ import CommentButton from '@/components/global/Buttons/LessonItem/CommentButton/
 import LikeButton from '@/components/global/Buttons/LessonItem/LikeButton/LikeButton';
 import ShareButton from '@/components/global/Buttons/LessonItem/ShareButton/ShareButton';
 import CategoryItem from '@/components/global/CategoryIcon/CategoryIcon';
-import Overlay from '@/components/global/Overlay/Overlay';
-import BottomSheet from '@/components/global/BottomSheet/BottomSheet';
-import CommentList from '@/components/global/Comments/CommentList/CommentList';
-import TextField from '@/components/global/Comments/TextArea/TextArea';
-import CommentLogicWrapper from '@/components/global/Comments/CommentLogicWrapper/CommentLogicWrapper';
-import SocialShareList from '../SocialShareList/SocialShareList';
+import supabaseBrowserClient from '@/lib/supabaseBrowserClient';
 
-function LessonItem ({lesson, index, removeLessonFromList} : {lesson: Lesson, index: number, removeLessonFromList: (idToRemove : number) => void }) {
+
+function LessonItem ({lesson, index, removeLessonFromList, user} : {lesson: Lesson, index: number, removeLessonFromList: (idToRemove : number) => void, user : {} | null }) {
 
     const [isDragging, setIsDragging] = useState<boolean>(false);
     const cardRef = useRef<HTMLDivElement | null>(null);
@@ -27,8 +23,7 @@ function LessonItem ({lesson, index, removeLessonFromList} : {lesson: Lesson, in
     const distanceFromCenter : number = x / windowCenter //Represents the percentage to which a card has been moved away from its original position relative to the window center. This value can be used as a swipe-threshold to trigger events.
     const swipeThreshold : number = 0.4 //The minimum % of distance from the center to be interpreted as a swipe.
     
-    const [areCommentsOpen, setAreCommentsOpen] = useState<boolean>(false)
-    const [areSocialsOpen, setAreSocialsOpen] = useState<boolean>(false)
+
 
     const handlePointerDown = (e: React.MouseEvent | React.TouchEvent) : void => {
       setIsDragging(true);
@@ -104,67 +99,35 @@ function LessonItem ({lesson, index, removeLessonFromList} : {lesson: Lesson, in
       }
     }, [index])
 
-
-    const openComments = () => {
-      setAreCommentsOpen(true)
-    }
-
-    const closeComments = () => {
-      setAreCommentsOpen(false)
-    }
-
-    const openSocials = () => {
-      setAreSocialsOpen(true)
-    }
-
-    const closeSocials = () => {
-      setAreSocialsOpen(false)
-    }
-
-
   return (
-    <>
-      <div 
-        ref={cardRef} 
-        className={styles.lessonItem} 
-        style={{
-          transform: `translateX(${x}px) translateY(${0}px) rotate(${rotation}deg)`}} //to enable vertical dragging, set translateY to "y"px.
-        onMouseDown={handlePointerDown} 
-        onMouseMove={handlePointerMove} 
-        onMouseUp={handlePointerUp} 
-        onMouseLeave={handlePointerUp}
-        onTouchStart={handlePointerDown}
-        onTouchMove={handlePointerMove}
-        onTouchEnd={handlePointerUp}
-        onTouchCancel={handlePointerUp}
-      > 
-      <div className={styles.headerWrapper}>
-        <ShareButton openSocials={openSocials} />
-        <p className={styles.lessonCredentials}>Learned by <span>{lesson.author}</span></p>
-        <CategoryItem category={lesson.categories.category_name} />
-      </div>
-        
-        <p className={styles.lessonContent}>"{lesson.lesson}"</p>
-        <div className={styles.buttonWrapper}>
-          <BookmarkButton />
-          <CommentButton commentCount={0} openComments={openComments} />
-          <LikeButton />
-        </div>
-      </div>
-
+    <div 
+      ref={cardRef} 
+      className={styles.lessonItem} 
+      style={{
+        transform: `translateX(${x}px) translateY(${0}px) rotate(${rotation}deg)`}} //to enable vertical dragging, set translateY to "y"px.
+      onMouseDown={handlePointerDown} 
+      onMouseMove={handlePointerMove} 
+      onMouseUp={handlePointerUp} 
+      onMouseLeave={handlePointerUp}
+      onTouchStart={handlePointerDown}
+      onTouchMove={handlePointerMove}
+      onTouchEnd={handlePointerUp}
+      onTouchCancel={handlePointerUp}
+    > 
+    <div className={styles.headerWrapper}>
+      <ShareButton lessonId={lesson.id} />
+      <p className={styles.lessonCredentials}>Learned by <span>{lesson.author}</span></p>
+      <CategoryItem category={lesson.categories.category_name} />
+    </div>
       
-      <Overlay closeOverlayFunction={closeComments} isOpen={areCommentsOpen}>
-        <BottomSheet title='Comments'>
-          <CommentLogicWrapper lessonId={lesson.id}/>
-        </BottomSheet>
-      </Overlay>
-    
-      <Overlay isOpen={areSocialsOpen} closeOverlayFunction={closeSocials}>
-        <BottomSheet title="Share this lesson">
-            <SocialShareList />
-        </BottomSheet>
-      </Overlay>
-    </>
+      <p className={styles.lessonContent}>"{lesson.lesson}"</p>
+      
+      <div className={styles.buttonWrapper}>
+        <BookmarkButton lessonId={lesson.id} user={user}/>
+        <CommentButton lessonId={lesson.id} />
+        <LikeButton lessonId={lesson.id} user={user}/>
+      </div>
+    </div>
   );
 };
 

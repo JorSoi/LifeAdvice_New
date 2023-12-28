@@ -2,7 +2,7 @@ import { SocialType } from "@/types/home.types";
 import styles from './SocialItem.module.scss'
 import Image from "next/image";
 
-function SocialItem({type, url} : {type : string, url : string }) {
+function SocialItem({type, url } : {type : string, url : string }) {
 
 
 

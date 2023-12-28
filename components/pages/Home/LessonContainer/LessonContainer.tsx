@@ -10,6 +10,7 @@ import LessonItem from "../LessonItem/LessonItem";
 function LessonContainer() {
 
     const [lessonList, setLessonList] = useState<Lesson[]>([])
+    const [user, setUser] = useState<{} | null>(null);
     const supabase = supabaseBrowserClient();
 
     const getLessons = async () => {
@@ -40,12 +41,24 @@ function LessonContainer() {
         
     }, [lessonList])
 
+    useEffect(() => {
+        const getUser = async () => {
+          const {data: {user}, error} = await supabase.auth.getUser();
+          if(!error) {
+              setUser(user)
+          } else {
+              console.log(error)
+          }
+      }
+      getUser();
+      }, [])
+
     return (
         <div className={styles.lessonContainer}>
             {
                     lessonList.map((lesson, i) => {
                         
-                        return <LessonItem lesson={lesson} index={i} removeLessonFromList={removeLessonFromList}/>
+                        return <LessonItem lesson={lesson} index={i} removeLessonFromList={removeLessonFromList} user={user}/>
                     }) 
                 }
             

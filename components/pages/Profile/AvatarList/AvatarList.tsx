@@ -37,7 +37,6 @@ function AvatarList({user} : {user: any}) {
         const {data, error} = await supabase.from('avatars').select('*')
         if (!error) {
             setAvatarList(data)
-            console.log(data)
         }
     }
 

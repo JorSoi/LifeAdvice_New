@@ -2,15 +2,49 @@
 
 import Image from 'next/image';
 import styles from './LikeButton.module.scss'
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import supabaseBrowserClient from '@/lib/supabaseBrowserClient';
 
-function LikeButton() {
+function LikeButton({ lessonId, user } : {lessonId : number, user : any}) {
 
     const [isActive, setIsActive] = useState<boolean>(false);
 
-    const handleClick = () => {
-        setIsActive(!isActive);
+    const supabase = supabaseBrowserClient();
+
+    const handleClick = async () => {
+        if(!user) return; // Don't allow interaction if unauthenticated
+        if(isActive) {
+            const {data, error} = await supabase.from('lesson_upvoted_by').delete().eq('lesson_id', lessonId).eq('profile_id', user.id)
+            if(!error) {
+                setIsActive(false)
+            }
+        } else {
+            setIsActive(true)
+            const {data, error} = await supabase.from('lesson_upvoted_by').insert({
+                profile_id: user.id,
+                lesson_id: lessonId,
+            })
+            if(error) {
+                setIsActive(false)
+            }
+        }
     }
+
+    useEffect(() => {
+        if (!user) return;
+        const getLikeStatus = async () => {
+            if (!user) return;
+            const {data, error} = await supabase.from('lesson_upvoted_by').select('*').eq('lesson_id', lessonId).eq('profile_id', user.id).single();
+            if(data) {
+                setIsActive(true)
+            } else {
+                setIsActive(false);
+            }
+        }
+        getLikeStatus();
+    }, [])
+
+
 
     return (
         <div className={isActive ? `${styles.likeButton} ${styles.active}` : styles.likeButton} onClick={handleClick}>

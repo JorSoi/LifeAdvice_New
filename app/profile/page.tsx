@@ -5,7 +5,7 @@ import LessonItem from "@/components/pages/Home/LessonItem/LessonItem";
 
 function Profile() {
     return (
-        <div>
+        <div className={styles.profile}>
             <div className={styles.profileContainer}>
                 <ProfileCard />
                 

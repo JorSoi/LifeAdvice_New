@@ -54,5 +54,5 @@ export interface Avatar {
 }
 
 export interface OverlayContextType {
-    openOverlay : (name : string) => void
+    openOverlay : (name : string, lessonid? : number) => void
 }

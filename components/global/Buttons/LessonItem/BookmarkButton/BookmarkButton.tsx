@@ -2,15 +2,46 @@
 
 import Image from 'next/image';
 import styles from './BookmarkButton.module.scss'
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import supabaseBrowserClient from '@/lib/supabaseBrowserClient';
 
-function BookmarkButton () {
+function BookmarkButton ({ lessonId, user } : {lessonId : number, user : any}) {
 
     const [isActive, setIsActive] = useState<boolean>(false);
 
-    const handleClick = () => {
-        setIsActive(!isActive);
+    const supabase = supabaseBrowserClient();
+
+    const handleClick = async () => {
+        if(!user) return //Dont allow interaction if unauthenticated
+        if(isActive) {
+            const {data, error} = await supabase.from('lesson_bookmarked_by').delete().eq('lesson_id', lessonId).eq('profile_id', user?.id)
+            if(!error) {
+                setIsActive(false)
+            }
+        } else {
+            setIsActive(true)
+            const {data, error} = await supabase.from('lesson_bookmarked_by').insert({
+                profile_id: user.id,
+                lesson_id: lessonId,
+            })
+            if(error) {
+                setIsActive(false)
+            }
+        }
     }
+
+    useEffect(() => {
+        if (!user) return;
+        const getBookmarkStatus = async () => {
+            const {data, error} = await supabase.from('lesson_bookmarked_by').select('*').eq('lesson_id', lessonId).eq('profile_id', user.id).single();
+            if(data) {
+                setIsActive(true)
+            } else {
+                setIsActive(false);
+            }
+        }
+        getBookmarkStatus();
+    }, [])
 
     return (
         <div className={isActive ? `${styles.bookmarkButton} ${styles.active}` : styles.bookmarkButton} onClick={handleClick}>

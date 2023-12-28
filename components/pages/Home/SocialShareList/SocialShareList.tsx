@@ -3,7 +3,9 @@ import styles from './SocialShareList.module.scss'
 import SocialItem from '../SocialItem/SocialItem';
 import Image from 'next/image';
 
-function SocialShareList() {
+function SocialShareList( {lessonId} : { lessonId : number }) {
+
+    //Must be dynamic
 
 
     const shareOptions = [
@@ -21,7 +23,7 @@ function SocialShareList() {
         },
         {
             type: 'twitter',
-            url: `https://twitter.com/share?text=Take a look at the referral codes from !&url&hashtags=referralcodes`,
+            url: `http://twitter.com/share?text=Check out this lesson which I have learned here: &url=https://lifeadvice.app/lessons/${lessonId}&hashtags=lessonsForLife,learn,personalGrowth`,
         },
         {
             type: 'discord',
@@ -29,11 +31,11 @@ function SocialShareList() {
         },
         {
             type: 'messenger',
-            url: ``,
+            url: `fb-messenger://share/?link=https://lifeadvice.app`,
         },
         {
             type: 'telegram',
-            url: `https://telegram.me/share/url?url&text=Take a look at the referral codes from !`,
+            url: `https://telegram.me/share/url?url=https://lifeadvice.app&text=Check out this lesson from LifeAdvice`,
         }]
 
     return (
@@ -46,7 +48,7 @@ function SocialShareList() {
                 }
             </div>
             <div className={styles.clipBarWrapper}>
-                <input className={styles.clipBar} type='text' value={'https://lifeadvice.de?lessonId=9839'} />
+                <input className={styles.clipBar} type='text' onChange={() => {}} value={'https://lifeadvice.de?lessonId=9839'} />
                 <Image src={'/icons/copy-icon.svg'} width={20} height={20} alt=''/>
             </div>
         </>
