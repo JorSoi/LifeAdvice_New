@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import { EB_Garamond, Inter } from 'next/font/google'
 import '@/scss/globals.scss'
 import LogoHeading from '@/components/global/LogoHeading/LogoHeading'
-import OverlayProvider from '@/components/global/OverlayContextProvider/OverlayContextProvider'
+import OverlayContextProvider from '@/components/global/OverlayContextProvider/OverlayContextProvider'
 
 //Using next font optimization to locally host fonts for performance optimization.
 const garamond = EB_Garamond({
@@ -30,10 +30,10 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${garamond.variable} ${inter.variable}`}>
       <body>
-        <OverlayProvider>
+        <OverlayContextProvider>
           <LogoHeading />
           {children}
-        </OverlayProvider>
+        </OverlayContextProvider>
       </body>
     </html>
   )

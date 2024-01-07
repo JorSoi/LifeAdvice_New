@@ -1,4 +1,4 @@
-import { Database } from "./database.types";
+import { Dispatch, SetStateAction } from "react";
 
 //Must be extended if new category is introduced. 
 export type CategoryNames = 'love' | 'friendship' | 'business' | 'mental-health' | 'education' | 'travel' | 'fitness' | 'other';
@@ -58,9 +58,19 @@ export interface Avatar {
     id: number;
 }
 
+
+
+//Context Types
 export interface OverlayContextType {
     openOverlay : (name : string, lessonid? : number) => void
 }
+
+export interface SavedLessonsContextType {
+    setSelected : Dispatch<SetStateAction<"bookmarked" | "liked" | "created">>
+    selected: "bookmarked" | "liked" | "created"
+}
+
+
 
 //Used in ProfileCard Component
 export interface SavedLessonCount {
