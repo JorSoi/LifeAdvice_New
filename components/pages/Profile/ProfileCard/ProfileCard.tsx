@@ -1,8 +1,12 @@
 import supabaseServerClient from '@/lib/supabaseServerClient';
 import styles from './ProfileCard.module.scss'
 import ProfileImage from '../ProfileImage/ProfileImage';
-import HistoryButton from '../HistoryButtonWrapper/HistoryButtonWrapper';
 import HistoryButtonWrapper from '../HistoryButtonWrapper/HistoryButtonWrapper';
+import getSavedLessonCount from '@/lib/getSavedLessonCount';
+import { SavedLessonCount } from '@/types/home.types';
+import { formatToMonthAndYear } from '@/lib/formatToMonthAndYear';
+
+
 
 async function ProfileCard() {
 
@@ -17,15 +21,9 @@ async function ProfileCard() {
             profileData = data
         }   
     }
+    
 
-    const formatTimestamp = (timestamp : string) => {
-        const timeOfCreation : any = new Date(timestamp);
-        const monthName = new Intl.DateTimeFormat('en-US', {month: 'long'}).format(timeOfCreation);
-        console.log(monthName)
-        const year = timeOfCreation.getFullYear();
-
-        return `${monthName} ${year}`
-    }
+    const {bookmarkedCount, likedCount, createdCount} : SavedLessonCount = await getSavedLessonCount(user!.id);
 
 
     return (
@@ -46,9 +44,9 @@ async function ProfileCard() {
             </div>
             <div className={styles.userInfo}>
                 <h2>{profileData?.user_name}</h2>
-                <p>Joined {formatTimestamp(profileData?.created_at)}</p>
+                <p>Joined {formatToMonthAndYear(profileData?.created_at)}</p>
             </div>
-            <HistoryButtonWrapper />
+            <HistoryButtonWrapper bookmarkedCount={bookmarkedCount} likedCount={likedCount} createdCount={createdCount}/>
         </div>
     );
 }

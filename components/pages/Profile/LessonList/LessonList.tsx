@@ -19,12 +19,13 @@ function LessonList({user} : {user: any}) {
         const getBookmarkedLessons = async () => {
             const {data, error} = await supabase.from('lesson_bookmarked_by').select(`*, lessons(*, categories(*))`).eq('profile_id', user.id).order('created_at', { ascending: false })
             if(!error) {
-                //Changing data output into lessonList format
-                const lessonArray = data.map((item) => {
-                    return item.lessons
-                })
-                setLessonList(lessonArray)
-                console.log(lessonArray)
+                console.log(data)
+
+                setLessonList(() : any =>
+                // Changing data output into lessonList format
+                data.map((item) => item.lessons)
+            );
+                // console.log(lessonArray)
             }
         }
         getBookmarkedLessons();
@@ -38,7 +39,7 @@ function LessonList({user} : {user: any}) {
                     lessonList?.map((lesson, index) => {
                     return (
                         <div className={styles.lessonContainer}>
-                            <LessonItem lesson={lesson} index={index} removeLessonFromList={() => {}} user={user} draggable={false}/>
+                            <LessonItem key={lesson.id} lesson={lesson} index={index} removeLessonFromList={() => {}} user={user} draggable={false}/>
                         </div>
                     )
                     })

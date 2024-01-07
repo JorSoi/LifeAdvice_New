@@ -1,6 +1,6 @@
 'use client'
 
-import Image from 'next/image';
+
 import styles from './LikeButton.module.scss'
 import { useEffect, useState } from 'react';
 import supabaseBrowserClient from '@/lib/supabaseBrowserClient';
@@ -31,10 +31,9 @@ function LikeButton({ lessonId, user } : {lessonId : number, user : any}) {
     }
 
     useEffect(() => {
-        if (!user) return;
         const getLikeStatus = async () => {
-            if (!user) return;
-            const {data, error} = await supabase.from('lesson_upvoted_by').select('*').eq('lesson_id', lessonId).eq('profile_id', user.id).single();
+            if(!user) return;
+            const {data, error} = await supabase.from('lesson_upvoted_by').select('*').eq('lesson_id', lessonId).eq('profile_id', user.id).single();//If more than one identical row in DB, it wont work. Further refinement needed.
             if(data) {
                 setIsActive(true)
             } else {

@@ -35,18 +35,18 @@ export interface Database {
       }
       categories: {
         Row: {
-          category_emoji: string | null
-          category_name: string | null
+          category_emoji: string
+          category_name: string
           id: number
         }
         Insert: {
-          category_emoji?: string | null
-          category_name?: string | null
+          category_emoji: string
+          category_name: string
           id?: number
         }
         Update: {
-          category_emoji?: string | null
-          category_name?: string | null
+          category_emoji?: string
+          category_name?: string
           id?: number
         }
         Relationships: []
@@ -92,28 +92,28 @@ export interface Database {
           content: string
           created_at: string
           id: number
-          lesson_id: number | null
-          profile_id: string | null
+          lesson_id: number
+          profile_id: string
           reports_count: number
-          upvotes: number | null
+          upvotes: number
         }
         Insert: {
-          content: string
+          content?: string
           created_at?: string
           id?: number
-          lesson_id?: number | null
-          profile_id?: string | null
+          lesson_id: number
+          profile_id: string
           reports_count?: number
-          upvotes?: number | null
+          upvotes?: number
         }
         Update: {
           content?: string
           created_at?: string
           id?: number
-          lesson_id?: number | null
-          profile_id?: string | null
+          lesson_id?: number
+          profile_id?: string
           reports_count?: number
-          upvotes?: number | null
+          upvotes?: number
         }
         Relationships: [
           {
@@ -168,24 +168,60 @@ export interface Database {
           }
         ]
       }
-      lesson_upvoted_by: {
+      lesson_bookmarked_by: {
         Row: {
           created_at: string
           id: number
-          lesson_id: number | null
-          profile_id: number
+          lesson_id: number
+          profile_id: string
         }
         Insert: {
           created_at?: string
           id?: number
-          lesson_id?: number | null
-          profile_id: number
+          lesson_id: number
+          profile_id: string
         }
         Update: {
           created_at?: string
           id?: number
-          lesson_id?: number | null
-          profile_id?: number
+          lesson_id?: number
+          profile_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "lesson_bookmarked_by_lesson_id_fkey"
+            columns: ["lesson_id"]
+            isOneToOne: false
+            referencedRelation: "lessons"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "lesson_bookmarked_by_profile_id_fkey"
+            columns: ["profile_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          }
+        ]
+      }
+      lesson_upvoted_by: {
+        Row: {
+          created_at: string
+          id: number
+          lesson_id: number
+          profile_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: number
+          lesson_id: number
+          profile_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: number
+          lesson_id?: number
+          profile_id?: string
         }
         Relationships: [
           {
@@ -194,39 +230,46 @@ export interface Database {
             isOneToOne: false
             referencedRelation: "lessons"
             referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "lesson_upvoted_by_profile_id_fkey"
+            columns: ["profile_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
           }
         ]
       }
       lessons: {
         Row: {
           author: string | null
-          category_id: number | null
-          creation_date: string | null
-          downvotes: number | null
+          category_id: number
+          created_at: string
+          downvotes: number
           id: number
-          lesson: string | null
-          reports: string | null
-          upvotes: number | null
+          lesson: string
+          profile_id: string | null
+          upvotes: number
         }
         Insert: {
           author?: string | null
-          category_id?: number | null
-          creation_date?: string | null
-          downvotes?: number | null
+          category_id: number
+          created_at?: string
+          downvotes?: number
           id?: number
-          lesson?: string | null
-          reports?: string | null
-          upvotes?: number | null
+          lesson?: string
+          profile_id?: string | null
+          upvotes?: number
         }
         Update: {
           author?: string | null
-          category_id?: number | null
-          creation_date?: string | null
-          downvotes?: number | null
+          category_id?: number
+          created_at?: string
+          downvotes?: number
           id?: number
-          lesson?: string | null
-          reports?: string | null
-          upvotes?: number | null
+          lesson?: string
+          profile_id?: string | null
+          upvotes?: number
         }
         Relationships: [
           {
@@ -234,6 +277,13 @@ export interface Database {
             columns: ["category_id"]
             isOneToOne: false
             referencedRelation: "categories"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "lessons_profile_id_fkey"
+            columns: ["profile_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
             referencedColumns: ["id"]
           }
         ]

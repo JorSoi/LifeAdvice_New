@@ -16,7 +16,7 @@ function LessonContainer() {
     const getLessons = async () => {
         const {data, error} = await supabase.from('lessons').select(`*, categories(*)`).limit(10)
         if(!error) {
-            setLessonList((prev) => [...data, ...prev]);
+            setLessonList((prev) : any => [...data, ...prev]);
         } else {
             console.log(error)
         }

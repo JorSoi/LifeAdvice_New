@@ -1,4 +1,4 @@
-export default function getElapsedTime (timestamp : string) {
+export default function getElapsedTime (timestamp : string) : string {
     const timeOfCreation : any = new Date(timestamp);
     const currentTime : any = new Date();
     const elapsedTime : number = (currentTime - timeOfCreation) / (1000 * 60) //output in minutes

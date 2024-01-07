@@ -1,5 +1,5 @@
 import styles from "./CategoryIcon.module.scss"
-import { Category } from "@/types/home.types";
+import { CategoryNames } from "@/types/home.types";
 
 const emojiMap = {
     "love": '💌',
@@ -12,10 +12,10 @@ const emojiMap = {
     "other": '💭',
 }
 
-function CategoryIcon({category} : {category: Category}) {
+function CategoryIcon({categoryName} : {categoryName: CategoryNames}) {
     return (
-        <div className={`${styles.categoryIcon} ${styles[category]}`}>
-            {emojiMap[category]}
+        <div className={`${styles.categoryIcon} ${styles[categoryName]}`}>
+            {emojiMap[categoryName]}
         </div>
     );
 }

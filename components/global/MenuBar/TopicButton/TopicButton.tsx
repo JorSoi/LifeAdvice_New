@@ -1,6 +1,6 @@
 'use client'
 
-import { Category } from '@/types/home.types';
+import { CategoryNames } from '@/types/home.types';
 import styles from './TopicButton.module.scss'
 import { useRouter, usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
@@ -13,7 +13,7 @@ function TopicButton ({isActive} : {isActive : boolean}) {
 
     const router = useRouter();
     const pathName = usePathname();
-    const pathTopic : Category | undefined = pathName.split('/').pop() as Category
+    const pathTopic = pathName.split('/').pop() as CategoryNames
 
     useEffect(() => {
         switch (pathTopic) {
