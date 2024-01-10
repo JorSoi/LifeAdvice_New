@@ -1,0 +1,62 @@
+@import '@/scss/variables';
+@import '@/scss/mixins';
+
+.notificationForm {
+    width: 100%;
+}
+
+.notificationWrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+.titleWrapper {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 14px;
+}
+
+.icon {
+    @include flex-c-c;
+    width: 41px;
+    height: 41px;
+    border-radius: 9px;
+    background-color: #FDEDDF;
+}
+
+.title {
+    font-size: 1.05rem;
+    font-weight: 650;
+    color: $navy-primary;
+    margin-bottom: 2px;
+}
+
+.itemList {
+    @include flex-c-c;
+    flex-direction: column;
+    gap: 17px;
+    padding-right: 10px;
+}
+
+.notificationItem {
+    @include flex-sb-c;
+    width: 100%;
+
+    p {
+        color: $grey-primary;
+        font-weight: 500;
+        font-size: 0.95rem;
+    }
+}
+
+.buttonWrapper {
+    @include flex-c-c;
+    gap: 10px;
+}
+
+.submitButton {
+    @include Button('dark');
+    transition: opacity 0.3s;
+}

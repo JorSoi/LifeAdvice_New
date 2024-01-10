@@ -9,6 +9,7 @@ import AvatarList from "@/components/pages/Profile/AvatarList/AvatarList";
 import supabaseBrowserClient from "@/lib/supabaseBrowserClient";
 import CommentLogicWrapper from "../Comments/CommentLogicWrapper/CommentLogicWrapper";
 import SocialShareList from "@/components/pages/Home/SocialShareList/SocialShareList";
+import GeneralSettings from "@/components/pages/Profile/ProfileSettings/GeneralSettings/GeneralSettings";
 
 
 // This component wraps around the entire application. Calling openOverlay(name) from the context anywhere within the application will open the requested Overlay without the need for extensive prop-drilling.
@@ -43,10 +44,9 @@ function OverlayContextProvider({children} : { children: React.ReactNode }) {
     }, [])
 
     return (
-        <OverlayContext.Provider value={{openOverlay: openOverlay}}>
+        <OverlayContext.Provider value={{openOverlay: openOverlay, closeOverlay: closeOverlay}}>
             {children}
 
-            
             <Overlay isOpen={overlayName == 'authentication'} closeOverlayFunction={closeOverlay}>
                 <BottomSheet>
                     <AuthLogicWrapper />
@@ -68,6 +68,12 @@ function OverlayContextProvider({children} : { children: React.ReactNode }) {
             <Overlay isOpen={overlayName == 'socials'} closeOverlayFunction={closeOverlay}>
                 <BottomSheet title="Share this lesson">
                     <SocialShareList lessonId={lessonId}/>
+                </BottomSheet>
+            </Overlay>
+
+            <Overlay isOpen={overlayName == 'general-settings'} closeOverlayFunction={closeOverlay}>
+                <BottomSheet title="General Settings">
+                    <GeneralSettings user={user} />
                 </BottomSheet>
             </Overlay>
         </OverlayContext.Provider>

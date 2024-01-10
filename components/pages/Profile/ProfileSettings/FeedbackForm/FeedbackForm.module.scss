@@ -1,0 +1,51 @@
+@import '@/scss/variables';
+@import '@/scss/mixins';
+
+.feedbackForm {
+    width: 100%;
+
+    h3 {
+        color: $navy-primary;
+        font-size: 1rem;
+        font-weight: 700;
+        margin-bottom: 7px;
+    }
+
+    p {
+        font-size: 13.8px;
+        color: $grey-primary;
+    }
+}
+
+.textArea {
+    width: 100%;
+    height: 200px;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: $input-bg;
+    border: 1px solid #e8e8e8;
+    font-family: $Inter;
+    font-size: 1rem;
+    color: $navy-primary;
+    line-height: 140%;
+    margin: 21px 0px;
+
+    &::placeholder {
+        color: #2d355ba6;
+        font-size: 0.925rem;
+    }
+}
+
+.buttonWrapper {
+    @include flex-c-c;
+    gap: 10px;
+}
+
+.submitButton {
+    @include Button('dark');
+    transition: opacity 0.3s;
+}
+
+.disabled {
+    opacity: 80%;
+}

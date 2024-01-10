@@ -1,7 +1,7 @@
 'use client'
 
 import { CommentData, InitiateReplyFunction } from "@/types/home.types";
-import TextArea from "../TextArea/TextArea";
+import TextArea from "../CommentTextArea/CommentTextArea";
 import CommentList from "../CommentList/CommentList";
 import supabaseBrowserClient from "@/lib/supabaseBrowserClient";
 import { useState, useEffect } from "react";

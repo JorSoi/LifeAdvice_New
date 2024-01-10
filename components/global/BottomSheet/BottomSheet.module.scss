@@ -67,4 +67,8 @@
     @include flex-c-c;
     background-color: #D9D9D970;
     border-radius: 100px;
+
+    img {
+        transform: translateY(1px);
+    }
 }

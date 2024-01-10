@@ -62,12 +62,32 @@ export interface Avatar {
 
 //Context Types
 export interface OverlayContextType {
-    openOverlay : (name : string, lessonid? : number) => void
+    openOverlay : (name : OverlayNames, lessonid? : number) => void
+    closeOverlay: () => void
 }
+
+export type OverlayNames = 'authentication' | 'avatars' | 'comments' | 'socials' | 'general-settings' | ''
 
 export interface SavedLessonsContextType {
     setSelected : Dispatch<SetStateAction<"bookmarked" | "liked" | "created">>
     selected: "bookmarked" | "liked" | "created"
+}
+
+
+//Path Navigations within BottomSheets
+export interface authNavigation {
+    navigateToIntro: () => void
+    navigateToRegistration: () => void
+    navigateToSignIn: () => void
+    navigateToPasswordReset: () => void
+}
+
+
+export interface settingsNavigation {
+    navigateToOverview: () => void
+    navigateToFeedbackForm: () => void
+    navigateToNotifications: () => void
+    navigateToPasswordChange: () => void
 }
 
 
@@ -77,4 +97,17 @@ export interface SavedLessonCount {
     bookmarkedCount: number | null;
     likedCount: number | null;
     createdCount: number | null;
+}
+
+//Used in Settings
+export interface NotificationPreferences {
+    posts: {
+        likes: boolean,
+        replies: boolean,
+        bookmarked: boolean,
+    },
+    other: {
+        weekly_lesson: boolean,
+        monthly_story: boolean,
+    }
 }

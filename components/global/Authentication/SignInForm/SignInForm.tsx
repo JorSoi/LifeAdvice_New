@@ -7,9 +7,11 @@ import styles from './SignInForm.module.scss'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
 import supabaseBrowserClient from '@/lib/supabaseBrowserClient';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
+import { OverlayContext } from '@/lib/contexts';
+import { OverlayContextType } from '@/types/home.types';
 
 
 function SignInForm({authNavigation} : {authNavigation : any}) {
@@ -19,6 +21,7 @@ function SignInForm({authNavigation} : {authNavigation : any}) {
     const router = useRouter();
 
     const supabase = supabaseBrowserClient();
+    const {closeOverlay} = useContext(OverlayContext) as OverlayContextType
 
     const formik = useFormik({
         initialValues: {
@@ -32,7 +35,8 @@ function SignInForm({authNavigation} : {authNavigation : any}) {
                 password: formik.values.password,
             })
             if(!error) {
-                router.push('/')
+                router.push('/profile')
+                closeOverlay();
                 setIsLoading(false)
             } else {
                 if(error.cause == 'AuthApiError') {

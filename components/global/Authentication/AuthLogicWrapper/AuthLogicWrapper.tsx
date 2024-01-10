@@ -6,6 +6,7 @@ import SignInForm from '../SignInForm/SignInForm';
 import RegistrationForm from '../RegistrationForm/RegistrationForm';
 import { useState } from 'react';
 import ResetPasswordForm from '../RestPasswordForm/ResetPasswordForm';
+import { authNavigation } from '@/types/home.types';
 
 function AuthLogicWrapper() {
 
@@ -28,7 +29,7 @@ function AuthLogicWrapper() {
     }
 
     //Object is passed to components so that they can choose which navigation to invoke.
-    const authNavigation = {
+    const authNavigation : authNavigation = {
         navigateToIntro,
         navigateToRegistration,
         navigateToSignIn,

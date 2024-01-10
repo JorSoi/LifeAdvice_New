@@ -293,18 +293,21 @@ export interface Database {
           avatar_id: number
           created_at: string
           id: string
+          notification_preferences: Json
           user_name: string
         }
         Insert: {
           avatar_id: number
           created_at?: string
           id: string
+          notification_preferences?: Json
           user_name: string
         }
         Update: {
           avatar_id?: number
           created_at?: string
           id?: string
+          notification_preferences?: Json
           user_name?: string
         }
         Relationships: [
@@ -320,6 +323,35 @@ export interface Database {
             columns: ["id"]
             isOneToOne: true
             referencedRelation: "users"
+            referencedColumns: ["id"]
+          }
+        ]
+      }
+      user_feedback: {
+        Row: {
+          created_at: string
+          feedback: string
+          id: number
+          profile_id: string
+        }
+        Insert: {
+          created_at?: string
+          feedback?: string
+          id?: number
+          profile_id: string
+        }
+        Update: {
+          created_at?: string
+          feedback?: string
+          id?: number
+          profile_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "user_feedback_profile_id_fkey"
+            columns: ["profile_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
             referencedColumns: ["id"]
           }
         ]

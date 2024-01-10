@@ -1,16 +1,18 @@
 'use client'
 
-
-import BottomSheet from "@/components/global/BottomSheet/BottomSheet";
-import MenuBar from "@/components/global/MenuBar/MenuBar";
-import AvatarList from "@/components/pages/Profile/AvatarList/AvatarList";
+import { OverlayContext } from "@/lib/contexts";
 import supabaseBrowserClient from "@/lib/supabaseBrowserClient";
+import { OverlayContextType } from "@/types/home.types";
 import { useRouter } from "next/navigation";
+import { useContext, useEffect } from "react";
 
-async function Test() {
+function Test() {
 
     const supabase = supabaseBrowserClient();
     const router = useRouter();
+
+    const {openOverlay} = useContext(OverlayContext) as OverlayContextType;
+    
     
     const handleSignIn = async () => {
         const {data, error} = await supabase.auth.signInWithPassword({
@@ -36,6 +38,10 @@ async function Test() {
             alert('couldnt sign out:' + error.message)
         }
     }
+
+    useEffect(() => {
+        // openOverlay('general-settings')
+    }, [])
 
 
     return (

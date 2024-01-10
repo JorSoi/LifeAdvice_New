@@ -1,19 +1,31 @@
 'use client'
 
 import styles from './Toggle.module.scss'
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
-function Toggle() {
-    const [isActive, setIsActive] = useState<boolean>(false);
+function Toggle({ onEnable, onDisable, defaultState} : {onEnable : () => void, onDisable : () => void, defaultState : boolean | undefined}) {
+    const [enabled, setEnabled] = useState<boolean>(false);
 
     const handleClick = () => {
-        setIsActive(!isActive)
+        if(enabled) {
+            onDisable(); //Runs function which has been passed to the "onDisable" prop.
+            setEnabled(false)
+        } else {
+            onEnable(); //Runs function which has been passed to the "onEnable" prop.
+            setEnabled(true)
+        }
     }
 
+    useEffect(() => {
+        defaultState ? setEnabled(defaultState) : null;
+
+    }, [defaultState])
+
     return (
-        <div className={`${styles.toggle}  ${isActive ? styles.active : null}`} onClick={handleClick}>
-            <div className={styles.slider}></div>
-        </div>
+        <label className={styles.toggleWrapper}>
+            <input type={'checkbox'} checked={enabled} onClick={handleClick} />
+            <span className={`${styles.toggle} ${enabled ? styles.active : null}`}></span>
+        </label>
     );
 }
 

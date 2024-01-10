@@ -1,11 +1,11 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react';
-import styles from './TextArea.module.scss'
+import styles from './CommentTextArea.module.scss'
 import supabaseBrowserClient from '@/lib/supabaseBrowserClient';
 import { CommentData } from '@/types/home.types';
 
-function TextArea({minLength, maxLength, lessonId, recipient, addToCommentList} : {minLength : number, maxLength : number, lessonId : number, recipient : string, addToCommentList : (param : CommentData) => void }) {
+function CommentTextArea({minLength, maxLength, lessonId, recipient, addToCommentList} : {minLength : number, maxLength : number, lessonId : number, recipient : string, addToCommentList : (param : CommentData) => void }) {
 
     const [text, setText] = useState<string>('')
     const [lengthWarning, setLengthWarning] = useState<'hidden' | 'warn' | 'stop'>('hidden');
@@ -96,4 +96,4 @@ function TextArea({minLength, maxLength, lessonId, recipient, addToCommentList} 
     );
 }
 
-export default TextArea;
+export default CommentTextArea;
