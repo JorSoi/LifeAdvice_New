@@ -10,8 +10,6 @@ import ResetPasswordForm from '@/components/global/Authentication/RestPasswordFo
 
 function GeneralSettings({user} : { user : any }) {
 
-    console.log(user)
-
     const [path, setPath] = useState<'settings-overview' | 'feedback-form' | 'notifications' | 'password-change'>('settings-overview')
 
     const navigateToOverview = () : void => {

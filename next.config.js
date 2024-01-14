@@ -1,5 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+    reactStrictMode: false, //Must be deactivated for bottomSheet to work in dev mode
     images:{
         remotePatterns: [
             {

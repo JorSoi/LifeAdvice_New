@@ -33,7 +33,6 @@ function HistoryButtonWrapper ({bookmarkedCount, likedCount, createdCount} : Sav
                 </svg>
                 {createdCount}     
             </button>
-            
         </div>
     );
 }

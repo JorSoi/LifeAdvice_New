@@ -9,8 +9,6 @@ import { CommentData, InitiateReplyFunction } from '@/types/home.types';
 
 function CommentItem({comment, initiateReply} : {comment: CommentData, initiateReply : InitiateReplyFunction}) {
 
-    console.log(comment)
-
 
     const handleReplyClick = () => {
         initiateReply(comment.profiles.user_name)

@@ -42,10 +42,10 @@ function CommentLogicWrapper({lessonId} : {lessonId : number}) {
 
     
     return (
-        <>
+        <div>
             <TextArea minLength={1} maxLength={800} lessonId={lessonId} recipient={recipient.name} addToCommentList={addToCommentList} />
             <CommentList commentList={commentList} initiateReply={initiateReply}/>
-        </>
+        </div>
     );
 }
 

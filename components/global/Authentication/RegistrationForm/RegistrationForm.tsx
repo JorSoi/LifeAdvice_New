@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react';
+import { useContext, useState } from 'react';
 import BackButton from '../../Buttons/BackButton/BackButton';
 import InputField from '../../InputField/InputField';
 import styles from './RegistrationForm.module.scss'
@@ -8,12 +8,17 @@ import { useFormik } from 'formik'
 import * as Yup from 'yup'
 import supabaseBrowserClient from '@/lib/supabaseBrowserClient';
 import Image from 'next/image';
+import { OverlayContext } from '@/lib/contexts';
+import { OverlayContextType } from '@/types/home.types';
+import { useRouter } from 'next/navigation';
 
 
 function RegistrationForm({authNavigation} : {authNavigation : any}) {
 
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const supabase = supabaseBrowserClient();
+    const {closeOverlay} = useContext(OverlayContext) as OverlayContextType
+    const router = useRouter();
 
     const formik = useFormik({
         initialValues: {
@@ -33,8 +38,9 @@ function RegistrationForm({authNavigation} : {authNavigation : any}) {
                 }
             })
             if(!error) {
+                router.push('/profile');
                 setIsLoading(false)
-                console.log(data)
+                closeOverlay();
             } else {
                 setIsLoading(false)
                 if(error.status == 400) {

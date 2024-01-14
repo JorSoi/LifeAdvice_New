@@ -7,7 +7,6 @@ import { SavedLessonCount } from '@/types/home.types';
 import { formatToMonthAndYear } from '@/lib/formatToMonthAndYear';
 
 
-
 async function ProfileCard() {
 
     const supabase = supabaseServerClient();

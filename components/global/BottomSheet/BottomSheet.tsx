@@ -8,10 +8,6 @@ function BottomSheet({children, title} : {children? : React.ReactNode, title? : 
 
     const [newTitle, setNewTitle] = useState<string | undefined>(title)
 
-    const changeTitle = (value : string) => {
-        setNewTitle(value)
-    }
-
     return (
         <div className={styles.bottomSheet}>
             <div className={styles.headingContainer}>

@@ -42,7 +42,7 @@ function CommentTextArea({minLength, maxLength, lessonId, recipient, addToCommen
             setText(`@${recipient} `)          
         }
         if (formRef.current) {
-            formRef.current.scrollIntoView(false) //"false" will align the bottom of the element to the bottom of the visible area which forces the formElement to be scrolled into the view as much as somewhat possible.
+            formRef.current.scrollIntoView({behavior: 'smooth'})
             
         }
     }, [recipient])
