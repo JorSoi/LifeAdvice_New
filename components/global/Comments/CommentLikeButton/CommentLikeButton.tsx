@@ -1,27 +1,29 @@
 'use client'
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import styles from './CommentLikeButton.module.scss'
 import supabaseBrowserClient from '@/lib/supabaseBrowserClient';
 
-function CommentLikeButton({comment_id} : {comment_id : number}) {
+function CommentLikeButton({comment_id, user} : {comment_id : number, user : any}) {
 
     const [isLiked, setIsLiked] = useState<boolean>(false);
 
     const supabase = supabaseBrowserClient();
 
     const handleClick = async () => {
+        if(!user) return;
 
         if(isLiked) {
             //remove like
             setIsLiked(false)
-            const {data, error} = await supabase.from('comment_upvoted_by').delete().eq('profile_id', '782049b9-91f5-410b-ad7c-e327a5ec898f').eq('comment_id', comment_id);
+            const {data, error} = await supabase.from('comment_upvoted_by').delete().eq('profile_id', user.id).eq('comment_id', comment_id);
             if(!error) {
                 //decrease upvotes count on comment
-                await supabase.rpc( 'downvoteComment', {
+                const res = await supabase.rpc( 'downvoteComment', {
                     comment_id
                   } 
                 )
+                console.log(res)
             } else {
                 //return to previous state if upvoting fails
                 setIsLiked(true)
@@ -32,20 +34,34 @@ function CommentLikeButton({comment_id} : {comment_id : number}) {
             setIsLiked(true)
             const {data, error} = await supabase.from('comment_upvoted_by').insert({
                 comment_id,
-                profile_id: '782049b9-91f5-410b-ad7c-e327a5ec898f' //must be dynamic based on authed user
+                profile_id: user.id
             })
             if(!error) {
                //increase upvotes count on comment
-               await supabase.rpc( 'upvoteComment', {
+               const res = await supabase.rpc( 'upvoteComment', {
                 comment_id
               } 
             )
+            console.log(res)
             } else {
                 //return to previous state if upvoting fails
                 setIsLiked(true)
             }
         }
     }
+
+    useEffect(() => {
+        const getLikeStatus = async () => {
+            if(!user) return;
+            const {data, error} = await supabase.from('comment_upvoted_by').select('*').eq('comment_id', comment_id).eq('profile_id', user.id).single();//If more than one identical row in DB, it wont work. Further refinement needed.
+            if(data) {
+                setIsLiked(true)
+            } else {
+                setIsLiked(false);
+            }
+        }
+        getLikeStatus();
+    }, [])
 
     return (
         <div className={`${styles.commentLikeButton} ${isLiked ? styles.liked : null}`} onClick={handleClick}>

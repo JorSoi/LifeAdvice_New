@@ -13,7 +13,7 @@ export type PageOptions = 'explore' | 'topics' | 'stories' | 'profile' | 'defaul
 
 
 
-
+//Comment related
 export interface CommentData {
     id: number;
     content: string; 
@@ -28,7 +28,11 @@ export interface CommentData {
     }
 }
 
-export type InitiateReplyFunction = ((user_name : string) => void)
+export type InitiateReplyFunction = (user_name : string) => void
+export type RemoveFromCommentList = (comment_id : number) => void
+export type AddToCommentList = (param : CommentData) => void
+
+
 
 export type Lesson = {
     categories: Category

@@ -2,10 +2,10 @@
 
 import styles from './CommentList.module.scss'
 import CommentItem from '../CommentItem/CommentItem';
-import { CommentData, InitiateReplyFunction } from '@/types/home.types';
+import { CommentData, InitiateReplyFunction, RemoveFromCommentList } from '@/types/home.types';
 import Image from 'next/image';
 
-function CommentList({commentList, initiateReply} : {commentList : CommentData[], initiateReply : InitiateReplyFunction }) {
+function CommentList({commentList, initiateReply, removeFromCommentList, user} : {commentList : CommentData[], initiateReply : InitiateReplyFunction, removeFromCommentList : RemoveFromCommentList, user : any }) {
 
     return (
             <div className={styles.commentList}>
@@ -15,7 +15,7 @@ function CommentList({commentList, initiateReply} : {commentList : CommentData[]
                         
 
                         return (
-                            <CommentItem key={comment.id} comment={comment} initiateReply={initiateReply} />
+                            <CommentItem key={comment.id} comment={comment} initiateReply={initiateReply} user={user} removeFromCommentList={removeFromCommentList} />
                         )
                     })
                 }

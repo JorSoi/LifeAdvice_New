@@ -19,7 +19,6 @@ function SettingsOverview({settingsNavigation} : {settingsNavigation : settingsN
     const handleSignOut = async () => {
         const {error} = await supabase.auth.signOut();
         if(!error) {
-            router.push('/');
             router.refresh();
             closeOverlay();
         } else {

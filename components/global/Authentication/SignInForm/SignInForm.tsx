@@ -35,7 +35,7 @@ function SignInForm({authNavigation} : {authNavigation : any}) {
                 password: formik.values.password,
             })
             if(!error) {
-                router.push('/profile')
+                router.refresh();
                 closeOverlay();
                 setIsLoading(false)
             } else {

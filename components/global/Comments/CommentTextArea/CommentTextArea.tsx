@@ -3,10 +3,10 @@
 import { useEffect, useRef, useState } from 'react';
 import styles from './CommentTextArea.module.scss'
 import supabaseBrowserClient from '@/lib/supabaseBrowserClient';
-import { CommentData } from '@/types/home.types';
+import { AddToCommentList, CommentData } from '@/types/home.types';
 import useTextLimit from '@/hooks/useTextLimit';
 
-function CommentTextArea({minLength, maxLength, lessonId, recipient, addToCommentList} : {minLength : number, maxLength : number, lessonId : number, recipient : string, addToCommentList : (param : CommentData) => void }) {
+function CommentTextArea({minLength, maxLength, lessonId, recipient, addToCommentList, user} : {minLength : number, maxLength : number, lessonId : number, recipient : string, user : any, addToCommentList : AddToCommentList }) {
 
     const [text, setText] = useState<string>('')
     const [isExpanded, setIsExpanded] = useState<boolean>(false);
@@ -18,10 +18,11 @@ function CommentTextArea({minLength, maxLength, lessonId, recipient, addToCommen
 
     const handleSubmit = async (e : React.FormEvent) => {
         e.preventDefault();
+        if(!user) return;
         setIsLoading(true);
         const { data, error } = await supabase.from('comments').insert([{ 
             lesson_id: lessonId, 
-            profile_id: '782049b9-91f5-410b-ad7c-e327a5ec898f', //must be dynamic
+            profile_id: user.id,
             content: text,
         },]).select(`id, content, upvotes, created_at, profiles(id, user_name, avatars(avatar_url))`).single();
         if(!error) {
@@ -29,6 +30,7 @@ function CommentTextArea({minLength, maxLength, lessonId, recipient, addToCommen
             setText('')
             setIsExpanded(false)
             const newComment : any = data;
+            console.log(newComment)
             addToCommentList(newComment)
         } else {
             console.log(error)
@@ -39,7 +41,8 @@ function CommentTextArea({minLength, maxLength, lessonId, recipient, addToCommen
     useEffect(() => {
         // Checks if a recipient has been passed to this Component to open textarea and prefill it with the correct recipient
         if(recipient) {
-            setText(`@${recipient} `)          
+            setText(`@${recipient} `)
+            setIsExpanded(true)          
         }
         if (formRef.current) {
             formRef.current.scrollIntoView({behavior: 'smooth'})

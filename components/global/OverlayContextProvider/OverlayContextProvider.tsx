@@ -52,7 +52,7 @@ function OverlayContextProvider({children} : { children: React.ReactNode }) {
             </BottomSheetContainer>
 
             <BottomSheetContainer isOpen={overlayName == 'comments'} title="Comments">
-                <CommentLogicWrapper lessonId={lessonId} />
+                <CommentLogicWrapper lessonId={lessonId} user={user} />
             </BottomSheetContainer>
 
             <BottomSheetContainer isOpen={overlayName == 'general-settings'} title="General settings">

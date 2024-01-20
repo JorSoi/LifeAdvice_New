@@ -2,7 +2,7 @@
 
 import { useContext } from 'react'
 import { BottomSheet } from 'react-spring-bottom-sheet'
-import './BottomSheetDefaultStyling.scss'
+import '@/scss/BottomSheetDefaultStyling.scss'
 import styles from './BottomSheetContainer.module.scss'
 import { OverlayContext } from '@/lib/contexts'
 import { OverlayContextType } from '@/types/home.types'

@@ -53,19 +53,19 @@ export interface Database {
       }
       comment_upvoted_by: {
         Row: {
-          comment_id: number | null
+          comment_id: number
           created_at: string
           id: number
           profile_id: string
         }
         Insert: {
-          comment_id?: number | null
+          comment_id: number
           created_at?: string
           id?: number
           profile_id: string
         }
         Update: {
-          comment_id?: number | null
+          comment_id?: number
           created_at?: string
           id?: number
           profile_id?: string
@@ -94,7 +94,7 @@ export interface Database {
           id: number
           lesson_id: number
           profile_id: string
-          reports_count: number
+          reports: number
           upvotes: number
         }
         Insert: {
@@ -103,7 +103,7 @@ export interface Database {
           id?: number
           lesson_id: number
           profile_id: string
-          reports_count?: number
+          reports?: number
           upvotes?: number
         }
         Update: {
@@ -112,7 +112,7 @@ export interface Database {
           id?: number
           lesson_id?: number
           profile_id?: string
-          reports_count?: number
+          reports?: number
           upvotes?: number
         }
         Relationships: [
@@ -332,19 +332,19 @@ export interface Database {
           created_at: string
           feedback: string
           id: number
-          profile_id: string
+          profile_id: string | null
         }
         Insert: {
           created_at?: string
           feedback?: string
           id?: number
-          profile_id: string
+          profile_id?: string | null
         }
         Update: {
           created_at?: string
           feedback?: string
           id?: number
-          profile_id?: string
+          profile_id?: string | null
         }
         Relationships: [
           {
@@ -374,6 +374,12 @@ export interface Database {
       get_random_lessons: {
         Args: Record<PropertyKey, never>
         Returns: Record<string, unknown>
+      }
+      reportComment: {
+        Args: {
+          comment_id: number
+        }
+        Returns: undefined
       }
       upvoteComment: {
         Args: {
