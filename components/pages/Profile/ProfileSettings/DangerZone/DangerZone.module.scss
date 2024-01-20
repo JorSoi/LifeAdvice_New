@@ -1,0 +1,12 @@
+@import '@/scss/variables';
+@import '@/scss/mixins';
+
+.dangerZone {
+    @include flex-c-c;
+    gap: 10px;
+}
+
+.deletionButton {
+    @include Button('red');
+    color: $red-primary;
+}

@@ -88,6 +88,7 @@ export interface settingsNavigation {
     navigateToFeedbackForm: () => void
     navigateToNotifications: () => void
     navigateToPasswordChange: () => void
+    navigateToDangerZone: () => void
 }
 
 

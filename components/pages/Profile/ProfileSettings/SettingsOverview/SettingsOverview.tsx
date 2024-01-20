@@ -69,7 +69,7 @@ function SettingsOverview({settingsNavigation} : {settingsNavigation : settingsN
                 <Image className={styles.chevron} src={'/icons/chevron.svg'} width={18} height={18} alt='' priority={true} />
             </div>
 
-            <div className={styles.settingsItem}>
+            <div className={styles.settingsItem} onClick={() => settingsNavigation.navigateToDangerZone()}>
                 <div className={styles.leftWrapper}>
                     <div className={`${styles.icon} ${styles.dangerZone}`}>
                         <Image src={'/icons/profile-settings/danger-zone.svg'} width={22} height={22} alt='' priority={true} />

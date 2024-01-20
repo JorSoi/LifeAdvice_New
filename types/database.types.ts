@@ -361,6 +361,10 @@ export interface Database {
       [_ in never]: never
     }
     Functions: {
+      deleteUser: {
+        Args: Record<PropertyKey, never>
+        Returns: undefined
+      }
       downvoteComment: {
         Args: {
           comment_id: number

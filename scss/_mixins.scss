@@ -46,6 +46,9 @@
     } @else if ($type == "orange") {
         background: $orange-fade;
         color: white;
+    } @else if ($type == "red") {
+        background: #FDDFDF;
+        color: $red-primary;
     }               
 }
 
