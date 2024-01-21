@@ -2,17 +2,26 @@
 
 import Image from 'next/image';
 import styles from './BookmarkButton.module.scss'
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import supabaseBrowserClient from '@/lib/supabaseBrowserClient';
+import { OverlayContext } from '@/lib/contexts';
+import { OverlayContextType } from '@/types/home.types';
 
 function BookmarkButton ({ lessonId, user } : {lessonId : number, user : any}) {
 
     const [isActive, setIsActive] = useState<boolean>(false);
 
     const supabase = supabaseBrowserClient();
+    const {openOverlay} = useContext(OverlayContext) as OverlayContextType;
 
     const handleClick = async () => {
-        if(!user) return //Dont allow interaction if unauthenticated
+        
+        if(!user) {
+            //Dont allow interaction if unauthenticated
+            openOverlay('authentication');
+            return;
+        } 
+        
         if(isActive) {
             const {data, error} = await supabase.from('lesson_bookmarked_by').delete().eq('lesson_id', lessonId).eq('profile_id', user?.id)
             if(!error) {

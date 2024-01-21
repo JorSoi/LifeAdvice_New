@@ -1,10 +1,11 @@
 'use client'
 
-import { useEffect, useRef, useState } from 'react';
+import { useContext, useEffect, useRef, useState } from 'react';
 import styles from './CommentTextArea.module.scss'
 import supabaseBrowserClient from '@/lib/supabaseBrowserClient';
-import { AddToCommentList, CommentData } from '@/types/home.types';
+import { AddToCommentList, CommentData, OverlayContextType } from '@/types/home.types';
 import useTextLimit from '@/hooks/useTextLimit';
+import { OverlayContext } from '@/lib/contexts';
 
 function CommentTextArea({minLength, maxLength, lessonId, recipient, addToCommentList, user} : {minLength : number, maxLength : number, lessonId : number, recipient : string, user : any, addToCommentList : AddToCommentList }) {
 
@@ -14,11 +15,16 @@ function CommentTextArea({minLength, maxLength, lessonId, recipient, addToCommen
     const supabase = supabaseBrowserClient();
     const formRef = useRef<HTMLFormElement>(null);
     const status = useTextLimit(maxLength, text)
+    const {openOverlay} = useContext(OverlayContext) as OverlayContextType;
 
 
     const handleSubmit = async (e : React.FormEvent) => {
         e.preventDefault();
-        if(!user) return;
+        if(!user) {
+            //Dont allow interaction if unauthenticated
+            openOverlay('authentication');
+            return;
+        } 
         setIsLoading(true);
         const { data, error } = await supabase.from('comments').insert([{ 
             lesson_id: lessonId, 

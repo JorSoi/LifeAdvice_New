@@ -2,17 +2,25 @@
 
 
 import styles from './LikeButton.module.scss'
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import supabaseBrowserClient from '@/lib/supabaseBrowserClient';
+import { OverlayContextType } from '@/types/home.types';
+import { OverlayContext } from '@/lib/contexts';
 
 function LikeButton({ lessonId, user } : {lessonId : number, user : any}) {
 
     const [isActive, setIsActive] = useState<boolean>(false);
 
     const supabase = supabaseBrowserClient();
+    const {openOverlay} = useContext(OverlayContext) as OverlayContextType;
 
     const handleClick = async () => {
-        if(!user) return; // Don't allow interaction if unauthenticated
+        if(!user) {
+            //Dont allow interaction if unauthenticated
+            openOverlay('authentication');
+            return;
+        } 
+
         if(isActive) {
             const {data, error} = await supabase.from('lesson_upvoted_by').delete().eq('lesson_id', lessonId).eq('profile_id', user.id)
             if(!error) {

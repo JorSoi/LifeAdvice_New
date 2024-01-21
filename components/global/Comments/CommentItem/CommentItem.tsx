@@ -5,14 +5,23 @@ import styles from './CommentItem.module.scss'
 import CommentLikeButton from '../CommentLikeButton/CommentLikeButton';
 import CommentReplyButton from '../CommentReplyButton/CommentReplyButton';
 import getElapsedTime from '@/lib/getElapsedTime';
-import { CommentData, InitiateReplyFunction, RemoveFromCommentList } from '@/types/home.types';
+import { CommentData, InitiateReplyFunction, OverlayContextType, RemoveFromCommentList } from '@/types/home.types';
 import supabaseBrowserClient from '@/lib/supabaseBrowserClient';
+import { useContext } from 'react';
+import { OverlayContext } from '@/lib/contexts';
 
 function CommentItem({comment, initiateReply, removeFromCommentList, user} : {comment: CommentData, initiateReply : InitiateReplyFunction, removeFromCommentList : RemoveFromCommentList, user : any}) {
 
     const supabase = supabaseBrowserClient();
 
+    const {openOverlay} = useContext(OverlayContext) as OverlayContextType;
+
     const handleReplyClick = () => {
+        if(!user) {
+            //Dont allow interaction if unauthenticated
+            openOverlay('authentication');
+            return;
+        } 
         initiateReply(comment.profiles.user_name)
     }
 

@@ -1,17 +1,24 @@
 'use client'
 
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import styles from './CommentLikeButton.module.scss'
 import supabaseBrowserClient from '@/lib/supabaseBrowserClient';
+import { OverlayContext } from '@/lib/contexts';
+import { OverlayContextType } from '@/types/home.types';
 
 function CommentLikeButton({comment_id, user} : {comment_id : number, user : any}) {
 
     const [isLiked, setIsLiked] = useState<boolean>(false);
 
     const supabase = supabaseBrowserClient();
+    const {openOverlay} = useContext(OverlayContext) as OverlayContextType;
 
     const handleClick = async () => {
-        if(!user) return;
+        if(!user) {
+            //Dont allow interaction if unauthenticated
+            openOverlay('authentication');
+            return;
+        } 
 
         if(isLiked) {
             //remove like
