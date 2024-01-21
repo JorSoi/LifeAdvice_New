@@ -17,35 +17,35 @@ function TopicButton ({isActive} : {isActive : boolean}) {
 
     useEffect(() => {
         switch (pathTopic) {
-            case 'love' :
+            case 'Love' :
                 setClassName('love')
                 setSvgColor('#f35050');
                 break;
-            case 'friendship' :
+            case 'Friendship' :
                 setClassName('friendship')
                 setSvgColor('#5fa0d9');
                 break;
-            case 'mental-health' :
+            case 'Mental-health' :
                 setClassName('mental-health')
                 setSvgColor('#e065c6');
                 break;
-            case 'business' :
+            case 'Business' :
                 setClassName('business')
                 setSvgColor('#b87132');
                 break;
-            case 'education' :
+            case 'Education' :
                 setClassName('education')
                 setSvgColor('#63b314');
                 break;
-            case 'travel' :
+            case 'Travel' :
                 setClassName('travel')
                 setSvgColor('#2babeb');
                 break;
-            case 'fitness' :
+            case 'Fitness' :
                 setClassName('fitness')
                 setSvgColor('#928080');
                 break;
-            case 'other' :
+            case 'Other' :
                 setClassName('other')
                 setSvgColor('#2D355B');
                 break;

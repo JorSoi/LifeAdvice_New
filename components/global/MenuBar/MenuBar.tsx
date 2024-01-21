@@ -4,7 +4,7 @@ import { PageOptions } from '@/types/home.types';
 import TopicButton from './TopicButton/TopicButton';
 import StoryButton from './StoryButton/StoryButton';
 import ProfileButton from './ProfileButton/ProfileButton';
-import LessonButton from './LessonButton/LessonButton';
+import CreatorButton from './CreatorButton/CreatorButton';
 import supabaseServerClient from '@/lib/supabaseServerClient';
 
 async function MenuBar({page} : {page : PageOptions}) {
@@ -26,7 +26,7 @@ async function MenuBar({page} : {page : PageOptions}) {
             <div className={styles.menuBar}>
                 <ExploreButton isActive={page == 'explore'} />
                 <TopicButton isActive={page == 'topics'} />
-                <LessonButton />
+                <CreatorButton />
                 <StoryButton isActive={page == 'stories'} />
                 <ProfileButton isActive={page == 'profile'} profileData={profileData}/>
             </div>

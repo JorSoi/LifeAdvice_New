@@ -62,7 +62,7 @@ function CommentTextArea({minLength, maxLength, lessonId, recipient, addToCommen
                     () => {
                         setIsExpanded(true)
                         if (formRef.current) {
-                            formRef.current.scrollIntoView({behavior: 'smooth'}) 
+                            formRef.current.scrollIntoView(false) 
                         }
                     }
                 }

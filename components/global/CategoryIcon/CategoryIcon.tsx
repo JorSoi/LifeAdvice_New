@@ -1,15 +1,16 @@
 import styles from "./CategoryIcon.module.scss"
 import { CategoryNames } from "@/types/home.types";
 
+//Mapping the emojis to static values is not ideal and must be taken care of in a different way.
 const emojiMap = {
-    "love": '💌',
-    "friendship": '🫂',
-    "mental-health": '🧠',
-    "business": '💼',
-    "education": '🎓',
-    "travel": '✈️',
-    "fitness": '🏅',
-    "other": '💭',
+    "Love": '💌',
+    "Friendship": '🫂',
+    "Mental-health": '🧠',
+    "Business": '💼',
+    "Education": '🎓',
+    "Travel": '✈️',
+    "Fitness": '🏅',
+    "Other": '💭',
 }
 
 function CategoryIcon({categoryName} : {categoryName: CategoryNames}) {

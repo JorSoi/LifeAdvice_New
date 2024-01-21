@@ -1,16 +1,50 @@
 @import '@/scss/variables';
 @import '@/scss/mixins';
 
-.categoryDropdown {
-    padding: 15px 20px;
-    background-color: $navy-primary;
-    color: white;
-    font-size: 16px;
-    border-radius: 100px;
-    // @include flex-c-c;
+.dropdownWrapper {
+    @include Post-Button;
+    position: absolute;
+    left: 10px;
+    bottom: 20px;
 
     p {
-        margin-right: 10px;
+        padding-right: 35px;
+    }
+
+    span {
+        margin-right: 5px;
+        font-size: 0.9rem;
+    }
+
+    svg {
+        position: absolute;
+        right: 20px;
+        top: 50%;
+        transform: translateY(-45%) rotate(-90deg);
+        user-select: none;
+        pointer-events: none;
+        stroke: white;
     }
 }
+
+.default {
+    background-color: #D8D9E1;
+    color: $midnight-primary;
+
+    svg {
+        stroke: $midnight-primary;
+    }
+}
+
+.categoryDropdown {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+
+}
+
+
 

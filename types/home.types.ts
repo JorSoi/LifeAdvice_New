@@ -1,7 +1,7 @@
 import { Dispatch, SetStateAction } from "react";
 
 //Must be extended if new category is introduced. 
-export type CategoryNames = 'love' | 'friendship' | 'business' | 'mental-health' | 'education' | 'travel' | 'fitness' | 'other';
+export type CategoryNames = 'Love' | 'Friendship' | 'Business' | 'Mental-health' | 'Education' | 'Travel' | 'Fitness' | 'Other';
 
 export type Category = {
     id: number
@@ -70,7 +70,7 @@ export interface OverlayContextType {
     closeOverlay: () => void
 }
 
-export type OverlayNames = 'authentication' | 'avatars' | 'comments' | 'socials' | 'general-settings' | ''
+export type OverlayNames = 'authentication' | 'avatars' | 'comments' | 'socials' | 'general-settings' | 'lesson-creator' | ''
 
 export interface SavedLessonsContextType {
     setSelected : Dispatch<SetStateAction<"bookmarked" | "liked" | "created">>

@@ -10,6 +10,7 @@ import SocialShareList from "@/components/pages/Home/SocialShareList/SocialShare
 import GeneralSettings from "@/components/pages/Profile/ProfileSettings/GeneralSettings/GeneralSettings";
 import BottomSheetContainer from "../BottomSheetNew/BottomSheetContainer";
 import { OverlayNames } from "@/types/home.types";
+import LessonCreator from "../LessonCreator/LessonCreator";
 
 
 // This component wraps around the entire application. Calling openOverlay(name) from the context anywhere within the application will open the requested Overlay without the need for extensive prop-drilling.
@@ -65,6 +66,10 @@ function OverlayContextProvider({children} : { children: React.ReactNode }) {
 
             <BottomSheetContainer isOpen={overlayName == 'avatars'} title="Choose you avatar">
                 <AvatarList user={user} />
+            </BottomSheetContainer>
+
+            <BottomSheetContainer isOpen={overlayName == 'lesson-creator'} title="Share your life lesson">
+                <LessonCreator user={user} />
             </BottomSheetContainer>
 
         </OverlayContext.Provider>
