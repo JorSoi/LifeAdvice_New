@@ -23,7 +23,7 @@ function Toggle({ onEnable, onDisable, defaultState} : {onEnable : () => void, o
 
     return (
         <label className={styles.toggleWrapper}>
-            <input type={'checkbox'} checked={enabled} onClick={handleClick} />
+            <input type={'checkbox'} checked={enabled} onClick={handleClick} readOnly/>
             <span className={`${styles.toggle} ${enabled ? styles.active : null}`}></span>
         </label>
     );

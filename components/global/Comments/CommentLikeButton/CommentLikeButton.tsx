@@ -53,7 +53,7 @@ function CommentLikeButton({comment_id, user} : {comment_id : number, user : any
     useEffect(() => {
         const getLikeStatus = async () => {
             if(!user) return;
-            const {data, error} = await supabase.from('comment_upvoted_by').select('*').eq('comment_id', comment_id).eq('profile_id', user.id).single();//If more than one identical row in DB, it wont work. Further refinement needed.
+            const {data, error} = await supabase.from('comment_upvoted_by').select('*').eq('comment_id', comment_id).eq('profile_id', user.id).limit(1).maybeSingle();
             if(data) {
                 setIsLiked(true)
             } else {

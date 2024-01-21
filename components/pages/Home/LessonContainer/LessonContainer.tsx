@@ -50,7 +50,6 @@ function LessonContainer({category_id} : {category_id? : number}) {
             getLessons(category_id);
         }
         
-        
     }, [lessonList])
 
     useEffect(() => {
@@ -65,12 +64,16 @@ function LessonContainer({category_id} : {category_id? : number}) {
       getUser();
       }, [])
 
+      useEffect(() => {
+        console.log(lessonList)
+      }, [lessonList])
+
     return (
         <div className={styles.lessonContainer}>
             {
                     lessonList.map((lesson, i) => {
                         
-                        return <LessonItem lesson={lesson} index={i} removeLessonFromList={removeLessonFromList} user={user} draggable={true} />
+                        return <LessonItem key={i} lesson={lesson} index={i} removeLessonFromList={removeLessonFromList} user={user} draggable={true} />
                     }) 
                 }
             

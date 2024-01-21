@@ -16,7 +16,7 @@ function Profileimage({avatar_url} : {avatar_url : any}) {
 
     return (
         <div className={styles.wrapper} onClick={handleClick}>
-            <Image className={styles.profileImage} src={avatar_url} width={100} height={100} alt='' />
+            <Image className={styles.profileImage} src={avatar_url} width={100} height={100} alt='' priority/>
             <button className={styles.editButton} onClick={handleClick}>
                 <Image src={'/icons/edit-icon.svg'} width={17} height={17} alt='' />
             </button>

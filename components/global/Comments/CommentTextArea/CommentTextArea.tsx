@@ -30,7 +30,6 @@ function CommentTextArea({minLength, maxLength, lessonId, recipient, addToCommen
             setText('')
             setIsExpanded(false)
             const newComment : any = data;
-            console.log(newComment)
             addToCommentList(newComment)
         } else {
             console.log(error)
@@ -57,7 +56,7 @@ function CommentTextArea({minLength, maxLength, lessonId, recipient, addToCommen
                 placeholder='Share your thoughts' 
                 value={text} 
                 onChange={({target}) => setText(target.value)} 
-                maxLength={maxLength} 
+                maxLength={maxLength}
                 onFocus={
                     () => {
                         setIsExpanded(true)

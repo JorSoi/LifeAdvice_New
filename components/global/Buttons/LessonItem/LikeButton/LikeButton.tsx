@@ -33,7 +33,7 @@ function LikeButton({ lessonId, user } : {lessonId : number, user : any}) {
     useEffect(() => {
         const getLikeStatus = async () => {
             if(!user) return;
-            const {data, error} = await supabase.from('lesson_upvoted_by').select('*').eq('lesson_id', lessonId).eq('profile_id', user.id).single();//If more than one identical row in DB, it wont work. Further refinement needed.
+            const {data, error} = await supabase.from('lesson_upvoted_by').select('*').eq('lesson_id', lessonId).eq('profile_id', user.id).limit(1).maybeSingle();
             if(data) {
                 setIsActive(true)
             } else {

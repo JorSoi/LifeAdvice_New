@@ -39,7 +39,6 @@
         z-index: 0;
         right: 14px;
         bottom: 14px;
-        height: auto;
         user-select: none;
         pointer-events: none;
     }
@@ -55,12 +54,15 @@
 .friendship {
     background-color: #B7DDFF;
     img {
-        bottom: 0px;
+        bottom: -5px;
     }
 }
 
 .mental {
     background-color: #FFB8EF;
+    img {
+        bottom: 7px;
+    }
 }
 
 .business {
@@ -69,10 +71,18 @@
 
 .education {
     background-color: #B0E57C;
+    img {
+        bottom: 7px;
+        right: 7px;
+    }
 }
 
 .travel {
     background-color: #AEDFF7;
+    img {
+        bottom: 7px;
+        right: 10px;
+    }
 }
 
 .fitness {
@@ -81,6 +91,10 @@
 
 .other {
     background-color: $snow-white;
+    img {
+        bottom: 17px;
+        right: 20px;
+    }
 }
 
 

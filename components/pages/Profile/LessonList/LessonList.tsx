@@ -70,8 +70,8 @@ function LessonList({user} : {user: any}) {
                 {
                     lessonList?.map((lesson, index) => {
                     return (
-                        <div className={styles.lessonContainer}>
-                            <LessonItem key={lesson.id} lesson={lesson} index={index} removeLessonFromList={() => {}} user={user} draggable={false}/>
+                        <div key={lesson.id} className={styles.lessonContainer}>
+                            <LessonItem lesson={lesson} index={index} removeLessonFromList={() => {}} user={user} draggable={false}/>
                         </div>
                     )
                     })

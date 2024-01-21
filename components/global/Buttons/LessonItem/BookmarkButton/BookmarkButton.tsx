@@ -33,7 +33,7 @@ function BookmarkButton ({ lessonId, user } : {lessonId : number, user : any}) {
     useEffect(() => {
         if (!user) return;
         const getBookmarkStatus = async () => {
-            const {data, error} = await supabase.from('lesson_bookmarked_by').select('*').eq('lesson_id', lessonId).eq('profile_id', user.id).single();
+            const {data, error} = await supabase.from('lesson_bookmarked_by').select('*').eq('lesson_id', lessonId).eq('profile_id', user.id).limit(1).maybeSingle();
             if(data) {
                 setIsActive(true)
             } else {

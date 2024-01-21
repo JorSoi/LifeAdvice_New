@@ -53,7 +53,7 @@ function CategoryDropdown({formik} : {formik: any}) {
                 }
             </select>
             <svg width="12" height="12" viewBox="0 0 10 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M7.98734 2L2 7.5L7.98734 13" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M7.98734 2L2 7.5L7.98734 13" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
             </svg>
 
             {
