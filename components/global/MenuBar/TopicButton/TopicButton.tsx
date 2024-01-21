@@ -1,6 +1,5 @@
 'use client'
 
-import { CategoryNames } from '@/types/home.types';
 import styles from './TopicButton.module.scss'
 import { useRouter, usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
@@ -13,39 +12,39 @@ function TopicButton ({isActive} : {isActive : boolean}) {
 
     const router = useRouter();
     const pathName = usePathname();
-    const pathTopic = pathName.split('/').pop() as CategoryNames
+    const currentCategoryId = pathName.split('/').pop()
 
     useEffect(() => {
-        switch (pathTopic) {
-            case 'Love' :
+        switch (currentCategoryId) {
+            case '1' :
                 setClassName('love')
                 setSvgColor('#f35050');
                 break;
-            case 'Friendship' :
+            case '2' :
                 setClassName('friendship')
                 setSvgColor('#5fa0d9');
                 break;
-            case 'Mental-health' :
+            case '3' :
                 setClassName('mental-health')
                 setSvgColor('#e065c6');
                 break;
-            case 'Business' :
+            case '4' :
                 setClassName('business')
                 setSvgColor('#b87132');
                 break;
-            case 'Education' :
+            case '5' :
                 setClassName('education')
                 setSvgColor('#63b314');
                 break;
-            case 'Travel' :
+            case '6' :
                 setClassName('travel')
                 setSvgColor('#2babeb');
                 break;
-            case 'Fitness' :
+            case '7' :
                 setClassName('fitness')
                 setSvgColor('#928080');
                 break;
-            case 'Other' :
+            case '8' :
                 setClassName('other')
                 setSvgColor('#2D355B');
                 break;
