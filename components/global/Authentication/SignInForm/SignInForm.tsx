@@ -35,9 +35,9 @@ function SignInForm({authNavigation} : {authNavigation : any}) {
                 password: formik.values.password,
             })
             if(!error) {
-                router.refresh();
                 closeOverlay();
                 setIsLoading(false)
+                location.reload(); //Can't use next-navigation since top-layout appears to be untouched from refreshes even though it stores the "user" state. This state affects various components (especially related to comment-section) which is why I decided to use a hard-refresh instead of utilizing useRouter.
             } else {
                 if(error.cause == 'AuthApiError') {
                     console.log('sign in unsuccessfull. Invalid credentials')

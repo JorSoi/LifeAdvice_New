@@ -38,9 +38,9 @@ function RegistrationForm({authNavigation} : {authNavigation : any}) {
                 }
             })
             if(!error) {
-                router.push('/profile');
                 setIsLoading(false)
                 closeOverlay();
+                location.href = '/profile' //Can't use next-navigation since top-layout appears to be untouched from refreshes even though it stores the "user" state. This state affects various components (especially related to comment-section) which is why I decided to use a hard-refresh instead of utilizing useRouter.
             } else {
                 setIsLoading(false)
                 if(error.status == 400) {
