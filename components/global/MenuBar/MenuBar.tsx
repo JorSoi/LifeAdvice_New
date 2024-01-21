@@ -26,7 +26,7 @@ async function MenuBar({page} : {page : PageOptions}) {
             <div className={styles.menuBar}>
                 <ExploreButton isActive={page == 'explore'} />
                 <TopicButton isActive={page == 'topics'} />
-                <CreatorButton />
+                <CreatorButton user={user} />
                 <StoryButton isActive={page == 'stories'} />
                 <ProfileButton isActive={page == 'profile'} profileData={profileData}/>
             </div>
