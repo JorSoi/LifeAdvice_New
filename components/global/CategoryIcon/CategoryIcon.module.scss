@@ -2,13 +2,14 @@
 @import '@/scss/mixins';
 
 .categoryIcon {
-    min-width: 35px;
-    min-height: 35px;
+    width: 35px;
+    height: 35px;
     border-radius: 5px;
     @include flex-c-c;
     font-size: 20px;
     user-select: none;
     pointer-events: none;
+    flex-shrink: 0
 }
 
 .Love {

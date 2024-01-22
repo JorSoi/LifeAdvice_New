@@ -3,9 +3,10 @@
 
 .shareButton {
     @include flex-c-c;
-    min-width: 40px;
-    min-height: 40px;
+    width: 40px;
+    height: 40px;
     border-radius: 100px;
     border: 2.2px solid #DBDBDE;
+    flex-shrink: 0;
     cursor: pointer;
 }
