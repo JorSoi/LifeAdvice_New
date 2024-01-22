@@ -21,16 +21,21 @@
 .headerWrapper {
     width: 100%;
     @include flex-sb-c;
+    gap: 5px;
 }
 
 .lessonCredentials {
-    color: #2D355B99;
+    color: $orange-primary;
     font-family: $Inter;
     font-size: 1rem;
     font-weight: 500;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    
     span {
         font-family: $Inter;
-        color: $orange-primary;
+        color: #2D355B99;
     }
 }
 

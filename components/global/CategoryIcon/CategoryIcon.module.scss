@@ -2,8 +2,8 @@
 @import '@/scss/mixins';
 
 .categoryIcon {
-    width: 35px;
-    height: 35px;
+    min-width: 35px;
+    min-height: 35px;
     border-radius: 5px;
     @include flex-c-c;
     font-size: 20px;

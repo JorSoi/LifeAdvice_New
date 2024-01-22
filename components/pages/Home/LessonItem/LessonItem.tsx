@@ -116,7 +116,7 @@ function LessonItem ({lesson, index, removeLessonFromList, user, draggable} : {l
     > 
     <div className={styles.headerWrapper}>
       <ShareButton lessonId={lesson.id} />
-      <p className={styles.lessonCredentials}>Learned by <span>{lesson.author}</span></p>
+      <p className={styles.lessonCredentials}><span>Learned by </span>{lesson.author}</p>
       <CategoryItem categoryName={lesson.categories.category_name} />
     </div>
       
