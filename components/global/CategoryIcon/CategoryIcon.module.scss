@@ -2,11 +2,11 @@
 @import '@/scss/mixins';
 
 .categoryIcon {
-    width: 35px;
-    height: 35px;
+    width: 37px;
+    height: 37px;
     border-radius: 5px;
     @include flex-c-c;
-    font-size: 20px;
+    font-size: 1.28rem;
     user-select: none;
     pointer-events: none;
     flex-shrink: 0
