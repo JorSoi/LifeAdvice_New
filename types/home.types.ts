@@ -77,6 +77,12 @@ export interface SavedLessonsContextType {
     selected: "bookmarked" | "liked" | "created"
 }
 
+export interface LogoVisibilityContextType {
+    setIsVisible : Dispatch<SetStateAction<boolean>>
+    isVisible: boolean
+}
+
+
 
 //Path Navigations within BottomSheets
 export interface authNavigation {

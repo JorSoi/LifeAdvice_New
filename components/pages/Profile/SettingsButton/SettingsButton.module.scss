@@ -2,9 +2,6 @@
 @import '@/scss/mixins';
 
 .settingsButton {
-    position: absolute;
-    top: 15px;
-    right: 3%;
     border-radius: 6px;
     @include flex-c-c;
     width: 45px;

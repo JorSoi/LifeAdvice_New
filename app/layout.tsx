@@ -31,7 +31,7 @@ export default function RootLayout({
     <html lang="en" className={`${garamond.variable} ${inter.variable}`}>
       <body>
         <OverlayContextProvider>
-          <LogoHeading />
+          {/* <LogoHeading /> */}
           {children}
         </OverlayContextProvider>
       </body>

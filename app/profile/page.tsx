@@ -1,3 +1,4 @@
+
 import MenuBar from "@/components/global/MenuBar/MenuBar";
 import styles from './Profile.module.scss'
 import ProfileCard from "@/components/pages/Profile/ProfileCard/ProfileCard";
@@ -5,7 +6,7 @@ import LessonList from "@/components/pages/Profile/LessonList/LessonList";
 import supabaseServerClient from "@/lib/supabaseServerClient";
 import { redirect } from "next/navigation";
 import SavedLessonsContextProvider from "@/components/global/SavedLessonsContextProvider/SavedLessonsContextProvider";
-import SettingsButton from "@/components/pages/Profile/SettingsButton/SettingsButton";
+import LogoVisibilityContextProvider from "@/components/global/LogoScrollContextProvider/LogoVisibilityContextProvider";
 
 
 async function Profile() {
@@ -17,8 +18,8 @@ async function Profile() {
     if(!user) redirect('/')
 
     return (
-        <div className={styles.profile}>
-            <SettingsButton />
+        <LogoVisibilityContextProvider>
+            
             <div className={styles.profileContainer}>
                 <SavedLessonsContextProvider user={user}>
                     <ProfileCard />
@@ -26,7 +27,7 @@ async function Profile() {
                 </SavedLessonsContextProvider>
             </div>
             <MenuBar page={'profile'} />
-        </div>
+        </LogoVisibilityContextProvider>
     );
 }
 
