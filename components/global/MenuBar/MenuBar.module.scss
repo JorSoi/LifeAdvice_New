@@ -3,8 +3,10 @@
 
 .menuWrapper {
     position: fixed;
-    z-index: 11;
     bottom: 0px;
+    left: 0px;
+    right: 0px;
+    z-index: 11;
     width: 100%;
     height: fit-content;
     background-color: $orange-background;

@@ -1,7 +1,6 @@
 import type { Metadata } from 'next'
 import { EB_Garamond, Inter } from 'next/font/google'
 import '@/scss/globals.scss'
-import LogoHeading from '@/components/global/LogoHeading/LogoHeading'
 import OverlayContextProvider from '@/components/global/OverlayContextProvider/OverlayContextProvider'
 
 //Using next font optimization to locally host fonts for performance optimization.
@@ -31,7 +30,6 @@ export default function RootLayout({
     <html lang="en" className={`${garamond.variable} ${inter.variable}`}>
       <body>
         <OverlayContextProvider>
-          {/* <LogoHeading /> */}
           {children}
         </OverlayContextProvider>
       </body>

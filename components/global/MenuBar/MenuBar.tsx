@@ -1,13 +1,13 @@
 import ExploreButton from './ExploreButton/ExploreButton';
 import styles from './MenuBar.module.scss'
-import { PageOptions } from '@/types/home.types';
+import { PagesNames } from '@/types/home.types';
 import TopicButton from './TopicButton/TopicButton';
 import StoryButton from './StoryButton/StoryButton';
 import ProfileButton from './ProfileButton/ProfileButton';
 import CreatorButton from './CreatorButton/CreatorButton';
 import supabaseServerClient from '@/lib/supabaseServerClient';
 
-async function MenuBar({page} : {page : PageOptions}) {
+async function MenuBar({page} : {page : PagesNames}) {
 
     const supabase = supabaseServerClient();
     let profileData;

@@ -1,16 +1,19 @@
 import LessonContainer from "@/components/pages/Home/LessonContainer/LessonContainer";
 import MenuBar from "@/components/global/MenuBar/MenuBar";
 import Image from "next/image";
-import styles from './Explore.module.scss'
+import PageContainer from "@/components/global/PageContainer/PageContainer";
 
 
 
 function Explore() {
+    
     return (
-        <div className={styles.explore}>
+        <PageContainer scrollEnabled={false}>
+
             <LessonContainer />
             <MenuBar page={'explore'}/>
-        </div>
+
+        </PageContainer>
     );
 }
 

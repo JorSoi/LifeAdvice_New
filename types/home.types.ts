@@ -9,7 +9,7 @@ export type Category = {
     category_emoji: string
 }
 
-export type PageOptions = 'explore' | 'topics' | 'stories' | 'profile' | 'default'
+export type PagesNames = 'explore' | 'topics' | 'stories' | 'profile' | 'default'
 
 
 

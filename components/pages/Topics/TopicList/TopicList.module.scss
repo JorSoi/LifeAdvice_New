@@ -2,9 +2,6 @@
 @import '@/scss/mixins';
 
 .topicList {
-    margin: 0px 3%;
-    padding-top: 85px;
-    padding-bottom: 120px;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 20px;

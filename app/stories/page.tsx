@@ -1,15 +1,18 @@
 import MenuBar from "@/components/global/MenuBar/MenuBar";
-import Test from "./test";
+import PageContainer from "@/components/global/PageContainer/PageContainer";
+import styles from './Stories.module.scss'
 
 async function Stories() {
 
 
 
     return (
-        <>
-            <Test />
+        <PageContainer scrollEnabled={false}>
+
             <MenuBar page={'stories'}/>
-        </>
+            
+        </PageContainer>
+      
    
     );
 }

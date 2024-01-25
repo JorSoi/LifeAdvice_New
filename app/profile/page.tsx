@@ -6,7 +6,7 @@ import LessonList from "@/components/pages/Profile/LessonList/LessonList";
 import supabaseServerClient from "@/lib/supabaseServerClient";
 import { redirect } from "next/navigation";
 import SavedLessonsContextProvider from "@/components/global/SavedLessonsContextProvider/SavedLessonsContextProvider";
-import LogoVisibilityContextProvider from "@/components/global/LogoScrollContextProvider/LogoVisibilityContextProvider";
+import PageContainer from "@/components/global/PageContainer/PageContainer";
 
 
 async function Profile() {
@@ -18,16 +18,17 @@ async function Profile() {
     if(!user) redirect('/')
 
     return (
-        <LogoVisibilityContextProvider>
-            
-            <div className={styles.profileContainer}>
+        <PageContainer scrollEnabled={true}>
+
+            <div className={styles.profile}>
                 <SavedLessonsContextProvider user={user}>
                     <ProfileCard />
                     <LessonList user={user}/>
                 </SavedLessonsContextProvider>
             </div>
             <MenuBar page={'profile'} />
-        </LogoVisibilityContextProvider>
+
+        </PageContainer>
     );
 }
 
