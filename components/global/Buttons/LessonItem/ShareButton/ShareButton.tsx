@@ -10,8 +10,22 @@ function ShareButton({lessonId} : {lessonId : number}) {
 
     const {openOverlay} = useContext(OverlayContext) as OverlayContextType;
 
-    const handleClick = () => {
-        openOverlay('socials', lessonId)
+    const handleClick = async () => {
+        if (navigator.share) {
+            try {
+              await navigator.share({
+                title: 'Share this lesson',
+                url: 'https://life-advice-new.vercel.app/'
+              });
+            } catch (error: any) {
+              console.error('Error sharing:', error.message);
+            }
+          } else {
+            // Fallback for browsers that don't support navigator.share
+            openOverlay('socials', lessonId)
+          }
+        
+        
     }
 
     return (
