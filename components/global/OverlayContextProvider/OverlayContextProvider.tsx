@@ -8,7 +8,7 @@ import supabaseBrowserClient from "@/lib/supabaseBrowserClient";
 import CommentLogicWrapper from "../Comments/CommentLogicWrapper/CommentLogicWrapper";
 import SocialShareList from "@/components/pages/Home/SocialShareList/SocialShareList";
 import GeneralSettings from "@/components/pages/Profile/ProfileSettings/GeneralSettings/GeneralSettings";
-import BottomSheetContainer from "../BottomSheetNew/BottomSheetContainer";
+import BottomSheetContainer from "../BottomSheet/BottomSheetContainer";
 import { OverlayNames } from "@/types/home.types";
 import LessonCreator from "../LessonCreator/LessonCreator";
 
