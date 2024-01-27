@@ -11,10 +11,9 @@ function IntroductionScreen({authNavigation} : {authNavigation : any}) {
     const handleGoogleClick = async () => {
         const {data, error} = await supabase.auth.signInWithOAuth({
             provider: 'google',
-            options: {
-                redirectTo: 'http://localhost:3000/'
-            }
         })
+
+        console.log(data, error)
     }
 
     return (
