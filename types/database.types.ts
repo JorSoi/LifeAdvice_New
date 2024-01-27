@@ -204,6 +204,45 @@ export interface Database {
           }
         ]
       }
+      lesson_seen_by: {
+        Row: {
+          created_at: string
+          id: number
+          lesson_id: number
+          profile_id: string | null
+          seen_count: number
+        }
+        Insert: {
+          created_at?: string
+          id?: number
+          lesson_id: number
+          profile_id?: string | null
+          seen_count?: number
+        }
+        Update: {
+          created_at?: string
+          id?: number
+          lesson_id?: number
+          profile_id?: string | null
+          seen_count?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "lesson_seen_by_lesson_id_fkey"
+            columns: ["lesson_id"]
+            isOneToOne: false
+            referencedRelation: "lessons"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "lesson_seen_by_profile_id_fkey"
+            columns: ["profile_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          }
+        ]
+      }
       lesson_upvoted_by: {
         Row: {
           created_at: string
@@ -373,7 +412,13 @@ export interface Database {
       }
       get_random_lessons: {
         Args: Record<PropertyKey, never>
-        Returns: Record<string, unknown>
+        Returns: Json[]
+      }
+      get_random_lessons_by_category: {
+        Args: {
+          category_id: number
+        }
+        Returns: Json[]
       }
       reportComment: {
         Args: {

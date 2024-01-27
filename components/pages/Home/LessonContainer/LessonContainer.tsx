@@ -16,7 +16,7 @@ function LessonContainer({category_id} : {category_id? : number}) {
     const getLessons = async (category_id? : number) => {
         if(!category_id) {
             //Fetch random lessons
-            const {data, error} = await supabase.from('lessons').select(`*, categories(*)`).limit(10)
+            const {data, error} = await supabase.rpc('get_random_lessons')
             if(!error) {
                 setLessonList((prev) : any => [...data, ...prev]);
             } else {
@@ -24,7 +24,7 @@ function LessonContainer({category_id} : {category_id? : number}) {
             }
         } else {
             //Only fetch lessons from specified category
-            const {data, error} = await supabase.from('lessons').select(`*, categories(*)`).eq('category_id', category_id).limit(10)
+            const {data, error} = await supabase.rpc('get_random_lessons_by_category', {category_id})
             if(!error) {
                 setLessonList((prev) : any => [...data, ...prev]);
             } else {
