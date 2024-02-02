@@ -3,6 +3,7 @@
 import supabaseBrowserClient from '@/lib/supabaseBrowserClient';
 import styles from './IntroductionScreen.module.scss'
 import Image from 'next/image';
+import getCurrentRootURL from '@/lib/getCurrentRootURL';
 
 function IntroductionScreen({authNavigation} : {authNavigation : any}) {
 
@@ -11,6 +12,9 @@ function IntroductionScreen({authNavigation} : {authNavigation : any}) {
     const handleGoogleClick = async () => {
         const {data, error} = await supabase.auth.signInWithOAuth({
             provider: 'google',
+            options: {
+                redirectTo: getCurrentRootURL(),
+            }
         })
 
         console.log(data, error)
