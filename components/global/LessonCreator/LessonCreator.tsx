@@ -9,10 +9,12 @@ import Image from 'next/image';
 import { OverlayContext } from '@/lib/contexts';
 import { OverlayContextType } from '@/types/home.types';
 import { useRouter } from 'next/navigation';
+import usePlaceholderAnimation from '@/hooks/usePlaceholderAnimation';
 
 function LessonCreator({user} : {user : any}) {
 
     const [isLoading, setIsLoading] = useState<boolean>(false);
+    const animatedPlaceholderText = usePlaceholderAnimation(['A thing you wish you had known earlier', 'An advice you would give to your past self', 'A lifehack which has proven handy to you', 'A mistake you want to warn others about'])
     const supabase = supabaseBrowserClient();
     const {closeOverlay} = useContext(OverlayContext) as OverlayContextType
     const router = useRouter();
@@ -39,7 +41,7 @@ function LessonCreator({user} : {user : any}) {
             }
         },
         validationSchema: Yup.object().shape({
-            lesson: Yup.string().min(30, 'Your lesson needs to be at least 30 characters long').max(maxLength, 'Your lesson is too long, make sure it is bite-sized').required('Your lesson needs to be at least 30 characters long'),
+            lesson: Yup.string().min(30, 'Your own lesson should be at least 30 characters long').max(maxLength, 'Your lesson is too long, make sure it is bite-sized').required('Your own lesson should be at least 30 characters long'),
             category: Yup.number().notOneOf([-1], 'Please select a topic before submitting').required('Please choose a category for your lesson'),
         })
     })
@@ -54,7 +56,7 @@ function LessonCreator({user} : {user : any}) {
                 <textarea 
                     name={'lesson'}
                     className={styles.textArea} 
-                    placeholder='Tell us about your personal lesson' 
+                    placeholder={animatedPlaceholderText} 
                     value={formik.values.lesson} 
                     onChange={formik.handleChange} 
                     onBlur={formik.handleBlur}
