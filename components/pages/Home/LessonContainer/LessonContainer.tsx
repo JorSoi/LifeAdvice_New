@@ -11,6 +11,8 @@ function LessonContainer({category_id} : {category_id? : number}) {
 
     const [lessonList, setLessonList] = useState<Lesson[]>([])
     const [user, setUser] = useState<{} | null>(null);
+    const [hasSeenSpotlightedLesson, setHasSeenSpotlightedLesson] = useState(false);
+    const spotlight_lesson_id : number  | undefined = typeof window !== 'undefined' && window.location.hash ? Number(window.location.hash.split('=')[1]) : undefined;
     const supabase = supabaseBrowserClient();
 
     const getLessons = async (category_id? : number) => {
@@ -31,9 +33,18 @@ function LessonContainer({category_id} : {category_id? : number}) {
                 console.log(error)
             }
         }
-        
-    }
 
+        if(spotlight_lesson_id && !hasSeenSpotlightedLesson) {
+            //Fetch specific lesson to be on top of the rest if its mentioned in the url params
+            const {data, error} = await supabase.from('lessons').select(`*, categories(*), profiles(avatars(*))`).eq('id', spotlight_lesson_id).single();
+            if(!error) {
+                setLessonList((prev) : any => [...prev, data]);
+                setHasSeenSpotlightedLesson(true)
+            } else {
+                console.log(error)
+            }
+        }
+    }
 
 
     //Called after lesson has been swiped
@@ -50,6 +61,8 @@ function LessonContainer({category_id} : {category_id? : number}) {
             getLessons(category_id);
         }
         
+        console.log(lessonList)
+
     }, [lessonList])
 
     useEffect(() => {
@@ -64,13 +77,10 @@ function LessonContainer({category_id} : {category_id? : number}) {
       getUser();
       }, [])
 
-      useEffect(() => {
-        console.log(lessonList)
-      }, [lessonList])
-
     return (
         <div className={styles.lessonContainer}>
             {
+                    //Last items of lessonList will always be seen first, since we want to take advantage of the default z-index behavior (lowest item in the list has higher z-index prio).
                     lessonList.map((lesson, i) => {
                         
                         return <LessonItem key={i} lesson={lesson} index={i} removeLessonFromList={removeLessonFromList} user={user} draggable={true} />

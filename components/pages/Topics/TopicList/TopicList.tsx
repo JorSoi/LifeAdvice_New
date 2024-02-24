@@ -51,8 +51,8 @@ function TopicList() {
             <Link href={'topics/6'}>
                 <div className={`${styles.card} ${styles.travel}`}>
                     <h2>Travel and Adventures</h2>
-                    <CategoryIcon categoryName={'Travel'} />
                     <Image src={'/topic-banners/travel.svg'} width={110} height={110} priority={true} alt=''/>
+                    <CategoryIcon categoryName={'Travel'} />
                 </div>
             </Link>
             <Link href={'topics/7'}>

@@ -1,6 +1,5 @@
 import LessonContainer from "@/components/pages/Home/LessonContainer/LessonContainer";
 import MenuBar from "@/components/global/MenuBar/MenuBar";
-import Image from "next/image";
 import PageContainer from "@/components/global/PageContainer/PageContainer";
 
 

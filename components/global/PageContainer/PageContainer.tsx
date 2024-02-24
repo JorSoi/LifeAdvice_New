@@ -1,10 +1,9 @@
 'use client'
 
 import { useRef, useState } from "react";
-import LogoHeading from "../PageHeading/PageHeading";
-import SettingsButton from "@/components/pages/Profile/SettingsButton/SettingsButton";
 import styles from './PageContainer.module.scss'
-import PageHeading from "../PageHeading/PageHeading";
+import PageHeading from "../PageHeading/PageHeading"
+import getCurrentRootURL from "@/lib/getCurrentRootURL";
 
 
 
@@ -13,6 +12,7 @@ function PageContainer({scrollEnabled, children} : {scrollEnabled : boolean, chi
 
     const [isPageHeaderVisible, setIsPageHeaderVisible] = useState<boolean>(true);
     const pageContainerRef = useRef<HTMLDivElement>(null);
+    console.log(getCurrentRootURL())
 
     const handleScroll = () => {
         if (!pageContainerRef.current) return;

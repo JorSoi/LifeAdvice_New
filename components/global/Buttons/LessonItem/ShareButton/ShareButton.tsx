@@ -5,6 +5,7 @@ import styles from './ShareButton.module.scss'
 import { OverlayContext } from '@/lib/contexts';
 import { useContext } from 'react';
 import { OverlayContextType } from '@/types/home.types';
+import getCurrentRootURL from '@/lib/getCurrentRootURL';
 
 function ShareButton({lessonId} : {lessonId : number}) {
 
@@ -15,7 +16,7 @@ function ShareButton({lessonId} : {lessonId : number}) {
             try {
               await navigator.share({
                 title: 'Share this lesson',
-                url: 'https://life-advice-new.vercel.app/'
+                url: getCurrentRootURL()+`#lesson=${lessonId}`
               });
             } catch (error: any) {
               console.error('Error sharing:', error.message);
