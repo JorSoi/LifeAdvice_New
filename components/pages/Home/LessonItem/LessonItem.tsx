@@ -92,11 +92,6 @@ function LessonItem ({lesson, index, removeLessonFromList, user, isDraggable} : 
       }
     } 
 
-    useEffect(() => {
-      if(index == 0 && cardRef.current) {
-        cardRef.current.style.boxShadow = '0px 4px 15px 6px rgba(129, 102, 61, 0.03)'
-      }
-    }, [index])
 
   return (
     <div 

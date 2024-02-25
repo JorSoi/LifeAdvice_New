@@ -18,36 +18,9 @@
 .active {
     border: 2.2px solid #F4801C;
     background-color: #F4801C2B;
+    will-change: transform, opacity;
+
     svg {
-        animation: heartBeat 1.2s both cubic-bezier(0.45, 0.05, 0.55, 0.95);
-    }
-}
-
-@keyframes heartBeat {
-    0% {
-        -webkit-transform: scale(0);
-        transform: scale(0)
-    }
-
-    15% {
-        -webkit-transform: scale(1.6);
-        transform: scale(1.6)
-    }
-
-    32% {
-        -webkit-transform: scale(0.8);
-        transform: scale(0.8)
-    }
-
-    50% {
-        -webkit-transform: scale(1);
-        transform: scale(1);
-        opacity: 1
-    }
-
-    to {
-        -webkit-transform: scale(1);
-        transform: scale(1);
-        opacity: 1
+        @include keyframes ('heartBeat')
     }
 }
