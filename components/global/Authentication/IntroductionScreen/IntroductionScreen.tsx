@@ -13,7 +13,7 @@ function IntroductionScreen({authNavigation} : {authNavigation : any}) {
         const {data, error} = await supabase.auth.signInWithOAuth({
             provider: 'google',
             options: {
-                redirectTo: getCurrentRootURL(),
+                redirectTo: `${getCurrentRootURL()}/redirect`,
             }
         })
 

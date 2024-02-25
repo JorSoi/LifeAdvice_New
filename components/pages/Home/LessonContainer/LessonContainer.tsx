@@ -28,7 +28,7 @@ function LessonContainer({category_id} : {category_id? : number}) {
             //Only fetch lessons from specified category
             const {data, error} = await supabase.rpc('get_random_lessons_by_category', {category_id})
             if(!error) {
-                setLessonList((prev) : any => [...data, ...prev]);
+                data.length !== 0 ? setLessonList((prev) : any => [...data, ...prev]) : null;
             } else {
                 console.log(error)
             }

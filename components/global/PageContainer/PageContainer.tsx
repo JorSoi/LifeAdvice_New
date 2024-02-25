@@ -1,9 +1,8 @@
 'use client'
 
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import styles from './PageContainer.module.scss'
 import PageHeading from "../PageHeading/PageHeading"
-import getCurrentRootURL from "@/lib/getCurrentRootURL";
 
 
 
@@ -12,7 +11,6 @@ function PageContainer({scrollEnabled, children} : {scrollEnabled : boolean, chi
 
     const [isPageHeaderVisible, setIsPageHeaderVisible] = useState<boolean>(true);
     const pageContainerRef = useRef<HTMLDivElement>(null);
-    console.log(getCurrentRootURL())
 
     const handleScroll = () => {
         if (!pageContainerRef.current) return;
@@ -25,6 +23,15 @@ function PageContainer({scrollEnabled, children} : {scrollEnabled : boolean, chi
             setIsPageHeaderVisible(true)
         }
     }
+
+
+    // Check if user is coming from oAuth and conduct hard refresh to bring all UI components (especially the MenuBar) to the correct state.
+    useEffect(() => {
+        if(Boolean(sessionStorage.getItem('OAuthRedirection'))){
+            sessionStorage.removeItem('OAuthRedirection')
+            window.location.reload();
+        }
+    }, [])
 
     return (
             <div ref={pageContainerRef} className={`${styles.pageContainer} ${scrollEnabled ? styles.scrollable : null}`} onScroll={scrollEnabled ? handleScroll : undefined}>
