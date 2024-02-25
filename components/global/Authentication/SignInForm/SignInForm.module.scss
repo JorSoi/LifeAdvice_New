@@ -16,6 +16,10 @@
 .submit {
     @include Button('dark');
     flex-grow: 1;
+
+    &[error] {
+        @include keyframes ('wiggle');
+    }
 }
 
 .register {
@@ -32,16 +36,15 @@
     }
 }
 
-.passwordWrapper {
-    position: relative;
-}
-
 .forgotPassword {
-    position: absolute;
-    z-index: 9999;
-    bottom: -5px;
-    right: 0px;
-    font-size: 0.8rem;
-    text-decoration: underline;
-    color: $navy-primary;
+    @include flex-c-c;
+    justify-content: left;
+    gap: 7px;
+    margin-top: -15px;
+    padding: 15px;
+    border-radius: 9px;
+    background-color: #FDEDDF;
+    color: $orange-primary;
+    font-weight: 470;
+    cursor: pointer;
 }

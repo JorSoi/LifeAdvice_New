@@ -8,14 +8,14 @@ import { OverlayContext } from '@/lib/contexts'
 import { OverlayContextType } from '@/types/home.types'
 import Image from 'next/image'
 
-export default function BottomSheetContainer({title, isOpen, children} : { title : string, isOpen : boolean, children: React.ReactNode}) {
+export default function BottomSheetContainer({title, isOpen, isDismissable = true, children} : { title : string, isOpen : boolean, isDismissable? : boolean, children: React.ReactNode}) {
   
   const {closeOverlay} = useContext(OverlayContext) as OverlayContextType
 
   return (
     <BottomSheet 
       open={isOpen}
-      onDismiss={() => closeOverlay()}
+      onDismiss={isDismissable ? () => closeOverlay() : undefined}
       initialFocusRef={false}
       scrollLocking={true}
       expandOnContentDrag={true}

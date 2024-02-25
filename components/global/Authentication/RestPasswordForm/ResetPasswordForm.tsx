@@ -10,6 +10,7 @@ import styles from './ResetPasswordForm.module.scss'
 import { useContext, useEffect, useState } from "react";
 import { AuthNavigation, OverlayContextType, settingsNavigation } from "@/types/home.types";
 import { OverlayContext } from "@/lib/contexts";
+import getCurrentRootURL from "@/lib/getCurrentRootURL";
 
 function ResetPasswordForm({authNavigation, settingsNavigation, user} : {authNavigation? : AuthNavigation, settingsNavigation? : settingsNavigation, user? : any}) {
 
@@ -30,7 +31,7 @@ function ResetPasswordForm({authNavigation, settingsNavigation, user} : {authNav
         }),
         onSubmit: async () => {
             setIsLoading(true)
-            const {data, error} = await supabase.auth.resetPasswordForEmail(formik.values.email, {redirectTo: 'http://localhost:3000'});
+            const {data, error} = await supabase.auth.resetPasswordForEmail(formik.values.email, {redirectTo: getCurrentRootURL() + 'new-password'});
             if(!error) {
                 setIsLoading(false);
                 closeOverlay();
