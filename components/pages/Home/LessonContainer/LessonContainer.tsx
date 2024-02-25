@@ -82,8 +82,16 @@ function LessonContainer({category_id} : {category_id? : number}) {
             {
                     //Last items of lessonList will always be seen first, since we want to take advantage of the default z-index behavior (lowest item in the list has higher z-index prio).
                     lessonList.map((lesson, i) => {
+                        let isDraggable : boolean;
+
+                        //Only the top-item of the stack is swipeable. Swiping is shortly disabled, when new lessons are fetched to prevent swiping the wrong lesson before lessonList is again populated with the new lesson items.
+                        if(i == lessonList.length-1 && lessonList.length >= 3) {
+                            isDraggable = true;
+                        } else {
+                            isDraggable = false;
+                        }
                         
-                        return <LessonItem key={i} lesson={lesson} index={i} removeLessonFromList={removeLessonFromList} user={user} draggable={true} />
+                        return <LessonItem key={i} lesson={lesson} index={i} removeLessonFromList={removeLessonFromList} user={user} isDraggable={isDraggable} />
                     }) 
                 }
             

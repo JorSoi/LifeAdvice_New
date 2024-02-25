@@ -71,7 +71,7 @@ function LessonList({user} : {user: any}) {
                     lessonList?.map((lesson, index) => {
                     return (
                         <div key={lesson.id} className={styles.lessonContainer}>
-                            <LessonItem lesson={lesson} index={index} removeLessonFromList={() => {}} user={user} draggable={false}/>
+                            <LessonItem lesson={lesson} index={index} removeLessonFromList={() => {}} user={user} isDraggable={false}/>
                         </div>
                     )
                     })

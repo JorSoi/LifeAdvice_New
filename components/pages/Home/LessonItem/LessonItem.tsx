@@ -8,12 +8,11 @@ import CommentButton from '@/components/global/Buttons/LessonItem/CommentButton/
 import LikeButton from '@/components/global/Buttons/LessonItem/LikeButton/LikeButton';
 import ShareButton from '@/components/global/Buttons/LessonItem/ShareButton/ShareButton';
 import CategoryItem from '@/components/global/CategoryIcon/CategoryIcon';
-import supabaseBrowserClient from '@/lib/supabaseBrowserClient';
 
 
-function LessonItem ({lesson, index, removeLessonFromList, user, draggable} : {lesson: Lesson, index: number, removeLessonFromList: (idToRemove : number) => void, user : {} | null, draggable : boolean }) {
+function LessonItem ({lesson, index, removeLessonFromList, user, isDraggable} : {lesson: Lesson, index: number, removeLessonFromList: (idToRemove : number) => void, user : {} | null, isDraggable : boolean }) {
 
-    const [isDragging, setIsDragging] = useState<boolean>(false);
+    const [isCurrentlyDragging, setIsCurrentlyDragging] = useState<boolean>(false);
     const cardRef = useRef<HTMLDivElement | null>(null);
     const [x, setX] = useState<number>(0)
     const [y, setY] = useState<number>(0)
@@ -26,7 +25,7 @@ function LessonItem ({lesson, index, removeLessonFromList, user, draggable} : {l
 
 
     const handlePointerDown = (e: React.MouseEvent | React.TouchEvent) : void => {
-      setIsDragging(true);
+      setIsCurrentlyDragging(true);
 
       if (cardRef.current) {
         cardRef.current.style.transition = 'none'; //resets prior transition settings to enable smooth drag functionality.
@@ -40,7 +39,7 @@ function LessonItem ({lesson, index, removeLessonFromList, user, draggable} : {l
   
     const handlePointerMove = (e: React.MouseEvent | React.TouchEvent) : void=> {
 
-      if (isDragging && cardRef.current && initialPointerPosition) {
+      if (cardRef.current && isCurrentlyDragging && initialPointerPosition) {
 
         if(e.type == 'touchmove') {
           setX(() => (e as React.TouchEvent).touches[0].clientX - initialPointerPosition.x );
@@ -59,7 +58,7 @@ function LessonItem ({lesson, index, removeLessonFromList, user, draggable} : {l
     };
    
     const handlePointerUp = () => {
-      setIsDragging(false);
+      setIsCurrentlyDragging(false);
 
       if(distanceFromCenter > swipeThreshold) {
         executeSwipe('right');
@@ -89,7 +88,7 @@ function LessonItem ({lesson, index, removeLessonFromList, user, draggable} : {l
         //Wait before removing the lesson from lessonList, to finish animation
         setTimeout(() => {
           removeLessonFromList(lesson.id)
-        }, 300)
+        }, 240)
       }
     } 
 
@@ -103,16 +102,16 @@ function LessonItem ({lesson, index, removeLessonFromList, user, draggable} : {l
     <div 
       ref={cardRef} 
       className={styles.lessonItem} 
-      style={draggable ? {
-        transform: `translateX(${x}px) translateY(${0}px) rotate(${rotation}deg)`} : {}} //to enable vertical dragging, set translateY to "y"px.
-      onMouseDown={handlePointerDown} 
-      onMouseMove={handlePointerMove} 
-      onMouseUp={handlePointerUp} 
-      onMouseLeave={handlePointerUp}
-      onTouchStart={handlePointerDown}
-      onTouchMove={handlePointerMove}
-      onTouchEnd={handlePointerUp}
-      onTouchCancel={handlePointerUp}
+      style={{
+        transform: `translateX(${x}px) translateY(${0}px) rotate(${rotation}deg)`}} //to enable vertical dragging, set translateY to "y"px.
+      onMouseDown={isDraggable ? handlePointerDown : undefined} 
+      onMouseMove={isDraggable ? handlePointerMove : undefined} 
+      onMouseUp={isDraggable ? handlePointerUp : undefined} 
+      onMouseLeave={isDraggable ? handlePointerUp : undefined}
+      onTouchStart={isDraggable ? handlePointerDown : undefined}
+      onTouchMove={isDraggable ? handlePointerMove : undefined}
+      onTouchEnd={isDraggable ? handlePointerUp : undefined}
+      onTouchCancel={isDraggable ? handlePointerUp : undefined}
     > 
     <div className={styles.headerWrapper}>
       <ShareButton lessonId={lesson.id} />
