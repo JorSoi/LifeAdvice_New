@@ -37,7 +37,7 @@ function CommentItem({comment, initiateReply, removeFromCommentList, user} : {co
         <div className={styles.commentItem}>
             <Image src={comment.profiles.avatars.avatar_url} width={35} height={35} alt='User Avatar' priority={true} />
             <div className={styles.contentContainer}>
-                <h5 className={styles.userName}>{comment.profiles.user_name}</h5>
+                <h5 className={styles.userName}>{comment.profiles.user_name} {comment.profiles.id == user.id ? '(You)' : null}</h5>
                 <p className={styles.comment}>{comment.content}</p>
                 <div className={styles.metadataWrapper}>
                     <p className={styles.creationDate}>{getElapsedTime(comment.created_at)}</p>
