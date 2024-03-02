@@ -7,10 +7,18 @@
     padding-bottom: 15px;
 }
 
+.passwordWrapper {
+    position: relative;
+}
+
 .inputField {
     @include Input-Field('outline');
     transition: all 0.3s;
     outline: none;
+}
+
+.password {
+    padding-right: 50px;
 }
 
 .error {
@@ -31,4 +39,14 @@
 .active {
     bottom: -5px;
     opacity: 1;
+}
+
+.eye {
+    @include flex-c-c;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    height: 100%;
+    padding: 0px 20px;
+    cursor: pointer;
 }

@@ -17,10 +17,9 @@ function SettingsOverview({settingsNavigation} : {settingsNavigation : settingsN
     const handleSignOut = async () => {
         const {error} = await supabase.auth.signOut();
         if(!error) {
-            closeOverlay();
             location.reload(); //Can't use router since it doesnt refresh the "user" state on the top-layout. The state affects various components (especially related to comment-section) which is why I decided to use a hard-refresh instead of utilizing useRouter.
         } else {
-            alert('couldnt sign out:' + error.message)
+            alert('Something went wrong: Reload page and try again')
         }
     }
 
