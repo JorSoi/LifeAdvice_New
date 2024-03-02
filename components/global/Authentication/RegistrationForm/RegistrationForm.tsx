@@ -18,7 +18,6 @@ function RegistrationForm({authNavigation} : {authNavigation : any}) {
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const supabase = supabaseBrowserClient();
     const {closeOverlay} = useContext(OverlayContext) as OverlayContextType
-    const router = useRouter();
 
     const formik = useFormik({
         initialValues: {

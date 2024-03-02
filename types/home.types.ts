@@ -70,7 +70,7 @@ export interface OverlayContextType {
     closeOverlay: () => void
 }
 
-export type OverlayNames = 'authentication' | 'avatars' | 'comments' | 'socials' | 'general-settings' | 'lesson-creator' | ''
+export type OverlayNames = 'authentication' | 'avatars' | 'comments' | 'socials' | 'general-settings' | 'lesson-creator' | 'user-name-setup' | ''
 
 export interface SavedLessonsContextType {
     setSelected : Dispatch<SetStateAction<"bookmarked" | "liked" | "created">>

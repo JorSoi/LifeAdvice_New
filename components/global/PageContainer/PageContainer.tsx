@@ -1,8 +1,11 @@
 'use client'
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useContext } from "react";
 import styles from './PageContainer.module.scss'
 import PageHeading from "../PageHeading/PageHeading"
+import { OverlayContext } from "@/lib/contexts";
+import supabaseBrowserClient from "@/lib/supabaseBrowserClient";
+import { OverlayContextType } from "@/types/home.types";
 
 
 
@@ -11,6 +14,9 @@ function PageContainer({scrollEnabled, children} : {scrollEnabled : boolean, chi
 
     const [isPageHeaderVisible, setIsPageHeaderVisible] = useState<boolean>(true);
     const pageContainerRef = useRef<HTMLDivElement>(null);
+    const supabase = supabaseBrowserClient();
+
+    const {openOverlay} = useContext(OverlayContext) as OverlayContextType;
 
     const handleScroll = () => {
         if (!pageContainerRef.current) return;
@@ -25,12 +31,27 @@ function PageContainer({scrollEnabled, children} : {scrollEnabled : boolean, chi
     }
 
 
-    // Check if user is coming from oAuth and conduct hard refresh to bring all UI components (especially the MenuBar) to the correct state.
     useEffect(() => {
+        // Check if user is coming from oAuth and conduct hard refresh to bring all UI components (especially the MenuBar) to the correct state.
         if(Boolean(sessionStorage.getItem('OAuthRedirection'))){
             sessionStorage.removeItem('OAuthRedirection')
             window.location.reload();
         }
+
+        //Check if user has no username yet (when registering with Google) and force user to set username
+        const getUserName = async () => {
+            const {data : {session}, error} = await supabase.auth.getSession()
+            const user = session?.user
+            if(!error && user) {
+                const {data : profile, error} = await supabase.from('profiles').select().eq('id', user.id).maybeSingle();
+                const userName = profile?.user_name;
+
+                if(!userName) openOverlay('user-name-setup');
+            } else if (error) {
+                console.log(error)
+            }
+        }
+        getUserName();
     }, [])
 
     return (

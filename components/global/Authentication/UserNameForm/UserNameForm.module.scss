@@ -1,7 +1,8 @@
 @import '@/scss/variables';
 @import '@/scss/mixins';
 
-.resetPasswordForm {
+
+.userNameForm {
     display: flex;
     flex-direction: column;
     gap: 12px;
@@ -22,4 +23,8 @@
 .submit {
     @include Button('dark');
     flex-grow: 1;
+
+    &[error] {
+        @include keyframes ('wiggle');
+    }
 }

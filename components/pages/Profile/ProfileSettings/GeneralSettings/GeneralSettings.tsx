@@ -49,7 +49,7 @@ function GeneralSettings({user} : { user : any }) {
             {path == 'feedback-form' && <FeedbackForm user={user} settingsNavigation={settingsNavigation}/>}
             {path == 'notifications' && <NotificationForm user={user} settingsNavigation={settingsNavigation}/>}
             {path == 'password-change' && <ResetPasswordForm settingsNavigation={settingsNavigation} user={user.email}/>}
-            {path == 'danger-zone' && <DangerZone settingsNavigation={settingsNavigation} user={user}/>}
+            {path == 'danger-zone' && <DangerZone settingsNavigation={settingsNavigation} />}
         </div>
     );
 }

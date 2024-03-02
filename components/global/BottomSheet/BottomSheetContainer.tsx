@@ -30,7 +30,7 @@ export default function BottomSheetContainer({title, isOpen, isDismissable = tru
           <div className={styles.gripHandle}></div>
           <div className={styles.titleWrapper}>
             <h3>{title}</h3>
-            <div className={styles.closeButton} onClick={() => closeOverlay()}>
+            <div className={styles.closeButton} onClick={() => isDismissable ? closeOverlay() : null}>
                 <Image src={'/icons/closeSheet-icon.svg'} width={12} height={10} alt='' />
             </div>
           </div>

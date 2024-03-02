@@ -7,7 +7,7 @@ import { useRouter } from 'next/navigation';
 import { useContext } from 'react';
 import { OverlayContext } from '@/lib/contexts';
 
-function DangerZone({settingsNavigation, user} : {settingsNavigation : settingsNavigation, user : any}) {
+function DangerZone({settingsNavigation} : {settingsNavigation : settingsNavigation}) {
 
     const supabase = supabaseBrowserClient();
     const router = useRouter();
@@ -17,8 +17,9 @@ function DangerZone({settingsNavigation, user} : {settingsNavigation : settingsN
         let hasConfirmed = confirm('By deleting your account, you will lose all your saved and created lectures. This action cannot be undone.')
 
         if (hasConfirmed) {
-            let { data, error } = await supabase.rpc('deleteUser')
+            const { error } = await supabase.rpc('deleteUser')
             if (!error) {
+                await supabase.auth.signOut(); //Removes all remaining session cookies.
                 router.refresh();
                 closeOverlay();
             } else {

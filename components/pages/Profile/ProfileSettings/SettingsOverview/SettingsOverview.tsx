@@ -4,14 +4,12 @@ import styles from './SettingsOverview.module.scss'
 import Image from 'next/image';
 import supabaseBrowserClient from '@/lib/supabaseBrowserClient';
 import { useContext } from 'react';
-import { useRouter } from 'next/navigation';
 import { OverlayContext } from '@/lib/contexts';
 import { OverlayContextType, settingsNavigation } from '@/types/home.types';
 
 function SettingsOverview({settingsNavigation} : {settingsNavigation : settingsNavigation}) {
 
     const supabase = supabaseBrowserClient();
-    const router = useRouter();
 
     const {closeOverlay} = useContext(OverlayContext) as OverlayContextType
 

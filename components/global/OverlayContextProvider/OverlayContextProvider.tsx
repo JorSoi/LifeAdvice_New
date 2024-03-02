@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { OverlayContext } from "@/lib/contexts";
+import { OverlayNames } from "@/types/home.types";
 import AuthLogicWrapper from "../Authentication/AuthLogicWrapper/AuthLogicWrapper";
 import AvatarList from "@/components/pages/Profile/AvatarList/AvatarList";
 import supabaseBrowserClient from "@/lib/supabaseBrowserClient";
@@ -9,8 +10,8 @@ import CommentLogicWrapper from "../Comments/CommentLogicWrapper/CommentLogicWra
 import SocialShareList from "@/components/pages/Home/SocialShareList/SocialShareList";
 import GeneralSettings from "@/components/pages/Profile/ProfileSettings/GeneralSettings/GeneralSettings";
 import BottomSheetContainer from "../BottomSheet/BottomSheetContainer";
-import { OverlayNames } from "@/types/home.types";
 import LessonCreator from "../LessonCreator/LessonCreator";
+import UserNameForm from "../Authentication/UserNameForm/UserNameForm";
 
 
 // This component wraps around the entire application. Calling openOverlay(name) from the context anywhere within the application will open the requested Overlay without the need for extensive prop-drilling.
@@ -70,6 +71,10 @@ function OverlayContextProvider({children} : { children: React.ReactNode }) {
 
             <BottomSheetContainer isOpen={overlayName == 'lesson-creator'} title="Share your life lesson">
                 <LessonCreator user={user} />
+            </BottomSheetContainer>
+
+            <BottomSheetContainer isOpen={overlayName == 'user-name-setup'} title="You're almost done!" isDismissable={false}>
+                <UserNameForm user={user}/>
             </BottomSheetContainer>
 
         </OverlayContext.Provider>

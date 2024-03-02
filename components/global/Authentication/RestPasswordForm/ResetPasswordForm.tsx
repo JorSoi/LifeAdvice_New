@@ -17,7 +17,6 @@ function ResetPasswordForm({authNavigation, settingsNavigation, user} : {authNav
     const [initialValue, setInitialValue] = useState<string>('');
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const {closeOverlay} = useContext(OverlayContext) as OverlayContextType;
-    let test;
 
     const supabase = supabaseBrowserClient();
 
