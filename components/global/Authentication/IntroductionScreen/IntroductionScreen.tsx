@@ -22,7 +22,23 @@ function IntroductionScreen({authNavigation} : {authNavigation : any}) {
 
     return (
         <div className={styles.introductionScreen}>
-            <Image src={'/registration-banner.webp'} className={styles.introductionBanner} width={200} height={200} alt='' priority={true} />
+            <div className={styles.introductionBanner}>
+                <Image className={styles.bannerImage} src={'/banner.webp'} width={200} height={200} alt='' priority={true} />
+                <div className={styles.titleWrapper}>
+                    <h2>Grow together with</h2>
+                    <div className={styles.secondRow}>
+                        <h2>this</h2>
+                        <div className={styles.underlinedText}>
+                            <h2>community!</h2>
+                            <Image src={'/underline.svg'} width={20} height={20} alt=''/>
+                        </div>
+                    </div>
+                </div>
+                <p>Your place to learn and share bite-sized personal lessons, experiences and advices with souls from all over the world.</p>
+
+                <Image className={styles.bannerDecorationLeft} src={'/banner-decoration-fade-left.svg'} width={200} height={200} alt='' />
+                <Image className={styles.bannerDecorationRight} src={'/banner-decoration-fade-right.svg'} width={200} height={200} alt='' />
+            </div>
             <button className={styles.googleButton} onClick={handleGoogleClick}>
                 <Image src={'/social-logos/google-logo.svg'} className={styles.googleLogo} width={20} height={20} alt='' priority={true} />
                 Continue with Google

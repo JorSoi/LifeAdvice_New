@@ -6,7 +6,7 @@ import styles from './StoryBanner.module.scss'
 function StoryBanner() {
     return (
         <div className={styles.storyBanner}>
-            <Image className={styles.bannerImage} src={'/banner-icons.png'} width={200} height={200} alt='' />
+            <Image className={styles.bannerImage} src={'/banner.webp'} width={200} height={200} alt='' />
             <div className={styles.titleWrapper}>
                 <h2>Stories are</h2>
                 <div className={styles.underlinedText}>
