@@ -4,6 +4,7 @@ const usePlaceholderAnimation = (texts : string[]) => {
 
     const [placeholderText, setPlaceholderText] = useState<string>('');
     const [currentTextIndex, setTextIndex] = useState(0);
+    
     const ms = 130 //determines the speed of the animation
     const infiniteLoop = false
 

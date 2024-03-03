@@ -7,7 +7,7 @@
 .lessonCreator {
     @include flex-c-c;
     flex-direction: column;
-    gap: 25px;
+    gap: 27px;
 }
 
 .textAreaWrapper {
@@ -38,7 +38,7 @@
 .errorMessage {
     color: red;
     position: absolute;
-    bottom: -10px;
+    bottom: -13px;
     left: 0px;
     transition: all 0.25s ease-in-out;
     opacity: 0;
@@ -46,7 +46,7 @@
 }
 
 .active {
-    bottom: -15px;
+    bottom: -18px;
     opacity: 1;
 }
 

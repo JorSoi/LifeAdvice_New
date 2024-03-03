@@ -2,24 +2,27 @@
 @import '@/scss/mixins';
 
 .feedbackForm {
-    width: 100%;
-
-    h3 {
-        color: $navy-primary;
-        font-size: 1rem;
-        font-weight: 700;
-        margin-bottom: 7px;
-    }
-
-    p {
-        font-size: 13.8px;
-        color: $grey-primary;
-    }
+    display: flex;
+    flex-direction: column;
+    gap: 27px;
 }
+
+.information {
+    color: $grey-primary;
+    font-size: 0.98rem;
+    line-height: 150%;
+}
+
+.textAreaWrapper {
+    position: relative;
+    width: 100%;
+}
+
+
 
 .textArea {
     width: 100%;
-    height: 200px;
+    height: 280px;
     padding: 20px;
     border-radius: 10px;
     background-color: $input-bg;
@@ -28,12 +31,25 @@
     font-size: 1rem;
     color: $navy-primary;
     line-height: 140%;
-    margin: 21px 0px;
 
     &::placeholder {
-        color: #2d355ba6;
-        font-size: 0.925rem;
+        color: #2d355b67;
     }
+}
+
+.errorMessage {
+    color: red;
+    position: absolute;
+    bottom: -13px;
+    left: 0px;
+    transition: all 0.25s ease-in-out;
+    opacity: 0;
+    font-size: 0.8rem;
+}
+
+.active {
+    bottom: -18px;
+    opacity: 1;
 }
 
 .buttonWrapper {
@@ -41,7 +57,7 @@
     gap: 10px;
 }
 
-.submitButton {
+.submit {
     @include Button('dark');
     transition: opacity 0.3s;
 }
