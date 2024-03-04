@@ -26,13 +26,8 @@
 
 [data-rsbs-overlay],
 [data-rsbs-root]:after {
-  max-width: auto;
-  max-width: var(--rsbs-max-w,auto);
-  margin-left: env(safe-area-inset-left);
-  margin-left: var(--rsbs-ml,env(safe-area-inset-left));
-  margin-right: env(safe-area-inset-right);
-  margin-right: var(--rsbs-mr,env(safe-area-inset-right));
-
+  max-width: 1200px;//Custom styling to ensure that bottomsheet is properly centered on desktop viewports.
+  margin: 0 auto; //Custom styling to ensure that bottomsheet is properly centered on desktop viewports.
 }
 
 

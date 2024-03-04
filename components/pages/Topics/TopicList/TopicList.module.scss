@@ -29,6 +29,7 @@
         font-weight: 700;
         position: relative;
         z-index: 1;
+        max-width: 170px;
     }
 
     img {
@@ -95,3 +96,30 @@
 }
 
 
+@media (min-width: 690px) {
+
+    .topicList {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .card {
+        h2 {
+            font-size: 1.32rem;
+        }
+
+        img {
+            width: 110px;
+            height: auto;
+        }
+    }
+}
+
+
+@media (min-width: 1000px) {
+
+    .card {
+        img {
+            width: 130px;
+        }
+    }
+}

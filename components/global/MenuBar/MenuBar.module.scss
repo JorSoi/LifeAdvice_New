@@ -7,11 +7,13 @@
     left: 0px;
     right: 0px;
     z-index: 11;
+    max-width: 1200px;
     width: 100%;
     height: fit-content;
     background-color: $orange-background;
     display: flex;
     justify-content: center;
+    margin: 0 auto; //Ensures that MenuBar is centered for desktop view
 }
 
 .menuBar {

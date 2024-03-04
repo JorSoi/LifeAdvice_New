@@ -145,17 +145,6 @@
 }
 
 
-
-
-
-
-@media (min-width: 425px) {
-
-    .storyBanner{
-        padding: 140px 15px 20px 15px;
-    } 
-}
-
 @media (max-width: 350px) {
 
     .introductionBanner {
@@ -165,3 +154,18 @@
         }
     }
 }
+
+@media (min-width: 425px) {
+
+    .introductionBanner{
+        padding: 140px 15px 20px 15px;
+    } 
+}
+
+@media (min-width: 560px) {
+
+    .introductionBanner{
+        display: none;
+    } 
+}
+
