@@ -20,7 +20,7 @@ export interface CommentData {
     upvotes: number;
     created_at: string;
     profiles: {
-        id: number;
+        id: string;
         user_name: string;
         avatars: {
             avatar_url: string;
