@@ -117,7 +117,7 @@ function LessonItem ({lesson, index, removeLessonFromList, user, isDraggable} : 
       <CategoryItem categoryName={lesson.categories.category_name} />
     </div>
       
-      <p className={styles.lessonContent}>"{lesson.lesson}"</p>
+      <h2 className={styles.lessonContent}>"{lesson.lesson}"</h2>
       
       <div className={styles.buttonWrapper}>
         <BookmarkButton lessonId={lesson.id} user={user}/>

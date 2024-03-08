@@ -35,15 +35,16 @@ function OverlayContextProvider({children} : { children: React.ReactNode }) {
 
     useEffect(() => {
         const getUser = async () => {
-            const {data: {user}, error} = await supabase.auth.getUser();
-            if(!error) {
+            const {data : {session}, error} = await supabase.auth.getSession()
+            const user = session?.user
+            if(!error && user) {
                 setUser(user)
-            } else {
+            } else if (error) {
                 console.log(error)
             }
-        }
-        getUser();
-    }, [])
+      }
+      getUser();
+      }, [])
 
     return (
         <OverlayContext.Provider value={{openOverlay: openOverlay, closeOverlay: closeOverlay}}>

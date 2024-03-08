@@ -67,12 +67,13 @@ function LessonContainer({category_id} : {category_id? : number}) {
 
     useEffect(() => {
         const getUser = async () => {
-          const {data: {user}, error} = await supabase.auth.getUser();
-          if(!error) {
-              setUser(user)
-          } else {
-              console.log(error)
-          }
+            const {data : {session}, error} = await supabase.auth.getSession()
+            const user = session?.user
+            if(!error && user) {
+                setUser(user)
+            } else if (error) {
+                console.log(error)
+            }
       }
       getUser();
       }, [])
