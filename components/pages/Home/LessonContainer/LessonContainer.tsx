@@ -36,7 +36,7 @@ function LessonContainer({category_id} : {category_id? : number}) {
 
         if(spotlight_lesson_id && !hasSeenSpotlightedLesson) {
             //Fetch specific lesson to be on top of the rest if its mentioned in the url params
-            const {data, error} = await supabase.from('lessons').select(`*, categories(*), profiles(avatars(*))`).eq('id', spotlight_lesson_id).single();
+            const {data, error} = await supabase.from('lessons').select(`*, categories(*), profiles(user_name)`).eq('id', spotlight_lesson_id).single();
             if(!error) {
                 setLessonList((prev) : any => [...prev, data]);
                 setHasSeenSpotlightedLesson(true)

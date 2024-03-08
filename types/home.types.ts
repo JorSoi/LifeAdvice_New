@@ -43,6 +43,9 @@ export type Lesson = {
     id: number
     lesson: string
     profile_id: string | null
+    profiles: {
+        user_name : string | null
+    }
     upvotes: number
 }
 

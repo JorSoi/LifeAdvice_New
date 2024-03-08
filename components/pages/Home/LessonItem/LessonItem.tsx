@@ -10,7 +10,7 @@ import ShareButton from '@/components/global/Buttons/LessonItem/ShareButton/Shar
 import CategoryItem from '@/components/global/CategoryIcon/CategoryIcon';
 
 
-function LessonItem ({lesson, index, removeLessonFromList, user, isDraggable} : {lesson: Lesson, index: number, removeLessonFromList: (idToRemove : number) => void, user : {} | null, isDraggable : boolean }) {
+function LessonItem ({lesson, index, removeLessonFromList, user, isDraggable} : {lesson: Lesson, index: number, removeLessonFromList: (idToRemove : number) => void, user : any | null, isDraggable : boolean }) {
 
     const [isCurrentlyDragging, setIsCurrentlyDragging] = useState<boolean>(false);
     const cardRef = useRef<HTMLDivElement | null>(null);
@@ -110,7 +110,10 @@ function LessonItem ({lesson, index, removeLessonFromList, user, isDraggable} : 
     > 
     <div className={styles.headerWrapper}>
       <ShareButton lessonId={lesson.id} />
-      <p className={styles.lessonCredentials}><span>Learned by </span>{lesson.author}</p>
+      <p className={styles.lessonCredentials}>
+        <span>Learned by </span>
+        {lesson.profiles.user_name ? `${lesson.profiles.user_name} ${lesson.profile_id === user.id ? '(You)' : ''}` : 'Anonymous User'}
+      </p>
       <CategoryItem categoryName={lesson.categories.category_name} />
     </div>
       

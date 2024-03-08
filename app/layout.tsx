@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import { EB_Garamond, Inter } from 'next/font/google'
+import { Analytics } from "@vercel/analytics/react"
 import '@/scss/globals.scss'
 import OverlayContextProvider from '@/components/global/OverlayContextProvider/OverlayContextProvider'
 
@@ -32,6 +33,7 @@ export default function RootLayout({
         <OverlayContextProvider>
           {children}
         </OverlayContextProvider>
+        <Analytics />
       </body>
     </html>
   )

@@ -12,6 +12,7 @@
   "dependencies": {
     "@supabase/ssr": "^0.0.10",
     "@supabase/supabase-js": "^2.39.1",
+    "@vercel/analytics": "^1.2.2",
     "formik": "^2.4.5",
     "next": "14.0.4",
     "react": "^18",

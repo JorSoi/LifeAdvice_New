@@ -21,7 +21,7 @@ function LessonList({user} : {user: any}) {
         
         //Fetch lessons bookmarked by authed user
         const getBookmarkedLessonsByUser = async () : Promise<void> => {
-            const {data, error} = await supabase.from('lesson_bookmarked_by').select(`*, lessons(*, categories(*))`).eq('profile_id', user.id).order('created_at', { ascending: false })
+            const {data, error} = await supabase.from('lesson_bookmarked_by').select(`*, lessons(*, categories(*), profiles(user_name))`).eq('profile_id', user.id).order('created_at', { ascending: false })
             if(!error) {
                 setLessonList(() : any =>
                 // Changing data output into lessonList format
@@ -32,7 +32,7 @@ function LessonList({user} : {user: any}) {
 
         //Fetch lessons liked by authed user
         const getLikedLessonsByUser = async () : Promise<void> => {
-            const {data, error} = await supabase.from('lesson_upvoted_by').select(`*, lessons(*, categories(*))`).eq('profile_id', user.id).order('created_at', { ascending: false })
+            const {data, error} = await supabase.from('lesson_upvoted_by').select(`*, lessons(*, categories(*), profiles(user_name))`).eq('profile_id', user.id).order('created_at', { ascending: false })
             if(!error) {
                 setLessonList(() : any =>
                 // Changing data output into lessonList format
@@ -43,7 +43,7 @@ function LessonList({user} : {user: any}) {
 
         //Fetch lessons created by authed user
         const getCreatedLessonsByUser = async () : Promise<void> => {
-            const {data, error} = await supabase.from('lessons').select(`*, categories(*)`).eq('profile_id', user.id).order('created_at', { ascending: false })
+            const {data, error} = await supabase.from('lessons').select(`*, categories(*), profiles(user_name)`).eq('profile_id', user.id).order('created_at', { ascending: false })
             if(!error) {
                 setLessonList(() : any => data );
             }
@@ -60,7 +60,6 @@ function LessonList({user} : {user: any}) {
                 getCreatedLessonsByUser();
         }
 
-        console.log(lessonList)
     }, [selected])
 
     return (
