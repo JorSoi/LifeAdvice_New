@@ -3,6 +3,7 @@ import { EB_Garamond, Inter } from 'next/font/google'
 import { Analytics } from "@vercel/analytics/react"
 import '@/scss/globals.scss'
 import OverlayContextProvider from '@/components/global/OverlayContextProvider/OverlayContextProvider'
+import getCurrentRootURL from '@/lib/getCurrentRootURL'
 
 //Using next font optimization to locally host fonts for performance optimization.
 const garamond = EB_Garamond({
@@ -24,7 +25,8 @@ export const metadata: Metadata = {
   authors: [{ name: "Jorim Soika", url: "https://www.linkedin.com/in/jorim-soika/" }],
   keywords: ['Life learnings', 'Personal growth', 'Personal development', 'Life advice', 'Self-improvement', 'Mindful living'],
   creator: 'Jorim Soika',
-  publisher: 'Jorim Soika'
+  publisher: 'Jorim Soika',
+  metadataBase: new URL(getCurrentRootURL())
 }
 
 export default function RootLayout({
