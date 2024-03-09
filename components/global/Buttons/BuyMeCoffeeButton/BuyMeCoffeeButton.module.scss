@@ -1,0 +1,11 @@
+@import '@/scss/variables';
+@import '@/scss/mixins';
+
+.buyMeCoffee {
+    background: $midnight-primary;
+    border-radius: 6px;
+    @include flex-c-c;
+    width: 45px;
+    height: 45px;
+    cursor: pointer;
+}
